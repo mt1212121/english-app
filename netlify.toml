@@ -1,0 +1,18 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+# Forward frontend calls to /api/generate-questions to the Netlify
+# Function, so src/lib/aiQuestions.js works unchanged on both Netlify
+# and Vercel.
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# Client-side routing fallback (single-page app).
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

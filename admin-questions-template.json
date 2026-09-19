@@ -1,0 +1,27 @@
+[
+  {
+    "level": "A1",
+    "category": "grammar",
+    "q": "He ___ a teacher.",
+    "options": ["is", "am", "are", "be"],
+    "correct": 0,
+    "explanation": "'He' takes 'is' with the verb to be."
+  },
+  {
+    "level": "A2",
+    "category": "vocabulary",
+    "q": "What is the opposite of 'fast'?",
+    "options": ["quick", "slow", "loud", "high"],
+    "correct": 1,
+    "explanation": "'Slow' is the opposite of 'fast'."
+  },
+  {
+    "level": "B2",
+    "category": "reading",
+    "passage": "A short 2-4 sentence passage goes here. It should give the reader enough information to answer the question below.",
+    "q": "A question about the passage.",
+    "options": ["Option A", "Option B", "Option C", "Option D"],
+    "correct": 2,
+    "explanation": "Why the correct option is right, quoting or paraphrasing the passage."
+  }
+]

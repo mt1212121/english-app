@@ -1,0 +1,1842 @@
+{
+  "A1": {
+    "grammar": [
+      {
+        "q": "She ___ to school every day.",
+        "options": [
+          "go",
+          "goes",
+          "going",
+          "went"
+        ],
+        "correct": 1,
+        "explanation": "With he/she/it in the present simple, verbs take an -s ending: goes."
+      },
+      {
+        "q": "I ___ a student.",
+        "options": [
+          "am",
+          "is",
+          "are",
+          "be"
+        ],
+        "correct": 0,
+        "explanation": "'I' always pairs with 'am' in the verb to be."
+      },
+      {
+        "q": "They ___ from Canada.",
+        "options": [
+          "is",
+          "am",
+          "are",
+          "be"
+        ],
+        "correct": 2,
+        "explanation": "'They' takes 'are' with the verb to be."
+      },
+      {
+        "q": "He ___ football on Sundays.",
+        "options": [
+          "play",
+          "plays",
+          "playing",
+          "played"
+        ],
+        "correct": 1,
+        "explanation": "Third person singular present simple needs an -s: plays."
+      },
+      {
+        "q": "We ___ happy today.",
+        "options": [
+          "is",
+          "am",
+          "are",
+          "be"
+        ],
+        "correct": 2,
+        "explanation": "'We' takes 'are' with the verb to be."
+      },
+      {
+        "q": "This is ___ apple.",
+        "options": [
+          "a",
+          "an",
+          "the",
+          "-"
+        ],
+        "correct": 1,
+        "explanation": "Use 'an' before words that start with a vowel sound."
+      },
+      {
+        "q": "You ___ my friend.",
+        "options": [
+          "is",
+          "am",
+          "are",
+          "be"
+        ],
+        "correct": 2,
+        "explanation": "'You' takes 'are' with the verb to be."
+      },
+      {
+        "q": "My mother ___ a doctor.",
+        "options": [
+          "is",
+          "am",
+          "are",
+          "be"
+        ],
+        "correct": 0,
+        "explanation": "'My mother' is third person singular, so use 'is'."
+      },
+      {
+        "q": "They ___ playing in the garden now.",
+        "options": [
+          "is",
+          "am",
+          "are",
+          "be"
+        ],
+        "correct": 2,
+        "explanation": "'They' takes 'are', used here for the present continuous."
+      },
+      {
+        "q": "I don't ___ coffee.",
+        "options": [
+          "like",
+          "likes",
+          "liking",
+          "liked"
+        ],
+        "correct": 0,
+        "explanation": "After 'don't', use the base form of the verb: 'like'."
+      },
+      {
+        "q": "___ he speak English?",
+        "options": [
+          "Does",
+          "Do",
+          "Is",
+          "Are"
+        ],
+        "correct": 0,
+        "explanation": "Questions with he/she/it in the present simple use 'Does'."
+      },
+      {
+        "q": "I have ___ car.",
+        "options": [
+          "a",
+          "an",
+          "the",
+          "-"
+        ],
+        "correct": 0,
+        "explanation": "Use 'a' before words that start with a consonant sound."
+      }
+    ],
+    "vocabulary": [
+      {
+        "q": "What is the opposite of 'big'?",
+        "options": [
+          "small",
+          "tall",
+          "wide",
+          "long"
+        ],
+        "correct": 0,
+        "explanation": "'Small' is the opposite of 'big'."
+      },
+      {
+        "q": "Where do you buy food?",
+        "options": [
+          "hospital",
+          "supermarket",
+          "library",
+          "airport"
+        ],
+        "correct": 1,
+        "explanation": "A supermarket is a shop where you buy food."
+      },
+      {
+        "q": "What is the first meal of the day called?",
+        "options": [
+          "dinner",
+          "lunch",
+          "breakfast",
+          "snack"
+        ],
+        "correct": 2,
+        "explanation": "'Breakfast' is eaten in the morning, the first meal of the day."
+      },
+      {
+        "q": "What color is the sky on a clear day?",
+        "options": [
+          "green",
+          "blue",
+          "yellow",
+          "purple"
+        ],
+        "correct": 1,
+        "explanation": "On a clear day the sky looks blue."
+      },
+      {
+        "q": "A person who teaches students is a ___.",
+        "options": [
+          "doctor",
+          "driver",
+          "teacher",
+          "farmer"
+        ],
+        "correct": 2,
+        "explanation": "A teacher is someone who teaches students."
+      },
+      {
+        "q": "Which animal says 'meow'?",
+        "options": [
+          "dog",
+          "cat",
+          "cow",
+          "duck"
+        ],
+        "correct": 1,
+        "explanation": "Cats make the sound 'meow'."
+      },
+      {
+        "q": "What is the opposite of 'hot'?",
+        "options": [
+          "warm",
+          "cold",
+          "wet",
+          "dry"
+        ],
+        "correct": 1,
+        "explanation": "'Cold' is the opposite of 'hot'."
+      },
+      {
+        "q": "Where do you sleep?",
+        "options": [
+          "kitchen",
+          "bedroom",
+          "bathroom",
+          "garage"
+        ],
+        "correct": 1,
+        "explanation": "People sleep in the bedroom."
+      },
+      {
+        "q": "Which day comes after Sunday?",
+        "options": [
+          "Saturday",
+          "Monday",
+          "Friday",
+          "Tuesday"
+        ],
+        "correct": 1,
+        "explanation": "Monday comes right after Sunday."
+      },
+      {
+        "q": "Your father's brother is your ___.",
+        "options": [
+          "cousin",
+          "uncle",
+          "nephew",
+          "grandfather"
+        ],
+        "correct": 1,
+        "explanation": "A father's brother is called an uncle."
+      },
+      {
+        "q": "What number comes after nine?",
+        "options": [
+          "eight",
+          "eleven",
+          "ten",
+          "twelve"
+        ],
+        "correct": 2,
+        "explanation": "Ten comes right after nine."
+      },
+      {
+        "q": "Which fruit is yellow and curved?",
+        "options": [
+          "apple",
+          "banana",
+          "grape",
+          "cherry"
+        ],
+        "correct": 1,
+        "explanation": "A banana is a yellow, curved fruit."
+      }
+    ],
+    "reading": [
+      {
+        "passage": "Tom is ten years old. He likes football and reading books. Every morning he walks to school with his sister.",
+        "q": "How old is Tom?",
+        "options": [
+          "eight",
+          "nine",
+          "ten",
+          "eleven"
+        ],
+        "correct": 2,
+        "explanation": "The passage says 'Tom is ten years old.'"
+      },
+      {
+        "passage": "Tom is ten years old. He likes football and reading books. Every morning he walks to school with his sister.",
+        "q": "How does Tom go to school?",
+        "options": [
+          "by bus",
+          "by car",
+          "he walks",
+          "by bike"
+        ],
+        "correct": 2,
+        "explanation": "The text says he 'walks to school with his sister.'"
+      },
+      {
+        "passage": "Sara works in a bakery. She bakes bread every morning and sells cakes in the afternoon.",
+        "q": "What does Sara bake?",
+        "options": [
+          "bread",
+          "pizza",
+          "pasta",
+          "rice"
+        ],
+        "correct": 0,
+        "explanation": "The passage states Sara 'bakes bread every morning.'"
+      },
+      {
+        "passage": "Sara works in a bakery. She bakes bread every morning and sells cakes in the afternoon.",
+        "q": "When does Sara sell cakes?",
+        "options": [
+          "morning",
+          "afternoon",
+          "night",
+          "evening"
+        ],
+        "correct": 1,
+        "explanation": "The text says she 'sells cakes in the afternoon.'"
+      },
+      {
+        "passage": "Ali has a small dog named Rex. Rex likes to play in the park every afternoon. Ali gives Rex food and water every day.",
+        "q": "What is the name of Ali's dog?",
+        "options": [
+          "Max",
+          "Rex",
+          "Buddy",
+          "Leo"
+        ],
+        "correct": 1,
+        "explanation": "The passage says the dog is 'named Rex.'"
+      },
+      {
+        "passage": "Ali has a small dog named Rex. Rex likes to play in the park every afternoon. Ali gives Rex food and water every day.",
+        "q": "When does Rex play in the park?",
+        "options": [
+          "morning",
+          "afternoon",
+          "night",
+          "at school"
+        ],
+        "correct": 1,
+        "explanation": "The text says Rex plays in the park 'every afternoon.'"
+      },
+      {
+        "passage": "Lina is a nurse. She works in a hospital. She helps sick people feel better.",
+        "q": "Where does Lina work?",
+        "options": [
+          "a school",
+          "a hospital",
+          "a shop",
+          "a bank"
+        ],
+        "correct": 1,
+        "explanation": "The passage says Lina 'works in a hospital.'"
+      },
+      {
+        "passage": "Lina is a nurse. She works in a hospital. She helps sick people feel better.",
+        "q": "What is Lina's job?",
+        "options": [
+          "teacher",
+          "nurse",
+          "driver",
+          "cook"
+        ],
+        "correct": 1,
+        "explanation": "The passage states 'Lina is a nurse.'"
+      }
+    ]
+  },
+  "A2": {
+    "grammar": [
+      {
+        "q": "Yesterday, I ___ to the cinema.",
+        "options": [
+          "go",
+          "went",
+          "goes",
+          "going"
+        ],
+        "correct": 1,
+        "explanation": "Past simple of 'go' is 'went'."
+      },
+      {
+        "q": "She is ___ than her brother.",
+        "options": [
+          "tall",
+          "taller",
+          "tallest",
+          "more tall"
+        ],
+        "correct": 1,
+        "explanation": "One-syllable adjectives add -er for comparatives: taller."
+      },
+      {
+        "q": "Look! It ___ outside.",
+        "options": [
+          "rain",
+          "rains",
+          "is raining",
+          "rained"
+        ],
+        "correct": 2,
+        "explanation": "'Look!' signals something happening now, so use present continuous."
+      },
+      {
+        "q": "There ___ some milk in the fridge.",
+        "options": [
+          "is",
+          "are",
+          "am",
+          "be"
+        ],
+        "correct": 0,
+        "explanation": "'Milk' is uncountable, so it takes the singular 'is'."
+      },
+      {
+        "q": "I have ___ finished my homework.",
+        "options": [
+          "already",
+          "yet",
+          "still",
+          "never"
+        ],
+        "correct": 0,
+        "explanation": "'Already' fits a positive sentence about something completed."
+      },
+      {
+        "q": "He can ___ swim very well.",
+        "options": [
+          "to",
+          "-",
+          "swimming",
+          "swims"
+        ],
+        "correct": 1,
+        "explanation": "Modal verbs like 'can' are followed by the base form with no 'to'."
+      },
+      {
+        "q": "She was ___ when the phone rang.",
+        "options": [
+          "sleep",
+          "sleeps",
+          "sleeping",
+          "slept"
+        ],
+        "correct": 2,
+        "explanation": "Past continuous (was + -ing) describes an action in progress when another happened."
+      },
+      {
+        "q": "We ___ to Paris last summer.",
+        "options": [
+          "go",
+          "went",
+          "goes",
+          "going"
+        ],
+        "correct": 1,
+        "explanation": "Past simple of 'go' is 'went'."
+      },
+      {
+        "q": "He is good ___ playing tennis.",
+        "options": [
+          "at",
+          "in",
+          "on",
+          "for"
+        ],
+        "correct": 0,
+        "explanation": "'Good at' is the correct preposition for skills."
+      },
+      {
+        "q": "I ___ my keys. Have you seen them?",
+        "options": [
+          "lose",
+          "lost",
+          "have lost",
+          "losing"
+        ],
+        "correct": 2,
+        "explanation": "Present perfect ('have lost') links a past action to its present result."
+      },
+      {
+        "q": "This book is ___ interesting than that one.",
+        "options": [
+          "more",
+          "most",
+          "much",
+          "very"
+        ],
+        "correct": 0,
+        "explanation": "Comparatives for longer adjectives use 'more + adjective'."
+      },
+      {
+        "q": "You should ___ a doctor.",
+        "options": [
+          "see",
+          "seeing",
+          "to see",
+          "saw"
+        ],
+        "correct": 0,
+        "explanation": "'Should' is followed by the base form of the verb."
+      }
+    ],
+    "vocabulary": [
+      {
+        "q": "What is the opposite of 'expensive'?",
+        "options": [
+          "cheap",
+          "costly",
+          "rich",
+          "valuable"
+        ],
+        "correct": 0,
+        "explanation": "'Cheap' means low in price, the opposite of 'expensive'."
+      },
+      {
+        "q": "Where do you watch films on a big screen?",
+        "options": [
+          "library",
+          "cinema",
+          "museum",
+          "stadium"
+        ],
+        "correct": 1,
+        "explanation": "A cinema is where films are shown."
+      },
+      {
+        "q": "Someone who flies a plane is a ___.",
+        "options": [
+          "sailor",
+          "pilot",
+          "driver",
+          "conductor"
+        ],
+        "correct": 1,
+        "explanation": "A pilot flies aircraft."
+      },
+      {
+        "q": "Which season comes after winter?",
+        "options": [
+          "summer",
+          "autumn",
+          "spring",
+          "fall"
+        ],
+        "correct": 2,
+        "explanation": "Spring follows winter in the yearly cycle."
+      },
+      {
+        "q": "A vehicle with two wheels that you pedal is a ___.",
+        "options": [
+          "bicycle",
+          "car",
+          "scooter",
+          "truck"
+        ],
+        "correct": 0,
+        "explanation": "A bicycle has two wheels and is pedaled."
+      },
+      {
+        "q": "If you feel very tired, you feel ___.",
+        "options": [
+          "excited",
+          "exhausted",
+          "curious",
+          "confident"
+        ],
+        "correct": 1,
+        "explanation": "'Exhausted' means extremely tired."
+      },
+      {
+        "q": "What is the opposite of 'difficult'?",
+        "options": [
+          "easy",
+          "boring",
+          "long",
+          "cheap"
+        ],
+        "correct": 0,
+        "explanation": "'Easy' is the opposite of 'difficult'."
+      },
+      {
+        "q": "Where do planes take off and land?",
+        "options": [
+          "station",
+          "airport",
+          "harbor",
+          "garage"
+        ],
+        "correct": 1,
+        "explanation": "An airport is where planes take off and land."
+      },
+      {
+        "q": "The money you receive for doing a job is your ___.",
+        "options": [
+          "bill",
+          "salary",
+          "receipt",
+          "budget"
+        ],
+        "correct": 1,
+        "explanation": "'Salary' is the money you're paid for working."
+      },
+      {
+        "q": "A person who cooks food in a restaurant is a ___.",
+        "options": [
+          "waiter",
+          "chef",
+          "cashier",
+          "manager"
+        ],
+        "correct": 1,
+        "explanation": "A chef is a professional cook in a restaurant."
+      },
+      {
+        "q": "What is the opposite of 'early'?",
+        "options": [
+          "fast",
+          "late",
+          "soon",
+          "quick"
+        ],
+        "correct": 1,
+        "explanation": "'Late' is the opposite of 'early'."
+      },
+      {
+        "q": "If you are looking forward to something, you feel ___ about it.",
+        "options": [
+          "bored",
+          "eager",
+          "angry",
+          "afraid"
+        ],
+        "correct": 1,
+        "explanation": "'Eager' describes excitement about something coming up."
+      }
+    ],
+    "reading": [
+      {
+        "passage": "Maria moved to London last year. At first, she found it difficult because she didn't know anyone. Now she has many friends and enjoys her new life.",
+        "q": "Where did Maria move to?",
+        "options": [
+          "Paris",
+          "London",
+          "Rome",
+          "Madrid"
+        ],
+        "correct": 1,
+        "explanation": "The passage states Maria 'moved to London.'"
+      },
+      {
+        "passage": "Maria moved to London last year. At first, she found it difficult because she didn't know anyone. Now she has many friends and enjoys her new life.",
+        "q": "Why was it difficult for Maria at first?",
+        "options": [
+          "she was ill",
+          "she didn't know anyone",
+          "she lost her job",
+          "the weather was bad"
+        ],
+        "correct": 1,
+        "explanation": "The text says she found it hard 'because she didn't know anyone.'"
+      },
+      {
+        "passage": "The museum opens at nine in the morning and closes at five in the evening. It is closed on Mondays.",
+        "q": "What time does the museum open?",
+        "options": [
+          "eight",
+          "nine",
+          "ten",
+          "eleven"
+        ],
+        "correct": 1,
+        "explanation": "The passage says the museum 'opens at nine in the morning.'"
+      },
+      {
+        "passage": "The museum opens at nine in the morning and closes at five in the evening. It is closed on Mondays.",
+        "q": "Which day is the museum closed?",
+        "options": [
+          "Sunday",
+          "Monday",
+          "Friday",
+          "Saturday"
+        ],
+        "correct": 1,
+        "explanation": "The text says 'It is closed on Mondays.'"
+      },
+      {
+        "passage": "Jake works as a taxi driver in New York. He drives around the city all day and meets many different people. He enjoys talking to his passengers.",
+        "q": "What is Jake's job?",
+        "options": [
+          "bus driver",
+          "taxi driver",
+          "pilot",
+          "train conductor"
+        ],
+        "correct": 1,
+        "explanation": "The passage says Jake 'works as a taxi driver.'"
+      },
+      {
+        "passage": "Jake works as a taxi driver in New York. He drives around the city all day and meets many different people. He enjoys talking to his passengers.",
+        "q": "Which city does Jake work in?",
+        "options": [
+          "London",
+          "New York",
+          "Paris",
+          "Tokyo"
+        ],
+        "correct": 1,
+        "explanation": "The text says Jake 'works as a taxi driver in New York.'"
+      },
+      {
+        "passage": "The library near my house has thousands of books. It opens six days a week and closes only on Sundays.",
+        "q": "How many days a week is the library open?",
+        "options": [
+          "five",
+          "six",
+          "seven",
+          "four"
+        ],
+        "correct": 1,
+        "explanation": "The passage says it 'opens six days a week.'"
+      },
+      {
+        "passage": "The library near my house has thousands of books. It opens six days a week and closes only on Sundays.",
+        "q": "Which day does the library close?",
+        "options": [
+          "Saturday",
+          "Monday",
+          "Sunday",
+          "Friday"
+        ],
+        "correct": 2,
+        "explanation": "The text says it 'closes only on Sundays.'"
+      }
+    ]
+  },
+  "B1": {
+    "grammar": [
+      {
+        "q": "If I ___ more time, I would travel more.",
+        "options": [
+          "have",
+          "had",
+          "has",
+          "will have"
+        ],
+        "correct": 1,
+        "explanation": "Second conditional uses past simple in the if-clause: 'had'."
+      },
+      {
+        "q": "The letter ___ by John yesterday.",
+        "options": [
+          "wrote",
+          "was written",
+          "is written",
+          "writes"
+        ],
+        "correct": 1,
+        "explanation": "Passive past simple: was/were + past participle."
+      },
+      {
+        "q": "I ___ never been to Japan.",
+        "options": [
+          "have",
+          "has",
+          "had",
+          "am"
+        ],
+        "correct": 0,
+        "explanation": "'I' takes 'have' in the present perfect."
+      },
+      {
+        "q": "She said she ___ come to the party.",
+        "options": [
+          "will",
+          "would",
+          "can",
+          "shall"
+        ],
+        "correct": 1,
+        "explanation": "In reported speech, 'will' shifts back to 'would'."
+      },
+      {
+        "q": "By the time we arrived, the film ___ already started.",
+        "options": [
+          "has",
+          "had",
+          "have",
+          "was"
+        ],
+        "correct": 1,
+        "explanation": "Past perfect describes an action completed before another past action."
+      },
+      {
+        "q": "He suggested ___ a break.",
+        "options": [
+          "to take",
+          "taking",
+          "take",
+          "took"
+        ],
+        "correct": 1,
+        "explanation": "'Suggest' is followed by a gerund: 'taking'."
+      },
+      {
+        "q": "If it rains tomorrow, we ___ the picnic.",
+        "options": [
+          "cancel",
+          "will cancel",
+          "canceled",
+          "would cancel"
+        ],
+        "correct": 1,
+        "explanation": "First conditional: if + present simple, will + base verb."
+      },
+      {
+        "q": "This house ___ in 1990.",
+        "options": [
+          "built",
+          "was built",
+          "is built",
+          "build"
+        ],
+        "correct": 1,
+        "explanation": "Passive past simple: was/were + past participle."
+      },
+      {
+        "q": "I'd rather ___ at home tonight.",
+        "options": [
+          "stay",
+          "staying",
+          "to stay",
+          "stayed"
+        ],
+        "correct": 0,
+        "explanation": "'Would rather' is followed by the base form of the verb."
+      },
+      {
+        "q": "He asked me where I ___.",
+        "options": [
+          "live",
+          "lived",
+          "living",
+          "had lived"
+        ],
+        "correct": 1,
+        "explanation": "In reported speech, present simple shifts back to past simple."
+      },
+      {
+        "q": "The more you practice, ___ you become.",
+        "options": [
+          "better",
+          "the better",
+          "best",
+          "the best"
+        ],
+        "correct": 1,
+        "explanation": "'The + comparative, the + comparative' is the correct pattern."
+      },
+      {
+        "q": "She's been learning French ___ three years.",
+        "options": [
+          "since",
+          "for",
+          "from",
+          "during"
+        ],
+        "correct": 1,
+        "explanation": "Use 'for' with a length of time."
+      }
+    ],
+    "vocabulary": [
+      {
+        "q": "'To postpone' means to ___.",
+        "options": [
+          "cancel",
+          "delay",
+          "finish",
+          "begin"
+        ],
+        "correct": 1,
+        "explanation": "'Postpone' means to delay something to a later time."
+      },
+      {
+        "q": "What is the opposite of 'generous'?",
+        "options": [
+          "kind",
+          "stingy",
+          "polite",
+          "friendly"
+        ],
+        "correct": 1,
+        "explanation": "'Stingy' means unwilling to give, the opposite of generous."
+      },
+      {
+        "q": "A person who studies the stars is a(n) ___.",
+        "options": [
+          "astronomer",
+          "biologist",
+          "geologist",
+          "chemist"
+        ],
+        "correct": 0,
+        "explanation": "An astronomer studies stars and space."
+      },
+      {
+        "q": "If you feel thrilled, you feel ___.",
+        "options": [
+          "bored",
+          "very excited",
+          "worried",
+          "confused"
+        ],
+        "correct": 1,
+        "explanation": "'Thrilled' means extremely excited or pleased."
+      },
+      {
+        "q": "Something 'obvious' is ___.",
+        "options": [
+          "hidden",
+          "clear and easy to see",
+          "expensive",
+          "rare"
+        ],
+        "correct": 1,
+        "explanation": "'Obvious' means easy to notice or understand."
+      },
+      {
+        "q": "A safe place to keep your money is a ___.",
+        "options": [
+          "bank",
+          "market",
+          "farm",
+          "factory"
+        ],
+        "correct": 0,
+        "explanation": "A bank is where people keep money safely."
+      },
+      {
+        "q": "'To achieve' a goal means to ___ it.",
+        "options": [
+          "fail",
+          "reach successfully",
+          "avoid",
+          "plan"
+        ],
+        "correct": 1,
+        "explanation": "'Achieve' means to successfully reach a goal."
+      },
+      {
+        "q": "What is the opposite of 'increase'?",
+        "options": [
+          "decrease",
+          "improve",
+          "expand",
+          "continue"
+        ],
+        "correct": 0,
+        "explanation": "'Decrease' means to become smaller, the opposite of increase."
+      },
+      {
+        "q": "A person who cannot see is ___.",
+        "options": [
+          "deaf",
+          "blind",
+          "mute",
+          "lame"
+        ],
+        "correct": 1,
+        "explanation": "'Blind' describes someone who cannot see."
+      },
+      {
+        "q": "To 'rely on' someone means to ___ them.",
+        "options": [
+          "depend on",
+          "avoid",
+          "dislike",
+          "forget"
+        ],
+        "correct": 0,
+        "explanation": "'Rely on' means to depend on someone or something."
+      },
+      {
+        "q": "What is a word meaning 'brave'?",
+        "options": [
+          "nervous",
+          "courageous",
+          "shy",
+          "careless"
+        ],
+        "correct": 1,
+        "explanation": "'Courageous' means brave."
+      },
+      {
+        "q": "'Frequently' means ___.",
+        "options": [
+          "rarely",
+          "often",
+          "never",
+          "sometimes"
+        ],
+        "correct": 1,
+        "explanation": "'Frequently' means happening often."
+      }
+    ],
+    "reading": [
+      {
+        "passage": "Remote work has become increasingly popular in recent years. While it offers flexibility, many employees report feeling isolated without regular office interaction.",
+        "q": "According to the passage, what is one benefit of remote work?",
+        "options": [
+          "higher salary",
+          "flexibility",
+          "free travel",
+          "more meetings"
+        ],
+        "correct": 1,
+        "explanation": "The text says remote work 'offers flexibility.'"
+      },
+      {
+        "passage": "Remote work has become increasingly popular in recent years. While it offers flexibility, many employees report feeling isolated without regular office interaction.",
+        "q": "What problem do some employees report?",
+        "options": [
+          "too much travel",
+          "feeling isolated",
+          "low pay",
+          "long meetings"
+        ],
+        "correct": 1,
+        "explanation": "The passage mentions employees 'feeling isolated without regular office interaction.'"
+      },
+      {
+        "passage": "Renewable energy sources, such as solar and wind power, are becoming cheaper to produce. Many countries are investing heavily in this technology to reduce pollution.",
+        "q": "Why are countries investing in renewable energy?",
+        "options": [
+          "to create jobs only",
+          "to reduce pollution",
+          "to raise taxes",
+          "to reduce exports"
+        ],
+        "correct": 1,
+        "explanation": "The text says investment aims 'to reduce pollution.'"
+      },
+      {
+        "passage": "Renewable energy sources, such as solar and wind power, are becoming cheaper to produce. Many countries are investing heavily in this technology to reduce pollution.",
+        "q": "Which two examples of renewable energy are mentioned?",
+        "options": [
+          "coal and oil",
+          "solar and wind",
+          "gas and nuclear",
+          "wood and coal"
+        ],
+        "correct": 1,
+        "explanation": "The passage names 'solar and wind power' as examples."
+      },
+      {
+        "passage": "Video games have changed a lot over the past twenty years. Modern games often include complex storylines and realistic graphics that were unimaginable in the past.",
+        "q": "What has changed about modern video games?",
+        "options": [
+          "they are cheaper",
+          "they have complex storylines and realistic graphics",
+          "they are shorter",
+          "they are less popular"
+        ],
+        "correct": 1,
+        "explanation": "The passage says modern games 'include complex storylines and realistic graphics.'"
+      },
+      {
+        "passage": "Video games have changed a lot over the past twenty years. Modern games often include complex storylines and realistic graphics that were unimaginable in the past.",
+        "q": "Over what period has this change happened?",
+        "options": [
+          "the past five years",
+          "the past twenty years",
+          "the past fifty years",
+          "the past year"
+        ],
+        "correct": 1,
+        "explanation": "The passage says games have changed 'over the past twenty years.'"
+      },
+      {
+        "passage": "Many companies now offer employees the choice between working from home and working in the office. This flexibility has improved job satisfaction for many workers.",
+        "q": "What choice do many companies now offer employees?",
+        "options": [
+          "higher pay or more vacation",
+          "working from home or the office",
+          "a car or a bonus",
+          "morning or night shifts"
+        ],
+        "correct": 1,
+        "explanation": "The passage says companies offer 'the choice between working from home and working in the office.'"
+      },
+      {
+        "passage": "Many companies now offer employees the choice between working from home and working in the office. This flexibility has improved job satisfaction for many workers.",
+        "q": "What has this flexibility improved, according to the passage?",
+        "options": [
+          "company profits",
+          "job satisfaction",
+          "office space",
+          "commute times"
+        ],
+        "correct": 1,
+        "explanation": "The passage says the flexibility 'has improved job satisfaction.'"
+      }
+    ]
+  },
+  "B2": {
+    "grammar": [
+      {
+        "q": "Had I known about the traffic, I ___ earlier.",
+        "options": [
+          "would leave",
+          "would have left",
+          "will leave",
+          "had left"
+        ],
+        "correct": 1,
+        "explanation": "Third conditional: had + past participle, would have + past participle."
+      },
+      {
+        "q": "She denied ___ the money.",
+        "options": [
+          "to take",
+          "taking",
+          "take",
+          "took"
+        ],
+        "correct": 1,
+        "explanation": "'Deny' is followed by a gerund: 'taking'."
+      },
+      {
+        "q": "Not only ___ late, but he also forgot the documents.",
+        "options": [
+          "he was",
+          "was he",
+          "he is",
+          "is he"
+        ],
+        "correct": 1,
+        "explanation": "'Not only' at the start of a clause triggers inversion: 'was he'."
+      },
+      {
+        "q": "I wish I ___ harder for the exam.",
+        "options": [
+          "study",
+          "studied",
+          "had studied",
+          "have studied"
+        ],
+        "correct": 2,
+        "explanation": "'Wish' about a past regret uses the past perfect: 'had studied'."
+      },
+      {
+        "q": "The company's profits, ___ rose last year, are expected to fall.",
+        "options": [
+          "that",
+          "which",
+          "who",
+          "whose"
+        ],
+        "correct": 1,
+        "explanation": "A non-defining relative clause about a thing uses 'which'."
+      },
+      {
+        "q": "Scarcely ___ the meeting begun when the fire alarm rang.",
+        "options": [
+          "had",
+          "has",
+          "did",
+          "was"
+        ],
+        "correct": 0,
+        "explanation": "'Scarcely' triggers inversion with the past perfect: 'had'."
+      },
+      {
+        "q": "No sooner ___ he arrived than the meeting started.",
+        "options": [
+          "had",
+          "did",
+          "has",
+          "was"
+        ],
+        "correct": 0,
+        "explanation": "'No sooner' triggers inversion with the past perfect: 'had'."
+      },
+      {
+        "q": "It's about time you ___ more responsibility.",
+        "options": [
+          "take",
+          "took",
+          "taken",
+          "will take"
+        ],
+        "correct": 1,
+        "explanation": "'It's (about) time' is followed by the past simple in this fixed structure."
+      },
+      {
+        "q": "She acted as if she ___ everything.",
+        "options": [
+          "knows",
+          "knew",
+          "had known",
+          "know"
+        ],
+        "correct": 1,
+        "explanation": "'As if' with a present hypothetical meaning uses the past simple."
+      },
+      {
+        "q": "He would rather she ___ tomorrow than today.",
+        "options": [
+          "comes",
+          "came",
+          "come",
+          "will come"
+        ],
+        "correct": 1,
+        "explanation": "'Would rather + subject' is followed by the past simple for a preference about someone else."
+      },
+      {
+        "q": "Given ___ chance, he would have succeeded.",
+        "options": [
+          "a",
+          "the",
+          "-",
+          "an"
+        ],
+        "correct": 1,
+        "explanation": "'Given the chance' is the idiomatic fixed phrase."
+      },
+      {
+        "q": "I can't help ___ how different things could have been.",
+        "options": [
+          "think",
+          "to think",
+          "thinking",
+          "thought"
+        ],
+        "correct": 2,
+        "explanation": "'Can't help' is followed by a gerund: 'thinking'."
+      }
+    ],
+    "vocabulary": [
+      {
+        "q": "'To alleviate' a problem means to ___.",
+        "options": [
+          "make it worse",
+          "make it less severe",
+          "ignore it",
+          "cause it"
+        ],
+        "correct": 1,
+        "explanation": "'Alleviate' means to make something less severe."
+      },
+      {
+        "q": "What is the opposite of 'abundant'?",
+        "options": [
+          "scarce",
+          "plentiful",
+          "huge",
+          "common"
+        ],
+        "correct": 0,
+        "explanation": "'Scarce' means in short supply, the opposite of abundant."
+      },
+      {
+        "q": "A strong desire for something is a ___.",
+        "options": [
+          "yearning",
+          "denial",
+          "refusal",
+          "doubt"
+        ],
+        "correct": 0,
+        "explanation": "'Yearning' describes an intense longing for something."
+      },
+      {
+        "q": "To criticize something very strongly is to ___ it.",
+        "options": [
+          "praise",
+          "condemn",
+          "admire",
+          "ignore"
+        ],
+        "correct": 1,
+        "explanation": "'Condemn' means to express strong disapproval."
+      },
+      {
+        "q": "Two events happening at the same time are ___.",
+        "options": [
+          "consecutive",
+          "simultaneous",
+          "occasional",
+          "gradual"
+        ],
+        "correct": 1,
+        "explanation": "'Simultaneous' means occurring at the same time."
+      },
+      {
+        "q": "Something very old-fashioned or no longer used is ___.",
+        "options": [
+          "outdated",
+          "innovative",
+          "durable",
+          "flexible"
+        ],
+        "correct": 0,
+        "explanation": "'Outdated' describes something no longer current or useful."
+      },
+      {
+        "q": "'To circumvent' a rule means to ___ it.",
+        "options": [
+          "enforce",
+          "avoid cleverly",
+          "follow strictly",
+          "create"
+        ],
+        "correct": 1,
+        "explanation": "'Circumvent' means to find a clever way around something."
+      },
+      {
+        "q": "'Meticulous' means ___.",
+        "options": [
+          "careless",
+          "very careful and precise",
+          "fast",
+          "loud"
+        ],
+        "correct": 1,
+        "explanation": "'Meticulous' describes extreme care and precision."
+      },
+      {
+        "q": "'To reiterate' a point means to ___ it.",
+        "options": [
+          "repeat",
+          "forget",
+          "deny",
+          "invent"
+        ],
+        "correct": 0,
+        "explanation": "'Reiterate' means to say something again for emphasis."
+      },
+      {
+        "q": "'Plausible' means ___.",
+        "options": [
+          "impossible",
+          "reasonable and believable",
+          "funny",
+          "expensive"
+        ],
+        "correct": 1,
+        "explanation": "'Plausible' describes something that seems reasonable or likely true."
+      },
+      {
+        "q": "'To undermine' someone's confidence means to ___ it.",
+        "options": [
+          "strengthen",
+          "weaken gradually",
+          "ignore",
+          "celebrate"
+        ],
+        "correct": 1,
+        "explanation": "'Undermine' means to gradually weaken something."
+      },
+      {
+        "q": "What is the opposite of 'transparent' (easy to see through)?",
+        "options": [
+          "opaque",
+          "clear",
+          "visible",
+          "obvious"
+        ],
+        "correct": 0,
+        "explanation": "'Opaque' means not able to be seen through, the opposite of transparent."
+      }
+    ],
+    "reading": [
+      {
+        "passage": "Despite significant advances in artificial intelligence, experts caution that machines still lack the nuanced understanding of context that humans possess naturally. This gap poses challenges for fields requiring emotional intelligence, such as counseling and negotiation.",
+        "q": "What do experts caution about AI?",
+        "options": [
+          "it is too expensive",
+          "it lacks nuanced understanding of context",
+          "it works too slowly",
+          "it cannot be trained"
+        ],
+        "correct": 1,
+        "explanation": "The passage says machines 'lack the nuanced understanding of context.'"
+      },
+      {
+        "passage": "Despite significant advances in artificial intelligence, experts caution that machines still lack the nuanced understanding of context that humans possess naturally. This gap poses challenges for fields requiring emotional intelligence, such as counseling and negotiation.",
+        "q": "Which fields are mentioned as especially challenging for AI?",
+        "options": [
+          "engineering and design",
+          "counseling and negotiation",
+          "cooking and cleaning",
+          "farming and mining"
+        ],
+        "correct": 1,
+        "explanation": "The text names 'counseling and negotiation' as examples."
+      },
+      {
+        "passage": "Urban planners are increasingly incorporating green spaces into city designs, not merely for aesthetic reasons but because studies link access to nature with improved mental health and reduced stress levels.",
+        "q": "Besides aesthetics, why are green spaces being added to cities?",
+        "options": [
+          "to increase traffic",
+          "for improved mental health and reduced stress",
+          "to reduce housing",
+          "to attract tourists only"
+        ],
+        "correct": 1,
+        "explanation": "The passage links nature access to 'improved mental health and reduced stress levels.'"
+      },
+      {
+        "passage": "Urban planners are increasingly incorporating green spaces into city designs, not merely for aesthetic reasons but because studies link access to nature with improved mental health and reduced stress levels.",
+        "q": "What do the studies mentioned link access to nature with?",
+        "options": [
+          "higher income",
+          "improved mental health",
+          "faster commutes",
+          "lower rent"
+        ],
+        "correct": 1,
+        "explanation": "The text explicitly links nature access with 'improved mental health.'"
+      },
+      {
+        "passage": "As global temperatures continue to rise, coastal cities face growing risks from flooding and erosion. Engineers are exploring innovative solutions, from sea walls to floating architecture, to protect vulnerable communities.",
+        "q": "What risks do coastal cities face, according to the passage?",
+        "options": [
+          "earthquakes and drought",
+          "flooding and erosion",
+          "wildfires and heatwaves",
+          "power outages"
+        ],
+        "correct": 1,
+        "explanation": "The passage says coastal cities 'face growing risks from flooding and erosion.'"
+      },
+      {
+        "passage": "As global temperatures continue to rise, coastal cities face growing risks from flooding and erosion. Engineers are exploring innovative solutions, from sea walls to floating architecture, to protect vulnerable communities.",
+        "q": "What are engineers exploring to protect these communities?",
+        "options": [
+          "higher taxes",
+          "innovative solutions like sea walls and floating architecture",
+          "relocating all residents",
+          "banning construction"
+        ],
+        "correct": 1,
+        "explanation": "The passage says engineers are 'exploring innovative solutions, from sea walls to floating architecture.'"
+      },
+      {
+        "passage": "The gig economy has given workers unprecedented flexibility, but critics argue it has also eroded traditional employment protections such as sick pay and pension contributions.",
+        "q": "What has the gig economy given workers, according to the passage?",
+        "options": [
+          "job security",
+          "unprecedented flexibility",
+          "higher salaries",
+          "free healthcare"
+        ],
+        "correct": 1,
+        "explanation": "The passage says the gig economy 'has given workers unprecedented flexibility.'"
+      },
+      {
+        "passage": "The gig economy has given workers unprecedented flexibility, but critics argue it has also eroded traditional employment protections such as sick pay and pension contributions.",
+        "q": "What do critics say has been eroded?",
+        "options": [
+          "worker flexibility",
+          "traditional employment protections like sick pay and pensions",
+          "company profits",
+          "customer satisfaction"
+        ],
+        "correct": 1,
+        "explanation": "The passage says critics argue it 'has also eroded traditional employment protections such as sick pay and pension contributions.'"
+      }
+    ]
+  },
+  "C1": {
+    "grammar": [
+      {
+        "q": "___ the economic downturn, the company managed to increase its revenue.",
+        "options": [
+          "Despite of",
+          "Notwithstanding",
+          "Although",
+          "Because"
+        ],
+        "correct": 1,
+        "explanation": "'Notwithstanding' means 'despite' and is followed directly by a noun phrase."
+      },
+      {
+        "q": "Rarely ___ such dedication among new employees.",
+        "options": [
+          "we see",
+          "do we see",
+          "we do see",
+          "see we"
+        ],
+        "correct": 1,
+        "explanation": "'Rarely' at the start of a clause requires inversion: 'do we see'."
+      },
+      {
+        "q": "It is imperative that she ___ present at the meeting.",
+        "options": [
+          "is",
+          "be",
+          "was",
+          "will be"
+        ],
+        "correct": 1,
+        "explanation": "The subjunctive after 'imperative that' uses the base form: 'be'."
+      },
+      {
+        "q": "The proposal, controversial ___ it was, received unanimous approval.",
+        "options": [
+          "as",
+          "that",
+          "which",
+          "though"
+        ],
+        "correct": 0,
+        "explanation": "'Adjective + as + subject + verb' is a formal concessive structure meaning 'although'."
+      },
+      {
+        "q": "Were it not for his intervention, the deal ___ collapsed.",
+        "options": [
+          "would",
+          "would have",
+          "will have",
+          "had"
+        ],
+        "correct": 1,
+        "explanation": "'Were it not for' is a formal third conditional opener, paired with 'would have + past participle'."
+      },
+      {
+        "q": "He is said ___ the company for over a decade.",
+        "options": [
+          "to lead",
+          "to have led",
+          "leading",
+          "lead"
+        ],
+        "correct": 1,
+        "explanation": "'Is said to have led' expresses a past action reported in the present."
+      },
+      {
+        "q": "So engrossed ___ in his work that he lost track of time.",
+        "options": [
+          "was he",
+          "he was",
+          "did he",
+          "he did"
+        ],
+        "correct": 0,
+        "explanation": "'So + adjective' at the start of a clause triggers inversion: 'was he'."
+      },
+      {
+        "q": "Only after much deliberation ___ to accept the offer.",
+        "options": [
+          "he decided",
+          "did he decide",
+          "he did decide",
+          "decided he"
+        ],
+        "correct": 1,
+        "explanation": "'Only after' at the start of a clause requires inversion: 'did he decide'."
+      },
+      {
+        "q": "Seldom ___ an opportunity like this.",
+        "options": [
+          "we get",
+          "do we get",
+          "we do get",
+          "get we"
+        ],
+        "correct": 1,
+        "explanation": "'Seldom' at the start of a clause requires inversion: 'do we get'."
+      },
+      {
+        "q": "Such was the outcry ___ the policy was withdrawn immediately.",
+        "options": [
+          "that",
+          "which",
+          "as",
+          "so"
+        ],
+        "correct": 0,
+        "explanation": "'Such + be + subject + that' is a formal structure showing result."
+      },
+      {
+        "q": "Had the warning been heeded, the disaster ___ averted.",
+        "options": [
+          "would be",
+          "could have been",
+          "will be",
+          "was"
+        ],
+        "correct": 1,
+        "explanation": "Third conditional: had + past participle, could have + past participle."
+      },
+      {
+        "q": "Nowhere ___ such diversity found as in this region.",
+        "options": [
+          "is",
+          "was",
+          "has",
+          "did"
+        ],
+        "correct": 0,
+        "explanation": "'Nowhere' at the start of a clause triggers inversion with 'is'."
+      }
+    ],
+    "vocabulary": [
+      {
+        "q": "'To exacerbate' a situation means to ___ it.",
+        "options": [
+          "improve",
+          "make worse",
+          "resolve",
+          "simplify"
+        ],
+        "correct": 1,
+        "explanation": "'Exacerbate' means to make a problem more severe."
+      },
+      {
+        "q": "What is the opposite of 'ambiguous'?",
+        "options": [
+          "unequivocal",
+          "vague",
+          "unclear",
+          "confusing"
+        ],
+        "correct": 0,
+        "explanation": "'Unequivocal' means completely clear, the opposite of ambiguous."
+      },
+      {
+        "q": "Something found everywhere is described as ___.",
+        "options": [
+          "obsolete",
+          "ubiquitous",
+          "isolated",
+          "scarce"
+        ],
+        "correct": 1,
+        "explanation": "'Ubiquitous' means present or found everywhere."
+      },
+      {
+        "q": "A brief, witty remark is called a ___.",
+        "options": [
+          "quip",
+          "lecture",
+          "rant",
+          "eulogy"
+        ],
+        "correct": 0,
+        "explanation": "A 'quip' is a clever, brief remark."
+      },
+      {
+        "q": "'To relinquish' a right means to ___ it.",
+        "options": [
+          "seize",
+          "give up",
+          "strengthen",
+          "defend"
+        ],
+        "correct": 1,
+        "explanation": "'Relinquish' means to voluntarily give up something."
+      },
+      {
+        "q": "Work that copies others without originality is described as ___.",
+        "options": [
+          "innovative",
+          "derivative",
+          "authentic",
+          "pioneering"
+        ],
+        "correct": 1,
+        "explanation": "'Derivative' describes something that imitates existing work."
+      },
+      {
+        "q": "'Ephemeral' means ___.",
+        "options": [
+          "permanent",
+          "lasting a very short time",
+          "expensive",
+          "loud"
+        ],
+        "correct": 1,
+        "explanation": "'Ephemeral' describes something that lasts only briefly."
+      },
+      {
+        "q": "'To vindicate' someone means to ___ them.",
+        "options": [
+          "accuse",
+          "prove right",
+          "punish",
+          "ignore"
+        ],
+        "correct": 1,
+        "explanation": "'Vindicate' means to clear someone of blame or prove them right."
+      },
+      {
+        "q": "A 'cogent' argument is one that is ___.",
+        "options": [
+          "weak",
+          "clear and convincing",
+          "long",
+          "emotional"
+        ],
+        "correct": 1,
+        "explanation": "'Cogent' means clear, logical, and convincing."
+      },
+      {
+        "q": "'Parsimonious' means ___.",
+        "options": [
+          "generous",
+          "extremely stingy",
+          "careless",
+          "wealthy"
+        ],
+        "correct": 1,
+        "explanation": "'Parsimonious' describes someone unwilling to spend money."
+      },
+      {
+        "q": "'To acquiesce' means to ___.",
+        "options": [
+          "refuse",
+          "reluctantly agree",
+          "celebrate",
+          "investigate"
+        ],
+        "correct": 1,
+        "explanation": "'Acquiesce' means to accept something without protest."
+      },
+      {
+        "q": "'Precarious' means ___.",
+        "options": [
+          "stable",
+          "dangerously insecure",
+          "comfortable",
+          "simple"
+        ],
+        "correct": 1,
+        "explanation": "'Precarious' describes something unstable or likely to fail."
+      }
+    ],
+    "reading": [
+      {
+        "passage": "The proliferation of misinformation on social media platforms has prompted policymakers to grapple with the delicate balance between curbing harmful content and preserving freedom of expression. Critics argue that overzealous moderation risks stifling legitimate discourse, while others contend that inaction emboldens the spread of falsehoods.",
+        "q": "What balance are policymakers grappling with?",
+        "options": [
+          "profit versus growth",
+          "curbing harmful content versus preserving free expression",
+          "speed versus accuracy",
+          "local versus global reach"
+        ],
+        "correct": 1,
+        "explanation": "The passage names the tension between 'curbing harmful content and preserving freedom of expression.'"
+      },
+      {
+        "passage": "The proliferation of misinformation on social media platforms has prompted policymakers to grapple with the delicate balance between curbing harmful content and preserving freedom of expression. Critics argue that overzealous moderation risks stifling legitimate discourse, while others contend that inaction emboldens the spread of falsehoods.",
+        "q": "What do critics say overzealous moderation risks?",
+        "options": [
+          "increasing costs",
+          "stifling legitimate discourse",
+          "slowing servers",
+          "reducing advertising"
+        ],
+        "correct": 1,
+        "explanation": "The text states critics fear it 'risks stifling legitimate discourse.'"
+      },
+      {
+        "passage": "Economists remain divided over the long-term implications of automation on labor markets. While some posit that technological displacement will be offset by the creation of new industries, others warn of a widening skills gap that could exacerbate income inequality.",
+        "q": "What do some economists believe will offset technological displacement?",
+        "options": [
+          "government subsidies",
+          "the creation of new industries",
+          "shorter working hours",
+          "higher taxes"
+        ],
+        "correct": 1,
+        "explanation": "The passage says displacement 'will be offset by the creation of new industries.'"
+      },
+      {
+        "passage": "Economists remain divided over the long-term implications of automation on labor markets. While some posit that technological displacement will be offset by the creation of new industries, others warn of a widening skills gap that could exacerbate income inequality.",
+        "q": "What could a widening skills gap exacerbate, according to the passage?",
+        "options": [
+          "income inequality",
+          "population growth",
+          "trade deficits",
+          "energy prices"
+        ],
+        "correct": 0,
+        "explanation": "The text warns the gap 'could exacerbate income inequality.'"
+      },
+      {
+        "passage": "The advent of quantum computing threatens to render current encryption standards obsolete, prompting a race among researchers to develop quantum-resistant cryptographic algorithms before such machines become practically viable.",
+        "q": "What does quantum computing threaten, according to the passage?",
+        "options": [
+          "to lower computing costs",
+          "to render current encryption standards obsolete",
+          "to eliminate all software jobs",
+          "to slow down the internet"
+        ],
+        "correct": 1,
+        "explanation": "The passage says quantum computing 'threatens to render current encryption standards obsolete.'"
+      },
+      {
+        "passage": "The advent of quantum computing threatens to render current encryption standards obsolete, prompting a race among researchers to develop quantum-resistant cryptographic algorithms before such machines become practically viable.",
+        "q": "What are researchers racing to develop?",
+        "options": [
+          "faster quantum computers",
+          "quantum-resistant cryptographic algorithms",
+          "cheaper hardware",
+          "new operating systems"
+        ],
+        "correct": 1,
+        "explanation": "The passage says this has prompted a race 'to develop quantum-resistant cryptographic algorithms.'"
+      },
+      {
+        "passage": "Behavioral economists have long argued that humans are not the purely rational actors classical economic theory assumes, but rather are subject to a host of cognitive biases that systematically distort decision-making.",
+        "q": "What do behavioral economists argue against, according to the passage?",
+        "options": [
+          "the idea that humans are purely rational actors",
+          "the existence of cognitive biases",
+          "classical physics",
+          "the value of economic theory generally"
+        ],
+        "correct": 0,
+        "explanation": "The passage says they argue humans 'are not the purely rational actors classical economic theory assumes.'"
+      },
+      {
+        "passage": "Behavioral economists have long argued that humans are not the purely rational actors classical economic theory assumes, but rather are subject to a host of cognitive biases that systematically distort decision-making.",
+        "q": "What do cognitive biases do, according to the passage?",
+        "options": [
+          "improve decision-making",
+          "systematically distort decision-making",
+          "have no real effect",
+          "only affect children"
+        ],
+        "correct": 1,
+        "explanation": "The passage says cognitive biases 'systematically distort decision-making.'"
+      }
+    ]
+  }
+}
