@@ -21,9 +21,13 @@ import {
   WifiOff,
   Lock,
   Upload,
+  Download,
+  Trash2,
   AlertTriangle,
   ShieldCheck,
   TrendingUp,
+  TrendingDown,
+  Minus,
   BarChart3,
   GraduationCap,
 } from "lucide-react";
@@ -251,7 +255,7 @@ function HomeScreen({ onStart, historyCount, history, onOpenHistory, onOpenProgr
               title="History"
               summary={
                 last
-                  ? `Last test: ${new Date(last.date).toLocaleDateString()} · ${last.level} · ${last.pct}%`
+                  ? `Last test: ${formatDate(last.date)} · ${last.level} · ${last.pct}%`
                   : "No tests taken yet."
               }
               onSeeMore={history.length ? () => { setDashOpen(false); onOpenHistory(); } : null}
@@ -454,6 +458,12 @@ function SetupScreen({ onBack, onStartTest }) {
 /* ------------------------------------------------------------------ */
 /*  SCREEN: QUIZ                                                       */
 /* ------------------------------------------------------------------ */
+
+function formatDate(iso) {
+  // Force en-US + explicit Gregorian calendar so this never renders in a
+  // Hijri or other non-Gregorian calendar based on the visitor's locale.
+  return new Date(iso).toLocaleDateString("en-US-u-ca-gregory", { month: "short", day: "numeric" });
+}
 
 function formatTime(sec) {
   const m = Math.floor(sec / 60).toString().padStart(2, "0");
@@ -828,16 +838,16 @@ function ResultsScreen({ session, onReview, onNewTest, onChooseLevel }) {
   return (
     <div className="flex flex-col h-full">
       <canvas ref={canvasRef} className="hidden" />
-      <div className="flex-1 overflow-y-auto px-5 md:px-8 pt-8 pb-4">
+      <div className="flex-1 overflow-y-auto px-5 md:px-8 pt-8 pb-4 md:max-w-[640px] md:mx-auto md:w-full">
         <div className="flex flex-col items-center text-center">
           <div
-            className="w-16 h-16 rounded-full flex items-center justify-center"
+            className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center"
             style={{ background: `linear-gradient(135deg, ${BLUE}, ${BLUE_LIGHT})` }}
           >
             <Trophy className="text-white" size={28} />
           </div>
-          <h2 className="text-[20px] font-bold text-[#1B1E2B] mt-4">Test Completed!</h2>
-          <p className="text-[13px] text-[#8890AE] mt-1">Here are your results</p>
+          <h2 className="text-[20px] md:text-[24px] font-bold text-[#1B1E2B] mt-4">Test Completed!</h2>
+          <p className="text-[13px] md:text-[14px] text-[#8890AE] mt-1">Here are your results</p>
           <button
             onClick={handleShare}
             disabled={shareState === "working"}
@@ -856,11 +866,11 @@ function ResultsScreen({ session, onReview, onNewTest, onChooseLevel }) {
           </button>
         </div>
 
-        <div className="rounded-2xl border border-[#EAEDF9] p-4 mt-6">
+        <div className="rounded-2xl border border-[#EAEDF9] p-4 md:p-6 mt-6">
           <div className="flex items-end justify-between">
             <div>
               <p className="text-[12px] text-[#8890AE]">Your score</p>
-              <p className="text-[28px] font-bold text-[#1B1E2B] mt-0.5">
+              <p className="text-[28px] md:text-[34px] font-bold text-[#1B1E2B] mt-0.5">
                 {correctCount}
                 <span className="text-[16px] text-[#8890AE] font-medium"> / {total}</span>
               </p>
@@ -869,7 +879,7 @@ function ResultsScreen({ session, onReview, onNewTest, onChooseLevel }) {
               <p className="text-[12px] text-[#8890AE]">
                 Level Tested : <span className="font-bold text-[#1B1E2B]">{config.level}</span>
               </p>
-              <p className="text-[26px] font-bold mt-0.5" style={{ color: BLUE }}>
+              <p className="text-[26px] md:text-[32px] font-bold mt-0.5" style={{ color: BLUE }}>
                 {pct}%
               </p>
             </div>
@@ -879,13 +889,13 @@ function ResultsScreen({ session, onReview, onNewTest, onChooseLevel }) {
           </div>
         </div>
 
-        <div className="rounded-2xl border border-[#EAEDF9] p-4 mt-3 flex items-start gap-3">
+        <div className="rounded-2xl border border-[#EAEDF9] p-4 md:p-5 mt-3 flex items-start gap-3">
           <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: "#EEF1FE" }}>
             <Sparkles size={18} style={{ color: BLUE }} />
           </div>
           <div>
             <p className="text-[12px] text-[#8890AE]">Your estimated level</p>
-            <p className="text-[15px] font-bold text-[#1B1E2B]">
+            <p className="text-[15px] md:text-[17px] font-bold text-[#1B1E2B]">
               {estLevel} · {levelName(estLevel)}
             </p>
             <button
@@ -1110,17 +1120,131 @@ function AdminScreen({ onBack }) {
   const [status, setStatus] = useState("idle"); // idle | uploading | done | error
   const [result, setResult] = useState(null);
   const fileInputRef = useRef(null);
-  const [sections, setSections] = useState([{ id: "bank", name: "Question Bank", builtin: true }]);
+  const [sections, setSections] = useState([{ id: "bank", name: "Question Bank", builtin: true, enabled: true }]);
   const [activeSection, setActiveSection] = useState("bank");
   const [newSectionName, setNewSectionName] = useState("");
+
+  // ---- Login gate ----
+  const [authed, setAuthed] = useState(false);
+  const [loginPw, setLoginPw] = useState("");
+  const [loginState, setLoginState] = useState("idle"); // idle | checking | error
+  const [loginError, setLoginError] = useState("");
+
+  async function handleLogin(e) {
+    e.preventDefault();
+    if (!loginPw.trim()) return;
+    setLoginState("checking");
+    setLoginError("");
+    try {
+      const res = await fetch("/api/add-questions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: loginPw, questions: [] }),
+      });
+      if (res.status === 401) {
+        setLoginState("error");
+        setLoginError("Wrong password");
+        return;
+      }
+      // Any other response (400 "no questions", 200, etc.) means the
+      // password itself was accepted by the server.
+      setPassword(loginPw);
+      setAuthed(true);
+    } catch (err) {
+      setLoginState("error");
+      setLoginError("Couldn't reach the server — check your connection and try again.");
+    }
+  }
 
   function addSection() {
     const name = newSectionName.trim();
     if (!name) return;
     const id = `custom-${Date.now()}`;
-    setSections((prev) => [...prev, { id, name, builtin: false }]);
+    setSections((prev) => [...prev, { id, name, builtin: false, enabled: true }]);
     setNewSectionName("");
     setActiveSection(id);
+  }
+
+  function toggleSectionEnabled(id) {
+    setSections((prev) => prev.map((s) => (s.id === id ? { ...s, enabled: !s.enabled } : s)));
+  }
+
+  // ---- Question Bank file manager (view / edit / download / clear) ----
+  const [bankInfo, setBankInfo] = useState(null); // { total, counts, sizeBytes }
+  const [bankContent, setBankContent] = useState("");
+  const [bankLoading, setBankLoading] = useState(false);
+  const [bankError, setBankError] = useState("");
+  const [bankEditing, setBankEditing] = useState(false);
+  const [bankEditText, setBankEditText] = useState("");
+  const [bankSaveState, setBankSaveState] = useState("idle"); // idle | saving | error
+  const [bankSaveMsg, setBankSaveMsg] = useState("");
+  const [confirmClear, setConfirmClear] = useState(false);
+
+  async function fetchBankInfo() {
+    setBankLoading(true);
+    setBankError("");
+    try {
+      const res = await fetch("/api/bank-file");
+      const data = await res.json();
+      if (!res.ok) {
+        setBankError(data.error || "Couldn't load the question bank file.");
+        return;
+      }
+      setBankInfo({ total: data.total, counts: data.counts, sizeBytes: data.sizeBytes });
+      setBankContent(data.content);
+    } catch (e) {
+      setBankError("Couldn't reach the server.");
+    } finally {
+      setBankLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    if (authed && activeSection === "bank" && !bankInfo && !bankLoading) fetchBankInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [authed, activeSection]);
+
+  function handleDownloadBank() {
+    const blob = new Blob([bankContent], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "questions.json";
+    link.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function openBankEditor() {
+    setBankEditText(bankContent);
+    setBankEditing(true);
+    setBankSaveState("idle");
+    setBankSaveMsg("");
+  }
+
+  async function saveBankEdit(newContentString) {
+    setBankSaveState("saving");
+    setBankSaveMsg("");
+    try {
+      const res = await fetch("/api/bank-file", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password, content: newContentString }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setBankSaveState("error");
+        setBankSaveMsg(data.error || "Save failed");
+        return;
+      }
+      setBankInfo({ total: data.total, counts: data.counts, sizeBytes: bankInfo?.sizeBytes });
+      setBankContent(newContentString);
+      setBankEditing(false);
+      setConfirmClear(false);
+      setBankSaveState("idle");
+    } catch (e) {
+      setBankSaveState("error");
+      setBankSaveMsg(String(e));
+    }
   }
 
   function handleFile(e) {
@@ -1179,6 +1303,46 @@ function AdminScreen({ onBack }) {
     }
   }
 
+  if (!authed) {
+    return (
+      <div className="flex flex-col h-full items-center justify-center px-6">
+        <div className="w-full max-w-[340px]">
+          <div className="flex flex-col items-center text-center mb-6">
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-3" style={{ background: "#EEF1FE" }}>
+              <Lock size={22} style={{ color: BLUE }} />
+            </div>
+            <h2 className="text-[18px] font-bold text-[#1B1E2B]">Admin Login</h2>
+            <p className="text-[12.5px] text-[#8890AE] mt-1">Enter the admin password to continue</p>
+          </div>
+          <form onSubmit={handleLogin}>
+            <div className="flex items-center gap-2 rounded-2xl border border-[#EAEDF9] px-3.5 py-3 mb-3">
+              <Lock size={16} className="text-[#8890AE]" />
+              <input
+                type="password"
+                autoFocus
+                value={loginPw}
+                onChange={(e) => setLoginPw(e.target.value)}
+                placeholder="Admin password"
+                className="flex-1 outline-none text-[14px] bg-transparent"
+              />
+            </div>
+            {loginState === "error" && (
+              <p className="text-[12px] text-[#C43A31] mb-3 flex items-center gap-1.5">
+                <AlertTriangle size={13} /> {loginError}
+              </p>
+            )}
+            <GradientButton type="submit" disabled={loginState === "checking" || !loginPw.trim()}>
+              {loginState === "checking" ? "Checking..." : "Continue"}
+            </GradientButton>
+          </form>
+          <button onClick={onBack} className="text-[13px] font-medium mt-4 w-full text-center" style={{ color: BLUE }}>
+            ← Back to Home
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col h-full">
       <div className="flex items-center gap-3 px-5 md:px-8 pt-5 pb-3">
@@ -1191,17 +1355,32 @@ function AdminScreen({ onBack }) {
       <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
         <div className="flex md:flex-col gap-2 overflow-x-auto md:overflow-visible px-5 md:px-3 md:w-[220px] md:border-r border-b md:border-b-0 border-[#EAEDF9] py-3 shrink-0">
           {sections.map((s) => (
-            <button
-              key={s.id}
-              onClick={() => setActiveSection(s.id)}
-              className="flex items-center gap-2 px-3 py-2.5 rounded-xl text-[13px] font-semibold whitespace-nowrap shrink-0"
-              style={{
-                background: activeSection === s.id ? BLUE : "transparent",
-                color: activeSection === s.id ? "#fff" : "#6B7190",
-              }}
-            >
-              {s.builtin ? "📦" : "📄"} {s.name}
-            </button>
+            <div key={s.id} className="flex items-center gap-1.5 shrink-0">
+              <button
+                onClick={() => s.enabled !== false && setActiveSection(s.id)}
+                disabled={s.enabled === false}
+                className="flex items-center gap-2 px-3 py-2.5 rounded-xl text-[13px] font-semibold whitespace-nowrap disabled:opacity-40"
+                style={{
+                  background: activeSection === s.id && s.enabled !== false ? BLUE : "transparent",
+                  color: activeSection === s.id && s.enabled !== false ? "#fff" : "#6B7190",
+                }}
+              >
+                {s.builtin ? "📦" : "📄"} {s.name}
+              </button>
+              {!s.builtin && (
+                <button
+                  onClick={() => toggleSectionEnabled(s.id)}
+                  title={s.enabled === false ? "Turn on" : "Turn off"}
+                  className="w-8 h-5 rounded-full relative shrink-0"
+                  style={{ background: s.enabled === false ? "#E2E6F0" : BLUE }}
+                >
+                  <div
+                    className="w-3.5 h-3.5 bg-white rounded-full absolute top-[3px] transition-all"
+                    style={{ left: s.enabled === false ? "3px" : "16px" }}
+                  />
+                </button>
+              )}
+            </div>
           ))}
           <div className="flex gap-1.5 md:mt-2 md:pt-2 md:border-t border-[#EAEDF9] shrink-0">
             <input
@@ -1228,25 +1407,117 @@ function AdminScreen({ onBack }) {
             </div>
           ) : (
             <>
+              <p className="text-[13px] font-semibold text-[#1B1E2B] mb-2">Current file</p>
+              {bankLoading && !bankInfo && (
+                <div className="flex items-center gap-2 text-[12.5px] text-[#8890AE] rounded-2xl border border-[#EAEDF9] p-4 mb-4">
+                  <Loader2 size={14} className="animate-spin" /> Loading questions.json…
+                </div>
+              )}
+              {bankError && (
+                <div className="rounded-2xl border border-[#F7C6C1] bg-[#FDF3F2] p-3.5 mb-4 text-[12.5px] text-[#C43A31] flex items-center gap-2">
+                  <AlertTriangle size={14} /> {bankError}
+                  <button onClick={fetchBankInfo} className="ml-auto underline font-semibold">Retry</button>
+                </div>
+              )}
+              {bankInfo && (
+                <div className="rounded-2xl border border-[#EAEDF9] p-4 mb-3">
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: "#EEF1FE" }}>
+                      🗂️
+                    </div>
+                    <div className="flex-1 min-w-[140px]">
+                      <p className="text-[13.5px] font-bold text-[#1B1E2B]">questions.json</p>
+                      <p className="text-[11.5px] text-[#8890AE]">
+                        {bankInfo.total} questions · {Math.round((bankInfo.sizeBytes || 0) / 1024)} KB
+                      </p>
+                    </div>
+                    <div className="flex gap-1.5 flex-wrap">
+                      <SecondaryButton onClick={handleDownloadBank} className="!py-2 !px-3 text-[12px]">
+                        <Download size={13} /> Download
+                      </SecondaryButton>
+                      <SecondaryButton onClick={openBankEditor} className="!py-2 !px-3 text-[12px]">
+                        <ClipboardList size={13} /> Edit inline
+                      </SecondaryButton>
+                      <button
+                        onClick={() => setConfirmClear(true)}
+                        className="flex items-center gap-1 text-[12px] font-semibold px-3 py-2 rounded-2xl border"
+                        style={{ color: "#C43A31", borderColor: "#F7C6C1" }}
+                      >
+                        <Trash2 size={13} /> Clear all
+                      </button>
+                    </div>
+                  </div>
+                  <p className="text-[11px] text-[#8890AE] mt-3">
+                    {Object.entries(bankInfo.counts || {}).map(([lvl, n]) => `${lvl}: ${n}`).join(" · ")}
+                  </p>
+                </div>
+              )}
+
+              {confirmClear && (
+                <div className="rounded-2xl border border-[#F7C6C1] bg-[#FDF3F2] p-4 mb-4">
+                  <p className="text-[13px] font-semibold text-[#C43A31]">
+                    This deletes every question in the live bank. This can't be undone from here — download
+                    a backup first if you're not sure.
+                  </p>
+                  <div className="flex gap-2 mt-3">
+                    <button
+                      onClick={() => saveBankEdit("{}")}
+                      disabled={bankSaveState === "saving"}
+                      className="text-[12.5px] font-bold px-4 py-2 rounded-xl text-white disabled:opacity-60"
+                      style={{ background: "#E0483E" }}
+                    >
+                      {bankSaveState === "saving" ? "Clearing..." : "Yes, clear everything"}
+                    </button>
+                    <SecondaryButton onClick={() => setConfirmClear(false)} className="!py-2 !px-4 text-[12.5px]">
+                      Cancel
+                    </SecondaryButton>
+                  </div>
+                  {bankSaveState === "error" && (
+                    <p className="text-[12px] text-[#C43A31] mt-2">{bankSaveMsg}</p>
+                  )}
+                </div>
+              )}
+
+              {bankEditing && (
+                <div className="rounded-2xl border border-[#EAEDF9] p-4 mb-5">
+                  <p className="text-[12.5px] font-semibold text-[#1B1E2B] mb-2">
+                    Editing questions.json directly — must stay valid JSON in the same shape.
+                  </p>
+                  <textarea
+                    value={bankEditText}
+                    onChange={(e) => setBankEditText(e.target.value)}
+                    rows={14}
+                    className="w-full rounded-xl border border-[#EAEDF9] p-3 text-[11.5px] font-mono outline-none focus:border-[#3F66F5]"
+                  />
+                  {bankSaveState === "error" && (
+                    <p className="text-[12px] text-[#C43A31] mt-2 flex items-center gap-1.5">
+                      <AlertTriangle size={13} /> {bankSaveMsg}
+                    </p>
+                  )}
+                  <div className="flex gap-2 mt-3">
+                    <GradientButton
+                      onClick={() => saveBankEdit(bankEditText)}
+                      disabled={bankSaveState === "saving"}
+                      className="!py-2.5 flex-none px-6"
+                    >
+                      {bankSaveState === "saving" ? "Saving..." : "Save changes"}
+                    </GradientButton>
+                    <SecondaryButton onClick={() => setBankEditing(false)} className="!py-2.5 px-6 flex-none">
+                      Cancel
+                    </SecondaryButton>
+                  </div>
+                </div>
+              )}
+
+              <div className="border-t border-[#EAEDF9] my-5" />
+
+              <p className="text-[13px] font-semibold text-[#1B1E2B] mb-2">Add new questions</p>
               <div className="rounded-2xl p-3.5 mb-4 flex gap-2.5" style={{ background: "#F5F6FB" }}>
                 <ShieldCheck size={18} style={{ color: BLUE }} className="shrink-0 mt-0.5" />
                 <p className="text-[12px] text-[#5B6180] leading-relaxed">
-                  Upload a JSON file of new questions. Once you enter the admin password and confirm,
-                  they're committed straight to your GitHub repo and go live for every visitor after
-                  the next auto-deploy (usually under a minute).
+                  Upload a JSON file of new questions to merge into the bank above. They go live for
+                  every visitor after the next auto-deploy (usually under a minute).
                 </p>
-              </div>
-
-              <p className="text-[13px] font-semibold text-[#1B1E2B] mb-2">Admin password</p>
-              <div className="flex items-center gap-2 rounded-2xl border border-[#EAEDF9] px-3.5 py-3 mb-4">
-                <Lock size={16} className="text-[#8890AE]" />
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter admin password"
-                  className="flex-1 outline-none text-[14px] bg-transparent"
-                />
               </div>
 
               <p className="text-[13px] font-semibold text-[#1B1E2B] mb-2">Questions JSON</p>
@@ -1386,7 +1657,7 @@ function HistoryScreen({ history, onBack }) {
           {reversed.map((h, i) => (
             <div key={i} className="flex items-center gap-3 rounded-2xl border border-[#EAEDF9] p-3">
               <span className="text-[12.5px] text-[#6B7190] w-28 shrink-0">
-                {new Date(h.date).toLocaleDateString()} · {h.level}
+                {formatDate(h.date)} · {h.level}
               </span>
               <div className="flex-1 h-2 bg-[#EEF1FA] rounded-full overflow-hidden">
                 <div className="h-full rounded-full" style={{ width: `${h.pct}%`, background: BLUE }} />
@@ -1409,6 +1680,25 @@ function ProgressScreen({ history, onBack }) {
   const last = history[history.length - 1];
   const currentLevel = last?.estLevel || "A1";
   const first = history[0];
+  const recent = history.slice(-10);
+  const maxPct = Math.max(100, ...recent.map((h) => h.pct));
+
+  let trend = "same";
+  if (first && last && first.estLevel) {
+    const diff = order.indexOf(currentLevel) - order.indexOf(first.estLevel);
+    trend = diff > 0 ? "up" : diff < 0 ? "down" : "same";
+  }
+  const TrendIcon = trend === "up" ? TrendingUp : trend === "down" ? TrendingDown : Minus;
+  const trendColor = trend === "up" ? "#2FAE6B" : trend === "down" ? "#E0483E" : "#8890AE";
+  const trendBg = trend === "up" ? "#F3FBF6" : trend === "down" ? "#FDF3F2" : "#F5F6FB";
+  const trendText =
+    trend === "up"
+      ? `Improved from ${first.estLevel} to ${currentLevel} over your last ${history.length} test${history.length > 1 ? "s" : ""}.`
+      : trend === "down"
+      ? `Dropped from ${first.estLevel} to ${currentLevel} — a bit more practice should help you climb back up.`
+      : first
+      ? `Holding steady at ${currentLevel} across your tests so far.`
+      : "Take a test to start tracking your progress.";
 
   return (
     <div className="flex flex-col h-full">
@@ -1421,7 +1711,7 @@ function ProgressScreen({ history, onBack }) {
           <p className="text-[12px] text-[#8890AE]">Where you stand across the CEFR scale</p>
         </div>
       </div>
-      <div className="flex-1 overflow-y-auto px-5 md:px-8 pb-6">
+      <div className="flex-1 overflow-y-auto px-5 md:px-8 pb-6 md:max-w-[720px] md:mx-auto md:w-full">
         <div className="flex gap-1.5 mb-4">
           {order.map((lvl) => (
             <div
@@ -1436,17 +1726,46 @@ function ProgressScreen({ history, onBack }) {
             </div>
           ))}
         </div>
-        {first && first.estLevel && first.estLevel !== currentLevel && (
-          <p className="text-[12.5px] text-[#6B7190] mb-5">
-            You moved from {first.estLevel} to {currentLevel} since your first test.
+
+        <div className="rounded-2xl p-4 mb-5 flex items-center gap-3" style={{ background: trendBg }}>
+          <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 bg-white">
+            <TrendIcon size={18} style={{ color: trendColor }} />
+          </div>
+          <p className="text-[12.5px] leading-relaxed" style={{ color: trendColor }}>
+            {trendText}
           </p>
+        </div>
+
+        {recent.length > 0 && (
+          <>
+            <p className="text-[13px] font-semibold text-[#1B1E2B] mb-3">Score trend</p>
+            <div className="flex items-end gap-2 h-32 mb-2 px-1">
+              {recent.map((h, i) => (
+                <div key={i} className="flex-1 flex flex-col items-center justify-end h-full gap-1">
+                  <span className="text-[10px] text-[#8890AE]">{h.pct}%</span>
+                  <div
+                    className="w-full rounded-t-md"
+                    style={{ height: `${Math.max(4, (h.pct / maxPct) * 100)}%`, background: BLUE }}
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="flex gap-2 px-1 mb-6">
+              {recent.map((h, i) => (
+                <span key={i} className="flex-1 text-center text-[10px] text-[#8890AE]">
+                  {formatDate(h.date)}
+                </span>
+              ))}
+            </div>
+          </>
         )}
+
         <p className="text-[13px] font-semibold text-[#1B1E2B] mb-2">Score history</p>
         <div className="flex flex-col gap-2">
-          {history.map((h, i) => (
+          {[...history].reverse().map((h, i) => (
             <div key={i} className="flex items-center gap-3 rounded-2xl border border-[#EAEDF9] p-3">
               <span className="text-[12.5px] text-[#6B7190] w-24 shrink-0">
-                {new Date(h.date).toLocaleDateString()}
+                {formatDate(h.date)}
               </span>
               <div className="flex-1 h-2 bg-[#EEF1FA] rounded-full overflow-hidden">
                 <div className="h-full rounded-full" style={{ width: `${h.pct}%`, background: BLUE }} />
@@ -1506,7 +1825,7 @@ export default function App() {
       style={{ background: "linear-gradient(180deg, #F7F9FF 0%, #FFFFFF 30%)", minHeight: "100vh" }}
     >
       <div
-        className="w-full bg-white flex flex-col min-h-screen max-w-[430px] md:max-w-[680px] lg:max-w-[820px] md:my-8 md:rounded-3xl md:min-h-[88vh]"
+        className="w-full bg-white flex flex-col min-h-screen max-w-[430px] md:max-w-[760px] lg:max-w-[960px] md:my-8 md:rounded-3xl md:min-h-[88vh]"
         style={{ boxShadow: "0 0 60px rgba(63,102,245,0.06)" }}
       >
         {screen === "home" && (
