@@ -13,9 +13,9 @@ export const LEVELS = [
 ];
 
 export const CATEGORY_META = [
-  { id: "grammar", label: "Grammar" },
-  { id: "vocabulary", label: "Vocabulary" },
-  { id: "reading", label: "Reading" },
+  { id: "grammar", label: "Grammar", desc: "Verb tenses, sentence structure, and word order." },
+  { id: "vocabulary", label: "Vocabulary", desc: "Word meanings, synonyms, and everyday usage." },
+  { id: "reading", label: "Reading", desc: "Short passages with comprehension questions." },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -84,9 +84,33 @@ export function pickQuestions(level, count, categoryIds, excludeUids = []) {
 export function estimateLevel(selectedLevel, percentage) {
   const order = ["A1", "A2", "B1", "B2", "C1"];
   const idx = order.indexOf(selectedLevel);
-  if (percentage >= 85 && idx < order.length - 1) return order[idx + 1];
-  if (percentage < 50 && idx > 0) return order[idx - 1];
-  return selectedLevel;
+  let shift = 0;
+  if (percentage <= 20) shift = -2;
+  else if (percentage <= 40) shift = -1;
+  else if (percentage <= 70) shift = 0;
+  else if (percentage <= 90) shift = 1;
+  else shift = 2;
+  const clamped = Math.min(order.length - 1, Math.max(0, idx + shift));
+  return order[clamped];
+}
+
+export function estimateExplanation(selectedLevel, percentage, estLevel) {
+  if (estLevel === selectedLevel) {
+    return `You scored ${percentage}% on the ${selectedLevel} test, which lines up well with that level — that's why we're keeping the estimate at ${selectedLevel}.`;
+  }
+  const order = ["A1", "A2", "B1", "B2", "C1"];
+  const movedUp = order.indexOf(estLevel) > order.indexOf(selectedLevel);
+  return movedUp
+    ? `You scored ${percentage}% on the ${selectedLevel} test — high enough that ${selectedLevel} looks too easy for you, so we suggest ${estLevel} instead.`
+    : `You scored ${percentage}% on the ${selectedLevel} test — low enough that the fundamentals still need work, so we suggest ${estLevel} rather than nudging you down just one step.`;
+}
+
+export function categoryQuestionCounts() {
+  const counts = {};
+  for (const cat of CATEGORY_META) {
+    counts[cat.id] = Object.keys(BANK).reduce((sum, level) => sum + (BANK[level]?.[cat.id]?.length || 0), 0);
+  }
+  return counts;
 }
 
 export function levelName(id) {

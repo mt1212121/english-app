@@ -23,8 +23,11 @@ import {
   Upload,
   AlertTriangle,
   ShieldCheck,
+  TrendingUp,
+  BarChart3,
+  GraduationCap,
 } from "lucide-react";
-import { LEVELS, CATEGORY_META, pickQuestions, estimateLevel, levelName } from "./data/bank";
+import { LEVELS, CATEGORY_META, pickQuestions, estimateLevel, estimateExplanation, levelName, categoryQuestionCounts } from "./data/bank";
 import { fetchAIQuestions } from "./lib/aiQuestions";
 import { getHistory, addHistoryEntry, getSeenUids, addSeenUids } from "./lib/storage";
 
@@ -103,9 +106,47 @@ function SecondaryButton({ children, onClick, disabled, className = "" }) {
 /*  SCREEN: HOME                                                       */
 /* ------------------------------------------------------------------ */
 
-function HomeScreen({ onStart, historyCount }) {
+function AccordionRow({ icon, title, soon, summary, onSeeMore }) {
+  const [open, setOpen] = useState(false);
   return (
-    <div className="flex flex-col h-full">
+    <div className="rounded-2xl border border-[#EAEDF9] bg-white overflow-hidden mb-2.5">
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="w-full flex items-center gap-2.5 p-3.5 text-left font-semibold text-[14px] text-[#1B1E2B]"
+      >
+        {icon}
+        <span>{title}</span>
+        {soon && (
+          <span className="text-[10px] font-bold bg-[#EEF1FE] text-[#3F66F5] px-1.5 py-0.5 rounded">soon</span>
+        )}
+        <ChevronRight
+          size={16}
+          className="ml-auto text-[#8890AE] transition-transform"
+          style={{ transform: open ? "rotate(90deg)" : "none" }}
+        />
+      </button>
+      {open && (
+        <div className="px-3.5 pb-3.5">
+          <p className="text-[12.5px] text-[#6B7190] leading-relaxed mb-2">{summary}</p>
+          {onSeeMore && (
+            <button onClick={onSeeMore} className="text-[12px] font-semibold" style={{ color: BLUE }}>
+              {`See full ${title} →`}
+            </button>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function HomeScreen({ onStart, historyCount, history, onOpenHistory, onOpenProgress }) {
+  const [dashOpen, setDashOpen] = useState(false);
+  const counts = categoryQuestionCounts();
+  const last = history[history.length - 1];
+  const currentLevel = last?.estLevel || null;
+
+  return (
+    <div className="flex flex-col h-full relative">
       <div className="flex items-center justify-between px-5 md:px-8 pt-5 pb-2">
         <div className="flex items-center gap-2">
           <div
@@ -116,7 +157,9 @@ function HomeScreen({ onStart, historyCount }) {
           </div>
           <span className="font-semibold text-[17px] text-[#1B1E2B]">English Test</span>
         </div>
-        <Menu size={20} className="text-[#8890AE]" />
+        <button onClick={() => setDashOpen(true)} className="w-8 h-8 flex items-center justify-center">
+          <Menu size={20} className="text-[#8890AE]" />
+        </button>
       </div>
 
       <div className="px-5 md:px-8 pt-2">
@@ -150,16 +193,20 @@ function HomeScreen({ onStart, historyCount }) {
         </div>
       </div>
 
-      <div className="px-5 md:px-8 mt-6 grid grid-cols-3 gap-2.5">
-        {CATEGORIES.map(({ icon: Icon, label }) => (
-          <div key={label} className="rounded-2xl border border-[#EAEDF9] p-3.5 bg-white">
+      <div className="px-5 md:px-8 mt-6 flex flex-col gap-2.5">
+        {CATEGORIES.map(({ id, icon: Icon, label, desc }) => (
+          <div key={id} className="flex items-start gap-3.5 rounded-2xl border border-[#EAEDF9] p-4 bg-white">
             <div
-              className="w-8 h-8 rounded-xl flex items-center justify-center mb-2.5"
+              className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
               style={{ background: "#EEF1FE" }}
             >
-              <Icon size={15} style={{ color: BLUE }} />
+              <Icon size={16} style={{ color: BLUE }} />
             </div>
-            <p className="font-semibold text-[13px] text-[#1B1E2B]">{label}</p>
+            <div className="flex-1 min-w-0">
+              <p className="font-semibold text-[14.5px] text-[#1B1E2B]">{label}</p>
+              <p className="text-[12.5px] text-[#8890AE] mt-0.5">{desc}</p>
+            </div>
+            <span className="text-[11.5px] text-[#8890AE] whitespace-nowrap pl-2">{counts[id]} questions</span>
           </div>
         ))}
       </div>
@@ -172,6 +219,52 @@ function HomeScreen({ onStart, historyCount }) {
           Small steps make big progress
         </p>
       </div>
+
+      {dashOpen && (
+        <div className="fixed inset-0 bg-black/30 z-40" onClick={() => setDashOpen(false)}>
+          <div
+            className="absolute top-0 right-0 h-full w-[85%] max-w-[340px] bg-[#F7F9FF] p-5 overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-bold text-[16px] text-[#1B1E2B]">Your Dashboard</h3>
+              <button
+                onClick={() => setDashOpen(false)}
+                className="w-7 h-7 rounded-lg border border-[#EAEDF9] bg-white flex items-center justify-center"
+              >
+                <X size={14} />
+              </button>
+            </div>
+
+            <AccordionRow
+              icon={<TrendingUp size={16} style={{ color: BLUE }} />}
+              title="Progress Level"
+              summary={
+                currentLevel
+                  ? `Current: ${currentLevel} · ${levelName(currentLevel)}`
+                  : "Take a test to see your estimated level here."
+              }
+              onSeeMore={history.length ? () => { setDashOpen(false); onOpenProgress(); } : null}
+            />
+            <AccordionRow
+              icon={<BarChart3 size={16} style={{ color: BLUE }} />}
+              title="History"
+              summary={
+                last
+                  ? `Last test: ${new Date(last.date).toLocaleDateString()} · ${last.level} · ${last.pct}%`
+                  : "No tests taken yet."
+              }
+              onSeeMore={history.length ? () => { setDashOpen(false); onOpenHistory(); } : null}
+            />
+            <AccordionRow
+              icon={<GraduationCap size={16} style={{ color: BLUE }} />}
+              title="Lessons"
+              soon
+              summary="This section will hold guided lessons and video content."
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -676,6 +769,7 @@ function ResultsScreen({ session, onReview, onNewTest, onChooseLevel }) {
 
   const canvasRef = useRef(null);
   const [shareState, setShareState] = useState("idle"); // idle | working | done
+  const [showExplain, setShowExplain] = useState(false);
 
   async function handleShare() {
     setShareState("working");
@@ -771,17 +865,22 @@ function ResultsScreen({ session, onReview, onNewTest, onChooseLevel }) {
                 <span className="text-[16px] text-[#8890AE] font-medium"> / {total}</span>
               </p>
             </div>
-            <p className="text-[26px] font-bold" style={{ color: BLUE }}>
-              {pct}%
-            </p>
+            <div className="text-right">
+              <p className="text-[12px] text-[#8890AE]">
+                Level Tested : <span className="font-bold text-[#1B1E2B]">{config.level}</span>
+              </p>
+              <p className="text-[26px] font-bold mt-0.5" style={{ color: BLUE }}>
+                {pct}%
+              </p>
+            </div>
           </div>
           <div className="w-full h-2 bg-[#EEF1FA] rounded-full mt-3 overflow-hidden">
             <div className="h-full rounded-full" style={{ width: `${pct}%`, background: BLUE }} />
           </div>
         </div>
 
-        <div className="rounded-2xl border border-[#EAEDF9] p-4 mt-3 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "#EEF1FE" }}>
+        <div className="rounded-2xl border border-[#EAEDF9] p-4 mt-3 flex items-start gap-3">
+          <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: "#EEF1FE" }}>
             <Sparkles size={18} style={{ color: BLUE }} />
           </div>
           <div>
@@ -789,6 +888,18 @@ function ResultsScreen({ session, onReview, onNewTest, onChooseLevel }) {
             <p className="text-[15px] font-bold text-[#1B1E2B]">
               {estLevel} · {levelName(estLevel)}
             </p>
+            <button
+              onClick={() => setShowExplain((v) => !v)}
+              className="text-[12.5px] underline mt-1"
+              style={{ color: BLUE }}
+            >
+              {showExplain ? "Read Less" : "Read More"}
+            </button>
+            {showExplain && (
+              <p className="text-[12.5px] text-[#6B7190] leading-relaxed mt-2">
+                {estimateExplanation(config.level, pct, estLevel)}
+              </p>
+            )}
           </div>
         </div>
 
@@ -796,7 +907,7 @@ function ResultsScreen({ session, onReview, onNewTest, onChooseLevel }) {
           <p className="text-[13px] font-semibold text-[#1B1E2B] mb-3">Breakdown by category</p>
           <div className="flex flex-col gap-2.5">
             {byCategory.map((c) => (
-              <div key={c.id} className="flex items-center gap-3">
+              <div key={c.id} className="flex items-center gap-3 rounded-2xl border border-[#EAEDF9] p-3">
                 <c.icon size={16} style={{ color: BLUE }} className="shrink-0" />
                 <span className="text-[13px] text-[#3F4460] w-20 shrink-0">{c.label}</span>
                 <div className="flex-1 h-2 bg-[#EEF1FA] rounded-full overflow-hidden">
@@ -999,6 +1110,18 @@ function AdminScreen({ onBack }) {
   const [status, setStatus] = useState("idle"); // idle | uploading | done | error
   const [result, setResult] = useState(null);
   const fileInputRef = useRef(null);
+  const [sections, setSections] = useState([{ id: "bank", name: "Question Bank", builtin: true }]);
+  const [activeSection, setActiveSection] = useState("bank");
+  const [newSectionName, setNewSectionName] = useState("");
+
+  function addSection() {
+    const name = newSectionName.trim();
+    if (!name) return;
+    const id = `custom-${Date.now()}`;
+    setSections((prev) => [...prev, { id, name, builtin: false }]);
+    setNewSectionName("");
+    setActiveSection(id);
+  }
 
   function handleFile(e) {
     const file = e.target.files?.[0];
@@ -1062,121 +1185,276 @@ function AdminScreen({ onBack }) {
         <button onClick={onBack} className="text-[#1B1E2B]">
           <ArrowLeft size={22} />
         </button>
-        <h2 className="text-[18px] font-bold text-[#1B1E2B]">Admin — Add Questions</h2>
+        <h2 className="text-[18px] font-bold text-[#1B1E2B]">Admin</h2>
       </div>
 
-      <div className="flex-1 overflow-y-auto px-5 md:px-8 pb-4">
-        <div className="rounded-2xl p-3.5 mb-4 flex gap-2.5" style={{ background: "#F5F6FB" }}>
-          <ShieldCheck size={18} style={{ color: BLUE }} className="shrink-0 mt-0.5" />
-          <p className="text-[12px] text-[#5B6180] leading-relaxed">
-            Upload a JSON file of new questions. Once you enter the admin password and confirm,
-            they're committed straight to your GitHub repo and go live for every visitor after
-            the next auto-deploy (usually under a minute).
-          </p>
-        </div>
-
-        <p className="text-[13px] font-semibold text-[#1B1E2B] mb-2">Admin password</p>
-        <div className="flex items-center gap-2 rounded-2xl border border-[#EAEDF9] px-3.5 py-3 mb-4">
-          <Lock size={16} className="text-[#8890AE]" />
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter admin password"
-            className="flex-1 outline-none text-[14px] bg-transparent"
-          />
-        </div>
-
-        <p className="text-[13px] font-semibold text-[#1B1E2B] mb-2">Questions JSON</p>
-        <div className="flex gap-2 mb-2">
-          <SecondaryButton onClick={() => fileInputRef.current?.click()} className="!py-2.5">
-            <Upload size={15} /> Upload .json file
-          </SecondaryButton>
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="application/json,.json"
-            onChange={handleFile}
-            className="hidden"
-          />
-        </div>
-        <textarea
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder={ADMIN_TEMPLATE}
-          rows={10}
-          className="w-full rounded-2xl border border-[#EAEDF9] p-3.5 text-[12px] font-mono outline-none focus:border-[#3F66F5]"
-        />
-        <button
-          onClick={() => setText(ADMIN_TEMPLATE)}
-          className="text-[12px] font-medium mt-1.5"
-          style={{ color: BLUE }}
-        >
-          Fill in an example template
-        </button>
-
-        <div className="mt-4">
-          <SecondaryButton onClick={handleValidate} disabled={!text.trim()}>
-            Validate
-          </SecondaryButton>
-        </div>
-
-        {parsed && (
-          <div className="mt-4 rounded-2xl border border-[#EAEDF9] p-3.5">
-            <p className="text-[13px] font-semibold text-[#1B1E2B]">
-              {parsed.valid.length} valid · {parsed.errors.length} invalid
-            </p>
-            {parsed.errors.length > 0 && (
-              <div className="mt-2 flex flex-col gap-1 max-h-40 overflow-y-auto">
-                {parsed.errors.map((e, i) => (
-                  <div key={i} className="flex items-start gap-1.5 text-[11.5px] text-[#C43A31]">
-                    <AlertTriangle size={12} className="mt-0.5 shrink-0" />
-                    <span>{e}</span>
-                  </div>
-                ))}
-              </div>
-            )}
+      <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
+        <div className="flex md:flex-col gap-2 overflow-x-auto md:overflow-visible px-5 md:px-3 md:w-[220px] md:border-r border-b md:border-b-0 border-[#EAEDF9] py-3 shrink-0">
+          {sections.map((s) => (
+            <button
+              key={s.id}
+              onClick={() => setActiveSection(s.id)}
+              className="flex items-center gap-2 px-3 py-2.5 rounded-xl text-[13px] font-semibold whitespace-nowrap shrink-0"
+              style={{
+                background: activeSection === s.id ? BLUE : "transparent",
+                color: activeSection === s.id ? "#fff" : "#6B7190",
+              }}
+            >
+              {s.builtin ? "📦" : "📄"} {s.name}
+            </button>
+          ))}
+          <div className="flex gap-1.5 md:mt-2 md:pt-2 md:border-t border-[#EAEDF9] shrink-0">
+            <input
+              value={newSectionName}
+              onChange={(e) => setNewSectionName(e.target.value)}
+              placeholder="e.g. Lessons"
+              className="w-28 md:w-auto md:flex-1 border border-[#EAEDF9] rounded-lg px-2 py-1.5 text-[12px] outline-none"
+            />
+            <button
+              onClick={addSection}
+              className="w-7 h-7 rounded-lg text-white flex items-center justify-center shrink-0"
+              style={{ background: BLUE }}
+            >
+              +
+            </button>
           </div>
-        )}
+        </div>
 
-        {result && (
-          <div
-            className="mt-4 rounded-2xl p-3.5 text-[12.5px] leading-relaxed"
-            style={{
-              background: status === "error" ? "#FDF3F2" : "#F3FBF6",
-              color: status === "error" ? "#C43A31" : "#1E8F55",
-            }}
-          >
-            {status === "error" ? (
-              <>
-                <p className="font-semibold">{result.error}</p>
-                {result.detail && <p className="mt-1 opacity-80">{JSON.stringify(result.detail)}</p>}
-              </>
-            ) : (
-              <>
-                <p className="font-semibold">
-                  Added {result.added} question{result.added === 1 ? "" : "s"}
-                  {result.skippedDuplicates ? ` (skipped ${result.skippedDuplicates} duplicates)` : ""}.
+        <div className="flex-1 overflow-y-auto px-5 md:px-8 py-4">
+          {activeSection !== "bank" ? (
+            <div className="text-center py-16 text-[13.5px] text-[#8890AE]">
+              📄 Content management for "{sections.find((s) => s.id === activeSection)?.name}" isn't built
+              yet — this just reserves its spot in the sidebar for later.
+            </div>
+          ) : (
+            <>
+              <div className="rounded-2xl p-3.5 mb-4 flex gap-2.5" style={{ background: "#F5F6FB" }}>
+                <ShieldCheck size={18} style={{ color: BLUE }} className="shrink-0 mt-0.5" />
+                <p className="text-[12px] text-[#5B6180] leading-relaxed">
+                  Upload a JSON file of new questions. Once you enter the admin password and confirm,
+                  they're committed straight to your GitHub repo and go live for every visitor after
+                  the next auto-deploy (usually under a minute).
                 </p>
-                {result.totals && (
-                  <p className="mt-1 opacity-80">
-                    New totals — {Object.entries(result.totals).map(([lvl, n]) => `${lvl}: ${n}`).join(" · ")}
-                  </p>
-                )}
-                <p className="mt-1 opacity-80">{result.note}</p>
-              </>
-            )}
-          </div>
-        )}
-      </div>
+              </div>
 
-      <div className="px-5 md:px-8 pb-6 pt-3">
-        <GradientButton
-          onClick={handleUpload}
-          disabled={!parsed || parsed.valid.length === 0 || !password || status === "uploading"}
-        >
-          {status === "uploading" ? "Uploading..." : `Add ${parsed?.valid.length || 0} Question(s)`}
-        </GradientButton>
+              <p className="text-[13px] font-semibold text-[#1B1E2B] mb-2">Admin password</p>
+              <div className="flex items-center gap-2 rounded-2xl border border-[#EAEDF9] px-3.5 py-3 mb-4">
+                <Lock size={16} className="text-[#8890AE]" />
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter admin password"
+                  className="flex-1 outline-none text-[14px] bg-transparent"
+                />
+              </div>
+
+              <p className="text-[13px] font-semibold text-[#1B1E2B] mb-2">Questions JSON</p>
+              <div className="flex gap-2 mb-2">
+                <SecondaryButton onClick={() => fileInputRef.current?.click()} className="!py-2.5">
+                  <Upload size={15} /> Upload .json file
+                </SecondaryButton>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="application/json,.json"
+                  onChange={handleFile}
+                  className="hidden"
+                />
+              </div>
+              <textarea
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                placeholder={ADMIN_TEMPLATE}
+                rows={10}
+                className="w-full rounded-2xl border border-[#EAEDF9] p-3.5 text-[12px] font-mono outline-none focus:border-[#3F66F5]"
+              />
+              <button
+                onClick={() => setText(ADMIN_TEMPLATE)}
+                className="text-[12px] font-medium mt-1.5"
+                style={{ color: BLUE }}
+              >
+                Fill in an example template
+              </button>
+
+              <div className="mt-4">
+                <SecondaryButton onClick={handleValidate} disabled={!text.trim()}>
+                  Validate
+                </SecondaryButton>
+              </div>
+
+              {parsed && (
+                <div className="mt-4 rounded-2xl border border-[#EAEDF9] p-3.5">
+                  <p className="text-[13px] font-semibold text-[#1B1E2B]">
+                    {parsed.valid.length} valid · {parsed.errors.length} invalid
+                  </p>
+                  {parsed.errors.length > 0 && (
+                    <div className="mt-2 flex flex-col gap-1 max-h-40 overflow-y-auto">
+                      {parsed.errors.map((e, i) => (
+                        <div key={i} className="flex items-start gap-1.5 text-[11.5px] text-[#C43A31]">
+                          <AlertTriangle size={12} className="mt-0.5 shrink-0" />
+                          <span>{e}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {result && (
+                <div
+                  className="mt-4 rounded-2xl p-3.5 text-[12.5px] leading-relaxed"
+                  style={{
+                    background: status === "error" ? "#FDF3F2" : "#F3FBF6",
+                    color: status === "error" ? "#C43A31" : "#1E8F55",
+                  }}
+                >
+                  {status === "error" ? (
+                    <>
+                      <p className="font-semibold">{result.error}</p>
+                      {result.detail && <p className="mt-1 opacity-80">{JSON.stringify(result.detail)}</p>}
+                    </>
+                  ) : (
+                    <>
+                      <p className="font-semibold">
+                        Added {result.added} question{result.added === 1 ? "" : "s"}
+                        {result.skippedDuplicates ? ` (skipped ${result.skippedDuplicates} duplicates)` : ""}.
+                      </p>
+                      {result.totals && (
+                        <p className="mt-1 opacity-80">
+                          New totals — {Object.entries(result.totals).map(([lvl, n]) => `${lvl}: ${n}`).join(" · ")}
+                        </p>
+                      )}
+                      <p className="mt-1 opacity-80">{result.note}</p>
+                    </>
+                  )}
+                </div>
+              )}
+
+              <div className="mt-5">
+                <GradientButton
+                  onClick={handleUpload}
+                  disabled={!parsed || parsed.valid.length === 0 || !password || status === "uploading"}
+                >
+                  {status === "uploading" ? "Uploading..." : `Add ${parsed?.valid.length || 0} Question(s)`}
+                </GradientButton>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  SCREEN: HISTORY (full)                                             */
+/* ------------------------------------------------------------------ */
+
+function HistoryScreen({ history, onBack }) {
+  const reversed = [...history].reverse();
+  const avg = history.length ? Math.round(history.reduce((s, h) => s + h.pct, 0) / history.length) : 0;
+  const best = history.length ? Math.max(...history.map((h) => h.pct)) : 0;
+
+  return (
+    <div className="flex flex-col h-full">
+      <div className="flex items-center gap-3 px-5 md:px-8 pt-5 pb-3">
+        <button onClick={onBack} className="text-[#1B1E2B]">
+          <ArrowLeft size={22} />
+        </button>
+        <div>
+          <h2 className="text-[18px] font-bold text-[#1B1E2B]">Test History</h2>
+          <p className="text-[12px] text-[#8890AE]">Every test you've taken, most recent first</p>
+        </div>
+      </div>
+      <div className="flex-1 overflow-y-auto px-5 md:px-8 pb-6">
+        <div className="grid grid-cols-3 gap-2.5 mb-5">
+          <div className="rounded-2xl border border-[#EAEDF9] p-3 text-center">
+            <p className="text-[20px] font-bold text-[#1B1E2B]">{history.length}</p>
+            <p className="text-[11px] text-[#8890AE]">Tests taken</p>
+          </div>
+          <div className="rounded-2xl border border-[#EAEDF9] p-3 text-center">
+            <p className="text-[20px] font-bold text-[#1B1E2B]">{avg}%</p>
+            <p className="text-[11px] text-[#8890AE]">Average score</p>
+          </div>
+          <div className="rounded-2xl border border-[#EAEDF9] p-3 text-center">
+            <p className="text-[20px] font-bold text-[#1B1E2B]">{best}%</p>
+            <p className="text-[11px] text-[#8890AE]">Best score</p>
+          </div>
+        </div>
+        <div className="flex flex-col gap-2">
+          {reversed.map((h, i) => (
+            <div key={i} className="flex items-center gap-3 rounded-2xl border border-[#EAEDF9] p-3">
+              <span className="text-[12.5px] text-[#6B7190] w-28 shrink-0">
+                {new Date(h.date).toLocaleDateString()} · {h.level}
+              </span>
+              <div className="flex-1 h-2 bg-[#EEF1FA] rounded-full overflow-hidden">
+                <div className="h-full rounded-full" style={{ width: `${h.pct}%`, background: BLUE }} />
+              </div>
+              <span className="text-[13px] font-semibold w-10 text-right">{h.pct}%</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  SCREEN: PROGRESS (full)                                             */
+/* ------------------------------------------------------------------ */
+
+function ProgressScreen({ history, onBack }) {
+  const order = ["A1", "A2", "B1", "B2", "C1"];
+  const last = history[history.length - 1];
+  const currentLevel = last?.estLevel || "A1";
+  const first = history[0];
+
+  return (
+    <div className="flex flex-col h-full">
+      <div className="flex items-center gap-3 px-5 md:px-8 pt-5 pb-3">
+        <button onClick={onBack} className="text-[#1B1E2B]">
+          <ArrowLeft size={22} />
+        </button>
+        <div>
+          <h2 className="text-[18px] font-bold text-[#1B1E2B]">Your Progress</h2>
+          <p className="text-[12px] text-[#8890AE]">Where you stand across the CEFR scale</p>
+        </div>
+      </div>
+      <div className="flex-1 overflow-y-auto px-5 md:px-8 pb-6">
+        <div className="flex gap-1.5 mb-4">
+          {order.map((lvl) => (
+            <div
+              key={lvl}
+              className="flex-1 text-center py-3 rounded-xl font-bold text-[13px]"
+              style={{
+                background: lvl === currentLevel ? BLUE : "#F5F6FB",
+                color: lvl === currentLevel ? "#fff" : "#8890AE",
+              }}
+            >
+              {lvl}
+            </div>
+          ))}
+        </div>
+        {first && first.estLevel && first.estLevel !== currentLevel && (
+          <p className="text-[12.5px] text-[#6B7190] mb-5">
+            You moved from {first.estLevel} to {currentLevel} since your first test.
+          </p>
+        )}
+        <p className="text-[13px] font-semibold text-[#1B1E2B] mb-2">Score history</p>
+        <div className="flex flex-col gap-2">
+          {history.map((h, i) => (
+            <div key={i} className="flex items-center gap-3 rounded-2xl border border-[#EAEDF9] p-3">
+              <span className="text-[12.5px] text-[#6B7190] w-24 shrink-0">
+                {new Date(h.date).toLocaleDateString()}
+              </span>
+              <div className="flex-1 h-2 bg-[#EEF1FA] rounded-full overflow-hidden">
+                <div className="h-full rounded-full" style={{ width: `${h.pct}%`, background: BLUE }} />
+              </div>
+              <span className="text-[13px] font-semibold w-10 text-right">{h.pct}%</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -1187,13 +1465,13 @@ function AdminScreen({ onBack }) {
 /* ------------------------------------------------------------------ */
 
 export default function App() {
-  const [screen, setScreen] = useState("home"); // home | setup | quiz | results | review
+  const [screen, setScreen] = useState("home"); // home | setup | quiz | results | review | history | progress | admin
   const [quizConfig, setQuizConfig] = useState(null);
   const [session, setSession] = useState(null); // { questions, answers, config }
-  const [historyCount, setHistoryCount] = useState(0);
+  const [history, setHistory] = useState([]);
 
   useEffect(() => {
-    setHistoryCount(getHistory().length);
+    setHistory(getHistory());
     if (typeof window !== "undefined" && new URLSearchParams(window.location.search).get("admin") === "1") {
       setScreen("admin");
     }
@@ -1208,14 +1486,17 @@ export default function App() {
     const s = { questions, answers, config: quizConfig };
     setSession(s);
     const score = questions.filter((q, i) => answers[i] === q.correct).length;
+    const pct = Math.round((score / questions.length) * 100);
+    const estLevel = estimateLevel(quizConfig.level, pct);
     addHistoryEntry({
       level: quizConfig.level,
       categories: quizConfig.categories,
       score,
       total: questions.length,
-      pct: Math.round((score / questions.length) * 100),
+      pct,
+      estLevel,
     });
-    setHistoryCount((c) => c + 1);
+    setHistory(getHistory());
     setScreen("results");
   }
 
@@ -1229,14 +1510,20 @@ export default function App() {
         style={{ boxShadow: "0 0 60px rgba(63,102,245,0.06)" }}
       >
         {screen === "home" && (
-          <HomeScreen onStart={() => setScreen("setup")} historyCount={historyCount} />
+          <HomeScreen
+            onStart={() => setScreen("setup")}
+            historyCount={history.length}
+            history={history}
+            onOpenHistory={() => setScreen("history")}
+            onOpenProgress={() => setScreen("progress")}
+          />
         )}
         {screen === "setup" && (
           <SetupScreen onBack={() => setScreen("home")} onStartTest={handleStartTest} />
         )}
         {screen === "quiz" && quizConfig && (
           <QuizScreen
-            key={JSON.stringify(quizConfig) + historyCount}
+            key={JSON.stringify(quizConfig) + history.length}
             config={quizConfig}
             onExit={() => setScreen("home")}
             onFinish={handleFinishQuiz}
@@ -1259,6 +1546,8 @@ export default function App() {
           />
         )}
         {screen === "admin" && <AdminScreen onBack={() => setScreen("home")} />}
+        {screen === "history" && <HistoryScreen history={history} onBack={() => setScreen("home")} />}
+        {screen === "progress" && <ProgressScreen history={history} onBack={() => setScreen("home")} />}
       </div>
     </div>
   );
