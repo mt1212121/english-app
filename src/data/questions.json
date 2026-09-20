@@ -132,6 +132,391 @@
         ],
         "correct": 0,
         "explanation": "Use 'a' before words that start with a consonant sound."
+      },
+      {
+        "q": "My brother ___ English.",
+        "options": [
+          "study",
+          "studies",
+          "studying",
+          "studied"
+        ],
+        "correct": 1,
+        "explanation": "'My brother' is third-person singular, so use 'studies'."
+      },
+      {
+        "q": "They ___ in Riyadh.",
+        "options": [
+          "live",
+          "lives",
+          "living",
+          "lived"
+        ],
+        "correct": 0,
+        "explanation": "'They' uses the base form 'live' in the present simple."
+      },
+      {
+        "q": "There ___ three chairs in the room.",
+        "options": [
+          "is",
+          "am",
+          "are",
+          "be"
+        ],
+        "correct": 2,
+        "explanation": "A plural noun takes 'there are'."
+      },
+      {
+        "q": "She ___ at school today.",
+        "options": [
+          "is",
+          "am",
+          "are",
+          "be"
+        ],
+        "correct": 0,
+        "explanation": "'She' takes 'is'."
+      },
+      {
+        "q": "They ___ at home.",
+        "options": [
+          "is",
+          "am",
+          "are",
+          "be"
+        ],
+        "correct": 2,
+        "explanation": "'They' takes 'are' with the verb to be."
+      },
+      {
+        "q": "My mother ___ dinner every evening.",
+        "options": [
+          "cook",
+          "cooks",
+          "cooking",
+          "cooked"
+        ],
+        "correct": 1,
+        "explanation": "Third-person singular uses 'cooks'."
+      },
+      {
+        "q": "I ___ to music every night.",
+        "options": [
+          "listen",
+          "listens",
+          "listening",
+          "listened"
+        ],
+        "correct": 0,
+        "explanation": "'I' uses the base verb 'listen'."
+      },
+      {
+        "q": "___ you like pizza?",
+        "options": [
+          "Do",
+          "Does",
+          "Are",
+          "Is"
+        ],
+        "correct": 0,
+        "explanation": "'You' takes 'do' in present simple questions."
+      },
+      {
+        "q": "There ___ two windows in my room.",
+        "options": [
+          "is",
+          "are",
+          "am",
+          "be"
+        ],
+        "correct": 1,
+        "explanation": "Plural 'two windows' takes 'are'."
+      },
+      {
+        "q": "He ___ football on Fridays.",
+        "options": [
+          "play",
+          "plays",
+          "playing",
+          "played"
+        ],
+        "correct": 1,
+        "explanation": "'He' takes the third-person singular form 'plays'."
+      },
+      {
+        "q": "There ___ a book on the table.",
+        "options": [
+          "are",
+          "is",
+          "am",
+          "be"
+        ],
+        "correct": 1,
+        "explanation": "A singular noun takes 'there is'."
+      },
+      {
+        "q": "Does he ___ coffee?",
+        "options": [
+          "drink",
+          "drinks",
+          "drinking",
+          "drank"
+        ],
+        "correct": 0,
+        "explanation": "After 'does', use the base verb."
+      },
+      {
+        "q": "___ there a bank near here?",
+        "options": [
+          "Are",
+          "Is",
+          "Am",
+          "Be"
+        ],
+        "correct": 1,
+        "explanation": "A singular noun 'a bank' takes 'is'."
+      },
+      {
+        "q": "She ___ like tea.",
+        "options": [
+          "don't",
+          "doesn't",
+          "isn't",
+          "aren't"
+        ],
+        "correct": 1,
+        "explanation": "With 'she', the negative present simple uses 'doesn't'."
+      },
+      {
+        "q": "My parents ___ at work.",
+        "options": [
+          "is",
+          "am",
+          "are",
+          "be"
+        ],
+        "correct": 2,
+        "explanation": "Plural subject 'my parents' takes 'are'."
+      },
+      {
+        "q": "___ she your teacher?",
+        "options": [
+          "Is",
+          "Are",
+          "Am",
+          "Be"
+        ],
+        "correct": 0,
+        "explanation": "'She' takes 'is' in a yes/no question."
+      },
+      {
+        "q": "I ___ a new phone.",
+        "options": [
+          "has",
+          "have",
+          "having",
+          "haves"
+        ],
+        "correct": 1,
+        "explanation": "'I' takes 'have'."
+      },
+      {
+        "q": "They ___ football after school.",
+        "options": [
+          "plays",
+          "play",
+          "playing",
+          "played"
+        ],
+        "correct": 1,
+        "explanation": "'They' takes the base verb 'play'."
+      },
+      {
+        "q": "We ___ lunch at noon.",
+        "options": [
+          "eat",
+          "eats",
+          "eating",
+          "ate"
+        ],
+        "correct": 0,
+        "explanation": "'We' uses the base verb in the present simple."
+      },
+      {
+        "q": "I ___ from Saudi Arabia.",
+        "options": [
+          "is",
+          "am",
+          "are",
+          "be"
+        ],
+        "correct": 1,
+        "explanation": "'I' takes 'am' with the verb to be."
+      },
+      {
+        "q": "We ___ not hungry.",
+        "options": [
+          "is",
+          "am",
+          "are",
+          "be"
+        ],
+        "correct": 2,
+        "explanation": "'We' takes 'are'."
+      },
+      {
+        "q": "He ___ not at home.",
+        "options": [
+          "are",
+          "am",
+          "is",
+          "be"
+        ],
+        "correct": 2,
+        "explanation": "'He' takes 'is'."
+      },
+      {
+        "q": "I ___ English every day.",
+        "options": [
+          "study",
+          "studies",
+          "studying",
+          "studied"
+        ],
+        "correct": 0,
+        "explanation": "'I' uses the base form in the present simple."
+      },
+      {
+        "q": "She ___ two brothers.",
+        "options": [
+          "have",
+          "has",
+          "having",
+          "had"
+        ],
+        "correct": 1,
+        "explanation": "'She' takes 'has' in the present simple."
+      },
+      {
+        "q": "I ___ two sisters.",
+        "options": [
+          "has",
+          "have",
+          "having",
+          "haves"
+        ],
+        "correct": 1,
+        "explanation": "'I' takes 'have'."
+      },
+      {
+        "q": "We ___ breakfast at eight.",
+        "options": [
+          "has",
+          "have",
+          "having",
+          "had"
+        ],
+        "correct": 1,
+        "explanation": "'We' takes 'have' in the present simple."
+      },
+      {
+        "q": "She ___ my sister.",
+        "options": [
+          "is",
+          "am",
+          "are",
+          "be"
+        ],
+        "correct": 0,
+        "explanation": "'She' takes 'is' with the verb to be."
+      },
+      {
+        "q": "We ___ English on Monday.",
+        "options": [
+          "study",
+          "studies",
+          "studying",
+          "studied"
+        ],
+        "correct": 0,
+        "explanation": "'We' takes the base verb 'study'."
+      },
+      {
+        "q": "He ___ coffee every morning.",
+        "options": [
+          "drink",
+          "drinks",
+          "drinking",
+          "drunk"
+        ],
+        "correct": 1,
+        "explanation": "With 'he' in the present simple, the verb takes -s."
+      },
+      {
+        "q": "___ he work here?",
+        "options": [
+          "Do",
+          "Does",
+          "Is",
+          "Are"
+        ],
+        "correct": 1,
+        "explanation": "'He' takes 'does' in present simple questions."
+      },
+      {
+        "q": "___ they your friends?",
+        "options": [
+          "Is",
+          "Are",
+          "Am",
+          "Be"
+        ],
+        "correct": 1,
+        "explanation": "'They' takes 'are' in a question."
+      },
+      {
+        "q": "They ___ play tennis on Mondays.",
+        "options": [
+          "doesn't",
+          "isn't",
+          "don't",
+          "aren't"
+        ],
+        "correct": 2,
+        "explanation": "'They' takes 'don't' in the present simple."
+      },
+      {
+        "q": "I ___ tired today.",
+        "options": [
+          "am",
+          "is",
+          "are",
+          "be"
+        ],
+        "correct": 0,
+        "explanation": "'I' takes 'am' with the verb to be."
+      },
+      {
+        "q": "We ___ students.",
+        "options": [
+          "is",
+          "am",
+          "are",
+          "be"
+        ],
+        "correct": 2,
+        "explanation": "'We' takes 'are' with the verb to be."
+      },
+      {
+        "q": "My father ___ a car.",
+        "options": [
+          "have",
+          "has",
+          "haves",
+          "having"
+        ],
+        "correct": 1,
+        "explanation": "The third-person singular form of 'have' is 'has'."
       }
     ],
     "vocabulary": [
@@ -266,6 +651,303 @@
         ],
         "correct": 1,
         "explanation": "A banana is a yellow, curved fruit."
+      },
+      {
+        "q": "What do you use to open a door?",
+        "options": [
+          "key",
+          "fork",
+          "pencil",
+          "shoe"
+        ],
+        "correct": 0,
+        "explanation": "A key is used to open a locked door."
+      },
+      {
+        "q": "Which is a color?",
+        "options": [
+          "purple",
+          "Monday",
+          "doctor",
+          "kitchen"
+        ],
+        "correct": 0,
+        "explanation": "Purple is a color."
+      },
+      {
+        "q": "Which one is a drink?",
+        "options": [
+          "water",
+          "bread",
+          "rice",
+          "chicken"
+        ],
+        "correct": 0,
+        "explanation": "Water is a drink."
+      },
+      {
+        "q": "What is the opposite of 'old'?",
+        "options": [
+          "young",
+          "slow",
+          "short",
+          "dark"
+        ],
+        "correct": 0,
+        "explanation": "'Young' is the opposite of 'old'."
+      },
+      {
+        "q": "Which one is a vehicle?",
+        "options": [
+          "bus",
+          "apple",
+          "table",
+          "shoe"
+        ],
+        "correct": 0,
+        "explanation": "A bus is a vehicle."
+      },
+      {
+        "q": "Where do you buy medicine?",
+        "options": [
+          "pharmacy",
+          "cinema",
+          "bakery",
+          "school"
+        ],
+        "correct": 0,
+        "explanation": "A pharmacy sells medicine."
+      },
+      {
+        "q": "Which place do you go to see a doctor?",
+        "options": [
+          "hospital",
+          "cinema",
+          "library",
+          "park"
+        ],
+        "correct": 0,
+        "explanation": "A hospital is where you usually see a doctor."
+      },
+      {
+        "q": "What do you use to call someone?",
+        "options": [
+          "phone",
+          "plate",
+          "pillow",
+          "fork"
+        ],
+        "correct": 0,
+        "explanation": "A phone is used to make calls."
+      },
+      {
+        "q": "Which animal can fly?",
+        "options": [
+          "cat",
+          "bird",
+          "fish",
+          "cow"
+        ],
+        "correct": 1,
+        "explanation": "Birds can fly."
+      },
+      {
+        "q": "What is the opposite of 'fast'?",
+        "options": [
+          "slow",
+          "strong",
+          "high",
+          "clean"
+        ],
+        "correct": 0,
+        "explanation": "'Slow' is the opposite of 'fast'."
+      },
+      {
+        "q": "Which room is usually used for cooking?",
+        "options": [
+          "bedroom",
+          "kitchen",
+          "garage",
+          "bathroom"
+        ],
+        "correct": 1,
+        "explanation": "The kitchen is where food is usually prepared."
+      },
+      {
+        "q": "Which one is a fruit?",
+        "options": [
+          "carrot",
+          "potato",
+          "apple",
+          "onion"
+        ],
+        "correct": 2,
+        "explanation": "An apple is a fruit."
+      },
+      {
+        "q": "What do you use to cut paper?",
+        "options": [
+          "scissors",
+          "pillow",
+          "plate",
+          "sock"
+        ],
+        "correct": 0,
+        "explanation": "Scissors are used to cut paper."
+      },
+      {
+        "q": "Which month comes after January?",
+        "options": [
+          "March",
+          "December",
+          "February",
+          "April"
+        ],
+        "correct": 2,
+        "explanation": "February comes after January."
+      },
+      {
+        "q": "Which word means a place where you buy food?",
+        "options": [
+          "school",
+          "supermarket",
+          "hospital",
+          "station"
+        ],
+        "correct": 1,
+        "explanation": "A supermarket is a place where people buy food."
+      },
+      {
+        "q": "What do you drink when you are thirsty?",
+        "options": [
+          "water",
+          "bread",
+          "rice",
+          "cheese"
+        ],
+        "correct": 0,
+        "explanation": "Water is a common drink for thirst."
+      },
+      {
+        "q": "Which animal gives milk?",
+        "options": [
+          "cow",
+          "lion",
+          "eagle",
+          "snake"
+        ],
+        "correct": 0,
+        "explanation": "Cows commonly provide milk."
+      },
+      {
+        "q": "Which word means the day after Monday?",
+        "options": [
+          "Sunday",
+          "Tuesday",
+          "Friday",
+          "Saturday"
+        ],
+        "correct": 1,
+        "explanation": "Tuesday comes after Monday."
+      },
+      {
+        "q": "What is the opposite of 'happy'?",
+        "options": [
+          "sad",
+          "small",
+          "clean",
+          "young"
+        ],
+        "correct": 0,
+        "explanation": "'Sad' is the opposite of 'happy'."
+      },
+      {
+        "q": "What do you wear on your feet?",
+        "options": [
+          "hat",
+          "shoes",
+          "shirt",
+          "gloves"
+        ],
+        "correct": 1,
+        "explanation": "Shoes are worn on the feet."
+      },
+      {
+        "q": "Which object tells you the time?",
+        "options": [
+          "clock",
+          "chair",
+          "bag",
+          "window"
+        ],
+        "correct": 0,
+        "explanation": "A clock tells you the time."
+      },
+      {
+        "q": "Which place has many books?",
+        "options": [
+          "library",
+          "garage",
+          "airport",
+          "restaurant"
+        ],
+        "correct": 0,
+        "explanation": "A library contains books."
+      },
+      {
+        "q": "What do you use to eat soup?",
+        "options": [
+          "spoon",
+          "shoe",
+          "key",
+          "book"
+        ],
+        "correct": 0,
+        "explanation": "A spoon is commonly used to eat soup."
+      },
+      {
+        "q": "What do you wear when it rains?",
+        "options": [
+          "raincoat",
+          "sandals",
+          "shorts",
+          "sunglasses"
+        ],
+        "correct": 0,
+        "explanation": "A raincoat helps keep you dry in rain."
+      },
+      {
+        "q": "Which one is furniture?",
+        "options": [
+          "chair",
+          "banana",
+          "shirt",
+          "car"
+        ],
+        "correct": 0,
+        "explanation": "A chair is a piece of furniture."
+      },
+      {
+        "q": "What do you use to write on paper?",
+        "options": [
+          "fork",
+          "pen",
+          "shoe",
+          "cup"
+        ],
+        "correct": 1,
+        "explanation": "A pen is used for writing."
+      },
+      {
+        "q": "What do you wear on your head?",
+        "options": [
+          "hat",
+          "shoe",
+          "belt",
+          "sock"
+        ],
+        "correct": 0,
+        "explanation": "A hat is worn on the head."
       }
     ],
     "reading": [
@@ -364,6 +1046,294 @@
         ],
         "correct": 1,
         "explanation": "The passage states 'Lina is a nurse.'"
+      },
+      {
+        "q": "What does the cafeteria serve?",
+        "options": [
+          "Lunch.",
+          "Breakfast only.",
+          "Dinner only.",
+          "Medicine."
+        ],
+        "correct": 0,
+        "explanation": "The passage describes the cafeteria serving lunch.",
+        "passage": "The weather is sunny today, so Adam decides to wash his car. He usually washes it on weekends when he has free time."
+      },
+      {
+        "q": "What does Lina eat for breakfast?",
+        "options": [
+          "Bread and fruit.",
+          "Soup and rice.",
+          "Fish and vegetables.",
+          "Cake and coffee."
+        ],
+        "correct": 0,
+        "explanation": "The passage says Lina eats bread and fruit.",
+        "passage": "Lina gets up at seven every morning. She eats bread and fruit for breakfast. Then she walks to school because it is close to her house."
+      },
+      {
+        "q": "What does Max dislike?",
+        "options": [
+          "Running.",
+          "The garden.",
+          "Rain.",
+          "Tom."
+        ],
+        "correct": 2,
+        "explanation": "Max does not like rain.",
+        "passage": "Tom has a small dog called Max. Max likes running in the garden, but he does not like rain. On rainy days, Tom keeps him inside."
+      },
+      {
+        "q": "What does Nora's notebook have?",
+        "options": [
+          "A red cover and blank pages.",
+          "A blue cover and pictures.",
+          "A green cover and maps.",
+          "A black cover and recipes."
+        ],
+        "correct": 0,
+        "explanation": "The notebook has a red cover and many blank pages.",
+        "passage": "Nora bought a new notebook yesterday. It has a red cover and many blank pages. She plans to use it for her English class."
+      },
+      {
+        "q": "Who is setting the table?",
+        "options": [
+          "Maya.",
+          "Her mother.",
+          "Her brother.",
+          "Her father."
+        ],
+        "correct": 2,
+        "explanation": "Her brother is setting the table.",
+        "passage": "Maya is making dinner for her family. She is cooking rice, chicken, and vegetables. Her brother is setting the table."
+      },
+      {
+        "q": "What will Nora use the notebook for?",
+        "options": [
+          "Cooking.",
+          "Her English class.",
+          "Drawing maps.",
+          "Shopping."
+        ],
+        "correct": 1,
+        "explanation": "She plans to use it for her English class.",
+        "passage": "Nora bought a new notebook yesterday. It has a red cover and many blank pages. She plans to use it for her English class."
+      },
+      {
+        "q": "Where does Tom keep Max on rainy days?",
+        "options": [
+          "In the garden.",
+          "At school.",
+          "Inside the house.",
+          "At the park."
+        ],
+        "correct": 2,
+        "explanation": "Tom keeps Max inside when it rains.",
+        "passage": "Tom has a small dog called Max. Max likes running in the garden, but he does not like rain. On rainy days, Tom keeps him inside."
+      },
+      {
+        "q": "When does Ali visit his grandmother?",
+        "options": [
+          "Every Friday.",
+          "Every Sunday.",
+          "Every morning.",
+          "Once a month."
+        ],
+        "correct": 0,
+        "explanation": "The passage says he visits every Friday.",
+        "passage": "Ali visits his grandmother every Friday. They drink tea together and talk about his week. His grandmother enjoys hearing his stories."
+      },
+      {
+        "q": "Who sometimes goes to the park with Omar?",
+        "options": [
+          "His brother.",
+          "His sister.",
+          "His teacher.",
+          "His friend."
+        ],
+        "correct": 1,
+        "explanation": "His sister sometimes goes with him.",
+        "passage": "Omar has a blue bicycle. He rides it to the park every Saturday morning. His sister sometimes goes with him."
+      },
+      {
+        "q": "What do Ali and his grandmother do together?",
+        "options": [
+          "Play football.",
+          "Drink tea and talk.",
+          "Cook dinner.",
+          "Watch films."
+        ],
+        "correct": 1,
+        "explanation": "They drink tea together and talk.",
+        "passage": "Ali visits his grandmother every Friday. They drink tea together and talk about his week. His grandmother enjoys hearing his stories."
+      },
+      {
+        "q": "What does Omar's sister sometimes do?",
+        "options": [
+          "She goes to the park with him.",
+          "She works at the park.",
+          "She rides to school.",
+          "She stays at home every day."
+        ],
+        "correct": 0,
+        "explanation": "She sometimes goes to the park with Omar.",
+        "passage": "The city library is next to the train station. It opens at nine and closes at six. Many students visit it after school to read or study."
+      },
+      {
+        "q": "Why does the library attract students?",
+        "options": [
+          "They visit to read or study.",
+          "They work there.",
+          "They buy clothes there.",
+          "They play sports there."
+        ],
+        "correct": 0,
+        "explanation": "The passage says students visit to read or study.",
+        "passage": "Lina gets up at seven every morning. She eats bread and fruit for breakfast. Then she walks to school because it is close to her house."
+      },
+      {
+        "q": "When does Adam usually wash his car?",
+        "options": [
+          "On weekends.",
+          "Every morning.",
+          "At night.",
+          "On Mondays."
+        ],
+        "correct": 0,
+        "explanation": "He usually washes it on weekends.",
+        "passage": "The weather is sunny today, so Adam decides to wash his car. He usually washes it on weekends when he has free time."
+      },
+      {
+        "q": "What is Maya cooking?",
+        "options": [
+          "Rice, chicken, and vegetables.",
+          "Bread and soup.",
+          "Fish and potatoes.",
+          "Pasta and cake."
+        ],
+        "correct": 0,
+        "explanation": "The passage lists rice, chicken, and vegetables.",
+        "passage": "Maya is making dinner for her family. She is cooking rice, chicken, and vegetables. Her brother is setting the table."
+      },
+      {
+        "q": "What can students choose for lunch?",
+        "options": [
+          "Only soup.",
+          "Rice, pasta, or a sandwich.",
+          "Only fruit.",
+          "Cake and coffee."
+        ],
+        "correct": 1,
+        "explanation": "The passage lists rice, pasta, and a sandwich as choices.",
+        "passage": "The school cafeteria serves lunch at twelve thirty. Students can choose rice, pasta, or a sandwich. Fruit and water are also available."
+      },
+      {
+        "q": "When does the library close?",
+        "options": [
+          "At six.",
+          "At seven.",
+          "At nine.",
+          "At noon."
+        ],
+        "correct": 0,
+        "explanation": "The library closes at six.",
+        "passage": "The city library is next to the train station. It opens at nine and closes at six. Many students visit it after school to read or study."
+      },
+      {
+        "q": "What color is Nora's notebook?",
+        "options": [
+          "Blue.",
+          "Green.",
+          "Red.",
+          "Yellow."
+        ],
+        "correct": 2,
+        "explanation": "The notebook has a red cover.",
+        "passage": "Nora bought a new notebook yesterday. It has a red cover and many blank pages. She plans to use it for her English class."
+      },
+      {
+        "q": "Where does Sara work?",
+        "options": [
+          "In a school.",
+          "In a bakery.",
+          "In a hospital.",
+          "At a station."
+        ],
+        "correct": 1,
+        "explanation": "Sara works in a bakery.",
+        "passage": "Sara works in a bakery. She starts work at six in the morning and finishes at two in the afternoon. She enjoys making cakes for customers."
+      },
+      {
+        "q": "What does Lina do after breakfast?",
+        "options": [
+          "She walks to school.",
+          "She goes to work.",
+          "She takes a bus.",
+          "She goes back to bed."
+        ],
+        "correct": 0,
+        "explanation": "The passage says that Lina walks to school after breakfast.",
+        "passage": "Lina gets up at seven every morning. She eats bread and fruit for breakfast. Then she walks to school because it is close to her house."
+      },
+      {
+        "q": "What else is available in the cafeteria?",
+        "options": [
+          "Fruit and water.",
+          "Ice cream and tea.",
+          "Coffee and cake.",
+          "Juice only."
+        ],
+        "correct": 0,
+        "explanation": "Fruit and water are also available.",
+        "passage": "The school cafeteria serves lunch at twelve thirty. Students can choose rice, pasta, or a sandwich. Fruit and water are also available."
+      },
+      {
+        "q": "When does Omar ride his bicycle?",
+        "options": [
+          "Every Monday.",
+          "Every Saturday morning.",
+          "Every evening.",
+          "On Friday nights."
+        ],
+        "correct": 1,
+        "explanation": "The passage says he rides it every Saturday morning.",
+        "passage": "Omar has a blue bicycle. He rides it to the park every Saturday morning. His sister sometimes goes with him."
+      },
+      {
+        "q": "When does Sara finish work?",
+        "options": [
+          "At six in the morning.",
+          "At noon.",
+          "At two in the afternoon.",
+          "At four in the afternoon."
+        ],
+        "correct": 2,
+        "explanation": "The passage says she finishes at two in the afternoon.",
+        "passage": "Sara works in a bakery. She starts work at six in the morning and finishes at two in the afternoon. She enjoys making cakes for customers."
+      },
+      {
+        "q": "Where is the library?",
+        "options": [
+          "Next to the train station.",
+          "Inside the school.",
+          "Near the airport.",
+          "Behind a supermarket."
+        ],
+        "correct": 0,
+        "explanation": "The library is next to the train station.",
+        "passage": "The city library is next to the train station. It opens at nine and closes at six. Many students visit it after school to read or study."
+      },
+      {
+        "q": "Why does Adam wash his car today?",
+        "options": [
+          "Because it is sunny.",
+          "Because it is raining.",
+          "Because his car is new.",
+          "Because he is going to work."
+        ],
+        "correct": 0,
+        "explanation": "The passage says the weather is sunny.",
+        "passage": "The weather is sunny today, so Adam decides to wash his car. He usually washes it on weekends when he has free time."
       }
     ]
   },
@@ -500,6 +1470,325 @@
         ],
         "correct": 0,
         "explanation": "'Should' is followed by the base form of the verb."
+      },
+      {
+        "q": "There isn't ___ milk left.",
+        "options": [
+          "many",
+          "much",
+          "few",
+          "a few"
+        ],
+        "correct": 1,
+        "explanation": "'Milk' is uncountable, so 'much' is used."
+      },
+      {
+        "q": "She ___ already finished when we arrived.",
+        "options": [
+          "has",
+          "had",
+          "was",
+          "is"
+        ],
+        "correct": 1,
+        "explanation": "Past perfect 'had finished' shows the earlier past action."
+      },
+      {
+        "q": "Could you ___ me with this box?",
+        "options": [
+          "help",
+          "to help",
+          "helping",
+          "helped"
+        ],
+        "correct": 0,
+        "explanation": "After 'could', use the base verb."
+      },
+      {
+        "q": "You ___ smoke in this building.",
+        "options": [
+          "mustn't",
+          "don't have",
+          "should to",
+          "can to"
+        ],
+        "correct": 0,
+        "explanation": "'Mustn't' expresses prohibition."
+      },
+      {
+        "q": "If it rains, we ___ at home.",
+        "options": [
+          "stay",
+          "stayed",
+          "will stayed",
+          "staying"
+        ],
+        "correct": 0,
+        "explanation": "The first conditional uses present simple after 'if'."
+      },
+      {
+        "q": "This exercise is ___ than the last one.",
+        "options": [
+          "easy",
+          "easier",
+          "easiest",
+          "more easy"
+        ],
+        "correct": 1,
+        "explanation": "The comparative of 'easy' is 'easier'."
+      },
+      {
+        "q": "I ___ my homework before dinner yesterday.",
+        "options": [
+          "finish",
+          "finished",
+          "finishes",
+          "finishing"
+        ],
+        "correct": 1,
+        "explanation": "The completed action happened yesterday, so use the past simple."
+      },
+      {
+        "q": "We ___ here since 2022.",
+        "options": [
+          "live",
+          "lived",
+          "have lived",
+          "are live"
+        ],
+        "correct": 2,
+        "explanation": "Present perfect is used with 'since' for an action continuing to now."
+      },
+      {
+        "q": "She ___ TV when I called.",
+        "options": [
+          "watched",
+          "was watching",
+          "watches",
+          "is watching"
+        ],
+        "correct": 1,
+        "explanation": "Past continuous describes an action in progress when another event happened."
+      },
+      {
+        "q": "I have never ___ sushi.",
+        "options": [
+          "eat",
+          "ate",
+          "eaten",
+          "eating"
+        ],
+        "correct": 2,
+        "explanation": "After 'have' in the present perfect, use the past participle 'eaten'."
+      },
+      {
+        "q": "I haven't seen him ___ Monday.",
+        "options": [
+          "for",
+          "since",
+          "during",
+          "at"
+        ],
+        "correct": 1,
+        "explanation": "'Since' is used with a starting point in time."
+      },
+      {
+        "q": "She is good ___ mathematics.",
+        "options": [
+          "in",
+          "at",
+          "on",
+          "for"
+        ],
+        "correct": 1,
+        "explanation": "The standard expression is 'good at'."
+      },
+      {
+        "q": "They ___ dinner when I arrived.",
+        "options": [
+          "were having",
+          "have",
+          "had",
+          "are having"
+        ],
+        "correct": 0,
+        "explanation": "Past continuous describes an action in progress when another event occurred."
+      },
+      {
+        "q": "If you study, you ___ the test.",
+        "options": [
+          "pass",
+          "passed",
+          "will pass",
+          "passing"
+        ],
+        "correct": 2,
+        "explanation": "The first conditional uses present simple in the if-clause and 'will' in the result."
+      },
+      {
+        "q": "We ___ meet them next weekend.",
+        "options": [
+          "are going to",
+          "going",
+          "are go",
+          "will to"
+        ],
+        "correct": 0,
+        "explanation": "'Are going to' expresses a planned future."
+      },
+      {
+        "q": "I need ___ eggs for the cake.",
+        "options": [
+          "a little",
+          "much",
+          "a few",
+          "any"
+        ],
+        "correct": 2,
+        "explanation": "'Eggs' are countable plural, so 'a few' is appropriate."
+      },
+      {
+        "q": "You ___ see a dentist if the pain continues.",
+        "options": [
+          "should",
+          "should to",
+          "are",
+          "did"
+        ],
+        "correct": 0,
+        "explanation": "'Should' is used to give advice."
+      },
+      {
+        "q": "You ___ wear a seat belt in a car.",
+        "options": [
+          "should",
+          "shouldn't",
+          "might to",
+          "can to"
+        ],
+        "correct": 0,
+        "explanation": "'Should' expresses advice or a sensible recommendation."
+      },
+      {
+        "q": "Yesterday, I ___ to the market.",
+        "options": [
+          "go",
+          "goes",
+          "went",
+          "going"
+        ],
+        "correct": 2,
+        "explanation": "The past simple of 'go' is 'went'."
+      },
+      {
+        "q": "There are ___ students in this class than last year.",
+        "options": [
+          "much",
+          "more",
+          "most",
+          "many"
+        ],
+        "correct": 1,
+        "explanation": "'More' compares a larger number."
+      },
+      {
+        "q": "I have lived here ___ three years.",
+        "options": [
+          "since",
+          "for",
+          "at",
+          "during"
+        ],
+        "correct": 1,
+        "explanation": "'For' is used with a duration."
+      },
+      {
+        "q": "We are ___ for the bus.",
+        "options": [
+          "wait",
+          "waited",
+          "waiting",
+          "waits"
+        ],
+        "correct": 2,
+        "explanation": "Present continuous uses 'are + -ing'."
+      },
+      {
+        "q": "I ___ swim when I was five.",
+        "options": [
+          "can",
+          "could",
+          "must",
+          "should"
+        ],
+        "correct": 1,
+        "explanation": "'Could' describes past ability."
+      },
+      {
+        "q": "How ___ apples do you need?",
+        "options": [
+          "much",
+          "many",
+          "any",
+          "little"
+        ],
+        "correct": 1,
+        "explanation": "'Apples' is countable plural, so use 'many'."
+      },
+      {
+        "q": "There isn't ___ information available.",
+        "options": [
+          "many",
+          "much",
+          "few",
+          "a few"
+        ],
+        "correct": 1,
+        "explanation": "'Information' is uncountable, so use 'much'."
+      },
+      {
+        "q": "He ___ speak French when he lived in Paris.",
+        "options": [
+          "could",
+          "can",
+          "must",
+          "should"
+        ],
+        "correct": 0,
+        "explanation": "'Could' describes past ability."
+      },
+      {
+        "q": "She has ___ her keys.",
+        "options": [
+          "lose",
+          "lost",
+          "losing",
+          "loses"
+        ],
+        "correct": 1,
+        "explanation": "The present perfect uses the past participle 'lost'."
+      },
+      {
+        "q": "He ___ visit us tomorrow.",
+        "options": [
+          "is going to",
+          "going",
+          "go",
+          "is go"
+        ],
+        "correct": 0,
+        "explanation": "'Is going to' expresses a planned future action."
+      },
+      {
+        "q": "Have you ever ___ to Turkey?",
+        "options": [
+          "go",
+          "went",
+          "been",
+          "going"
+        ],
+        "correct": 2,
+        "explanation": "Present perfect uses the past participle 'been'."
       }
     ],
     "vocabulary": [
@@ -634,6 +1923,336 @@
         ],
         "correct": 1,
         "explanation": "'Eager' describes excitement about something coming up."
+      },
+      {
+        "q": "What is a 'journey'?",
+        "options": [
+          "a meal",
+          "a trip from one place to another",
+          "a job",
+          "a building"
+        ],
+        "correct": 1,
+        "explanation": "A journey is travel from one place to another."
+      },
+      {
+        "q": "If a person is 'confident', they ___.",
+        "options": [
+          "feel sure about their ability",
+          "are always tired",
+          "avoid everyone",
+          "cannot decide"
+        ],
+        "correct": 0,
+        "explanation": "Confident means feeling sure of oneself or one's abilities."
+      },
+      {
+        "q": "Someone who is 'generous' likes to ___.",
+        "options": [
+          "give to others",
+          "argue",
+          "arrive late",
+          "hide things"
+        ],
+        "correct": 0,
+        "explanation": "A generous person is willing to give or share."
+      },
+      {
+        "q": "A 'schedule' tells you ___.",
+        "options": [
+          "when activities happen",
+          "how to cook",
+          "where money comes from",
+          "what a person looks like"
+        ],
+        "correct": 0,
+        "explanation": "A schedule lists planned times and activities."
+      },
+      {
+        "q": "To 'complain' means to ___.",
+        "options": [
+          "say that something is wrong or unsatisfactory",
+          "agree happily",
+          "invite someone",
+          "repair something"
+        ],
+        "correct": 0,
+        "explanation": "Complain means express dissatisfaction."
+      },
+      {
+        "q": "To 'avoid' something means to ___.",
+        "options": [
+          "stay away from it",
+          "find it quickly",
+          "buy it",
+          "repair it"
+        ],
+        "correct": 0,
+        "explanation": "Avoid means keep away from something."
+      },
+      {
+        "q": "What does 'repair' mean?",
+        "options": [
+          "fix",
+          "hide",
+          "sell",
+          "borrow"
+        ],
+        "correct": 0,
+        "explanation": "To repair something means to fix it."
+      },
+      {
+        "q": "What is a 'destination'?",
+        "options": [
+          "the place you are traveling to",
+          "your luggage",
+          "a ticket",
+          "a vehicle"
+        ],
+        "correct": 0,
+        "explanation": "A destination is the place someone is traveling to."
+      },
+      {
+        "q": "If something costs less, it is more ___.",
+        "options": [
+          "expensive",
+          "affordable",
+          "dangerous",
+          "crowded"
+        ],
+        "correct": 1,
+        "explanation": "'Affordable' means reasonably priced."
+      },
+      {
+        "q": "What is a 'queue'?",
+        "options": [
+          "a line of people waiting",
+          "a type of food",
+          "a room",
+          "a vehicle"
+        ],
+        "correct": 0,
+        "explanation": "A queue is a line of people waiting."
+      },
+      {
+        "q": "If you are 'available', you ___.",
+        "options": [
+          "are free or ready to do something",
+          "are asleep",
+          "are lost",
+          "are sick"
+        ],
+        "correct": 0,
+        "explanation": "Available means free or ready for use."
+      },
+      {
+        "q": "A 'neighbour' is someone who ___.",
+        "options": [
+          "lives near you",
+          "teaches you",
+          "works in a hospital",
+          "drives a taxi"
+        ],
+        "correct": 0,
+        "explanation": "A neighbour is a person who lives nearby."
+      },
+      {
+        "q": "What does 'borrow' mean?",
+        "options": [
+          "give something away",
+          "take something temporarily and return it",
+          "buy something",
+          "break something"
+        ],
+        "correct": 1,
+        "explanation": "To borrow is to take something temporarily with the intention of returning it."
+      },
+      {
+        "q": "To 'improve' something means to ___.",
+        "options": [
+          "make it better",
+          "make it smaller",
+          "hide it",
+          "copy it"
+        ],
+        "correct": 0,
+        "explanation": "Improve means make something better."
+      },
+      {
+        "q": "If something is 'urgent', it needs attention ___.",
+        "options": [
+          "soon",
+          "next year",
+          "never",
+          "only at night"
+        ],
+        "correct": 0,
+        "explanation": "Urgent means requiring immediate or prompt attention."
+      },
+      {
+        "q": "A 'flat' in British English is a ___.",
+        "options": [
+          "apartment",
+          "car",
+          "restaurant",
+          "garden"
+        ],
+        "correct": 0,
+        "explanation": "'Flat' is commonly used for 'apartment' in British English."
+      },
+      {
+        "q": "A 'discount' makes a product ___.",
+        "options": [
+          "cheaper",
+          "larger",
+          "older",
+          "heavier"
+        ],
+        "correct": 0,
+        "explanation": "A discount reduces the price."
+      },
+      {
+        "q": "If you 'reserve' a table, you ___.",
+        "options": [
+          "book it in advance",
+          "clean it",
+          "move it",
+          "sell it"
+        ],
+        "correct": 0,
+        "explanation": "Reserve means arrange to have something kept for you."
+      },
+      {
+        "q": "A 'customer' is a person who ___.",
+        "options": [
+          "buys goods or services",
+          "repairs roads",
+          "teaches at school",
+          "drives trains"
+        ],
+        "correct": 0,
+        "explanation": "A customer buys goods or services."
+      },
+      {
+        "q": "If food is 'delicious', it tastes ___.",
+        "options": [
+          "very good",
+          "very bad",
+          "very cold",
+          "very strange"
+        ],
+        "correct": 0,
+        "explanation": "Delicious means very pleasant to taste."
+      },
+      {
+        "q": "A 'receipt' is usually given after you ___.",
+        "options": [
+          "sleep",
+          "buy something",
+          "exercise",
+          "travel"
+        ],
+        "correct": 1,
+        "explanation": "A receipt records a purchase."
+      },
+      {
+        "q": "If you are 'exhausted', you are very ___.",
+        "options": [
+          "tired",
+          "angry",
+          "hungry",
+          "early"
+        ],
+        "correct": 0,
+        "explanation": "'Exhausted' means extremely tired."
+      },
+      {
+        "q": "A person who repairs cars is a ___.",
+        "options": [
+          "chef",
+          "mechanic",
+          "pilot",
+          "nurse"
+        ],
+        "correct": 1,
+        "explanation": "A mechanic repairs vehicles."
+      },
+      {
+        "q": "If a machine is 'broken', it ___.",
+        "options": [
+          "does not work properly",
+          "is expensive",
+          "is new",
+          "is clean"
+        ],
+        "correct": 0,
+        "explanation": "Broken means not working correctly."
+      },
+      {
+        "q": "To 'deliver' a package means to ___.",
+        "options": [
+          "take it to the recipient",
+          "open it",
+          "return it to the shop",
+          "hide it"
+        ],
+        "correct": 0,
+        "explanation": "Deliver means take something to the intended recipient."
+      },
+      {
+        "q": "If you 'cancel' a booking, you ___.",
+        "options": [
+          "arrange it",
+          "remove or stop it",
+          "pay twice",
+          "move abroad"
+        ],
+        "correct": 1,
+        "explanation": "Cancel means call off or stop an arrangement."
+      },
+      {
+        "q": "If a room is 'crowded', it has ___.",
+        "options": [
+          "very few people",
+          "many people",
+          "no furniture",
+          "no windows"
+        ],
+        "correct": 1,
+        "explanation": "A crowded place contains many people."
+      },
+      {
+        "q": "What is the opposite of 'polite'?",
+        "options": [
+          "kind",
+          "rude",
+          "quiet",
+          "careful"
+        ],
+        "correct": 1,
+        "explanation": "'Rude' is the opposite of 'polite'."
+      },
+      {
+        "q": "If a road is 'narrow', it is ___.",
+        "options": [
+          "wide",
+          "not wide",
+          "very long",
+          "very busy"
+        ],
+        "correct": 1,
+        "explanation": "Narrow means not wide."
+      },
+      {
+        "q": "A 'salary' is money you receive for ___.",
+        "options": [
+          "work",
+          "sleep",
+          "shopping",
+          "travel"
+        ],
+        "correct": 0,
+        "explanation": "A salary is regular payment for work."
       }
     ],
     "reading": [
@@ -732,6 +2351,294 @@
         ],
         "correct": 2,
         "explanation": "The text says it 'closes only on Sundays.'"
+      },
+      {
+        "q": "What materials have separate recycling containers?",
+        "options": [
+          "Paper, glass, and food waste.",
+          "Metal only.",
+          "Plastic and clothes.",
+          "Books and batteries."
+        ],
+        "correct": 0,
+        "explanation": "The containers are for paper, glass, and food waste.",
+        "passage": "The town has introduced a new recycling program. Residents receive separate containers for paper, glass, and food waste. The council hopes this will reduce the amount of rubbish sent to landfill."
+      },
+      {
+        "q": "Why did Emma join the book club?",
+        "options": [
+          "To improve her cooking.",
+          "To meet other readers.",
+          "To find a new job.",
+          "To study at a university."
+        ],
+        "correct": 1,
+        "explanation": "She joined because she wanted to meet people who enjoyed reading.",
+        "passage": "Emma joined a book club because she wanted to meet people who enjoyed reading. The group discusses one book each month and usually meets at a café."
+      },
+      {
+        "q": "When is museum entry free?",
+        "options": [
+          "Every morning.",
+          "Thursday afternoons this month.",
+          "Every weekend.",
+          "Only during holidays."
+        ],
+        "correct": 1,
+        "explanation": "The museum offers free entry on Thursday afternoons this month.",
+        "passage": "The museum is offering free entry on Thursday afternoons this month. Visitors can see a new exhibition about local history, but guided tours still require payment."
+      },
+      {
+        "q": "Who can join the class?",
+        "options": [
+          "Only professional swimmers.",
+          "Adults who can already swim a little.",
+          "Children under five.",
+          "People who cannot enter water."
+        ],
+        "correct": 1,
+        "explanation": "The class is for adults who already have some swimming ability.",
+        "passage": "A local sports club has started a beginner swimming class. The class meets twice a week and is open to adults who can already swim a little."
+      },
+      {
+        "q": "What problem did the technician find?",
+        "options": [
+          "A broken screen.",
+          "A damaged battery.",
+          "A missing keyboard.",
+          "A software update."
+        ],
+        "correct": 1,
+        "explanation": "The technician found that the battery was damaged.",
+        "passage": "Daniel's laptop stopped working before an important presentation. He took it to a repair shop, where a technician discovered that the battery was damaged. The laptop was ready the next day."
+      },
+      {
+        "q": "How often does the swimming class meet?",
+        "options": [
+          "Once a month.",
+          "Twice a week.",
+          "Every day.",
+          "Once a week."
+        ],
+        "correct": 1,
+        "explanation": "The class meets twice a week.",
+        "passage": "A local sports club has started a beginner swimming class. The class meets twice a week and is open to adults who can already swim a little."
+      },
+      {
+        "q": "What did James use instead of his usual bus?",
+        "options": [
+          "He walked.",
+          "He used a bicycle.",
+          "He took a taxi.",
+          "He stayed home."
+        ],
+        "correct": 0,
+        "explanation": "He decided to walk to work.",
+        "passage": "Daniel's laptop stopped working before an important presentation. He took it to a repair shop, where a technician discovered that the battery was damaged. The laptop was ready the next day."
+      },
+      {
+        "q": "What did Emma want to find through the book club?",
+        "options": [
+          "People who enjoyed reading.",
+          "A new apartment.",
+          "A job.",
+          "A language teacher."
+        ],
+        "correct": 0,
+        "explanation": "She wanted to meet people who enjoyed reading.",
+        "passage": "The museum is offering free entry on Thursday afternoons this month. Visitors can see a new exhibition about local history, but guided tours still require payment."
+      },
+      {
+        "q": "What did Nadia want to save for?",
+        "options": [
+          "A new car.",
+          "A holiday.",
+          "A house.",
+          "A course."
+        ],
+        "correct": 1,
+        "explanation": "She wanted to save money for a holiday.",
+        "passage": "Nadia wanted to save money for a holiday. She began cooking at home more often and stopped buying coffee on her way to work. After three months, she had saved enough for her flight."
+      },
+      {
+        "q": "What does the museum exhibition focus on?",
+        "options": [
+          "Local history.",
+          "Modern cars.",
+          "Cooking.",
+          "Space travel."
+        ],
+        "correct": 0,
+        "explanation": "The exhibition is about local history.",
+        "passage": "The museum is offering free entry on Thursday afternoons this month. Visitors can see a new exhibition about local history, but guided tours still require payment."
+      },
+      {
+        "q": "How did Nadia save money?",
+        "options": [
+          "She changed jobs.",
+          "She cooked at home and bought less coffee.",
+          "She cancelled her holiday.",
+          "She worked fewer hours."
+        ],
+        "correct": 1,
+        "explanation": "She saved by cooking at home and buying less coffee.",
+        "passage": "Nadia wanted to save money for a holiday. She began cooking at home more often and stopped buying coffee on her way to work. After three months, she had saved enough for her flight."
+      },
+      {
+        "q": "Who can get the discount?",
+        "options": [
+          "Tourists.",
+          "Children.",
+          "Students with student cards.",
+          "Bus drivers."
+        ],
+        "correct": 2,
+        "explanation": "The café offers a discount to students who show their student cards.",
+        "passage": "A new café has opened beside the university. It serves breakfast from seven until eleven and offers students a discount after showing their student cards."
+      },
+      {
+        "q": "What does the town's recycling program provide?",
+        "options": [
+          "Separate containers.",
+          "Free buses.",
+          "New houses.",
+          "School uniforms."
+        ],
+        "correct": 0,
+        "explanation": "Residents receive separate recycling containers.",
+        "passage": "Daniel's laptop stopped working before an important presentation. He took it to a repair shop, where a technician discovered that the battery was damaged. The laptop was ready the next day."
+      },
+      {
+        "q": "Where does Emma's book club usually meet?",
+        "options": [
+          "At a library.",
+          "At a café.",
+          "At a school.",
+          "Online only."
+        ],
+        "correct": 1,
+        "explanation": "The group usually meets at a café.",
+        "passage": "Emma joined a book club because she wanted to meet people who enjoyed reading. The group discusses one book each month and usually meets at a café."
+      },
+      {
+        "q": "Why did James arrive on time?",
+        "options": [
+          "His bus was early.",
+          "He worked from home.",
+          "He left home early.",
+          "The journey was shorter."
+        ],
+        "correct": 2,
+        "explanation": "He arrived on time because he had left home early.",
+        "passage": "James missed his usual bus this morning, so he decided to walk to work. The journey took thirty minutes longer than usual, but he arrived on time because he had left home early."
+      },
+      {
+        "q": "When was Daniel's laptop ready?",
+        "options": [
+          "The same hour.",
+          "The next day.",
+          "A week later.",
+          "The following month."
+        ],
+        "correct": 1,
+        "explanation": "It was ready the next day.",
+        "passage": "Daniel's laptop stopped working before an important presentation. He took it to a repair shop, where a technician discovered that the battery was damaged. The laptop was ready the next day."
+      },
+      {
+        "q": "What time does the new café start serving breakfast?",
+        "options": [
+          "Six.",
+          "Seven.",
+          "Eight.",
+          "Nine."
+        ],
+        "correct": 1,
+        "explanation": "Breakfast is served from seven until eleven.",
+        "passage": "A new café has opened beside the university. It serves breakfast from seven until eleven and offers students a discount after showing their student cards."
+      },
+      {
+        "q": "Why does Maria like the location?",
+        "options": [
+          "It has a large garden.",
+          "It is near shops and a bus stop.",
+          "It is outside the city.",
+          "It is cheaper than her old home."
+        ],
+        "correct": 1,
+        "explanation": "She likes the location because shops and a bus stop are nearby.",
+        "passage": "Maria recently moved to a new apartment near the city center. She likes the location because there are several shops and a bus stop nearby. However, the apartment is smaller than her old home."
+      },
+      {
+        "q": "Why did Leo take the train?",
+        "options": [
+          "His bicycle was stolen.",
+          "The route was unsafe because of strong winds.",
+          "The train was cheaper.",
+          "He wanted to work."
+        ],
+        "correct": 1,
+        "explanation": "Strong winds made the cycling route unsafe.",
+        "passage": "Leo planned to cycle to the coast, but strong winds made the route unsafe. Instead, he took a train and spent the afternoon walking along the beach."
+      },
+      {
+        "q": "How much longer did James's walk take?",
+        "options": [
+          "Ten minutes.",
+          "Twenty minutes.",
+          "Thirty minutes.",
+          "One hour."
+        ],
+        "correct": 2,
+        "explanation": "The journey took thirty minutes longer.",
+        "passage": "James missed his usual bus this morning, so he decided to walk to work. The journey took thirty minutes longer than usual, but he arrived on time because he had left home early."
+      },
+      {
+        "q": "What still requires payment at the museum?",
+        "options": [
+          "Entry on Thursday.",
+          "The local history exhibition.",
+          "Guided tours.",
+          "All museum visits."
+        ],
+        "correct": 2,
+        "explanation": "Guided tours still require payment.",
+        "passage": "The museum is offering free entry on Thursday afternoons this month. Visitors can see a new exhibition about local history, but guided tours still require payment."
+      },
+      {
+        "q": "What did Leo do at the coast?",
+        "options": [
+          "He cycled there.",
+          "He walked along the beach.",
+          "He went fishing all day.",
+          "He worked there."
+        ],
+        "correct": 1,
+        "explanation": "He took a train and walked along the beach.",
+        "passage": "Leo planned to cycle to the coast, but strong winds made the route unsafe. Instead, he took a train and spent the afternoon walking along the beach."
+      },
+      {
+        "q": "What is smaller than Maria's old home?",
+        "options": [
+          "Her new apartment.",
+          "The bus stop.",
+          "The city center.",
+          "The shops."
+        ],
+        "correct": 0,
+        "explanation": "Her new apartment is smaller than her old home.",
+        "passage": "Maria recently moved to a new apartment near the city center. She likes the location because there are several shops and a bus stop nearby. However, the apartment is smaller than her old home."
+      },
+      {
+        "q": "What is the aim of the program?",
+        "options": [
+          "To increase landfill waste.",
+          "To reduce rubbish sent to landfill.",
+          "To close the recycling center.",
+          "To sell more containers."
+        ],
+        "correct": 1,
+        "explanation": "The council hopes recycling will reduce landfill waste.",
+        "passage": "The town has introduced a new recycling program. Residents receive separate containers for paper, glass, and food waste. The council hopes this will reduce the amount of rubbish sent to landfill."
       }
     ]
   },
@@ -868,6 +2775,336 @@
         ],
         "correct": 1,
         "explanation": "Use 'for' with a length of time."
+      },
+      {
+        "q": "The more you practice, the ___ you become.",
+        "options": [
+          "good",
+          "better",
+          "best",
+          "well"
+        ],
+        "correct": 1,
+        "explanation": "The correlative comparative structure uses 'the more..., the better...'."
+      },
+      {
+        "q": "This is the book ___ I told you about.",
+        "options": [
+          "who",
+          "where",
+          "that",
+          "whose"
+        ],
+        "correct": 2,
+        "explanation": "'That' can introduce a defining relative clause referring to a thing."
+      },
+      {
+        "q": "He is used to ___ early.",
+        "options": [
+          "wake",
+          "waking",
+          "woke",
+          "to wake"
+        ],
+        "correct": 1,
+        "explanation": "'Be used to' is followed by a noun or gerund."
+      },
+      {
+        "q": "She suggested ___ the meeting until Friday.",
+        "options": [
+          "move",
+          "to move",
+          "moving",
+          "moved"
+        ],
+        "correct": 2,
+        "explanation": "'Suggest' is commonly followed by a gerund."
+      },
+      {
+        "q": "I regret ___ you that the event is canceled.",
+        "options": [
+          "tell",
+          "to tell",
+          "telling",
+          "told"
+        ],
+        "correct": 1,
+        "explanation": "'Regret to tell' is used for announcing disappointing information."
+      },
+      {
+        "q": "The woman ___ car was stolen called the police.",
+        "options": [
+          "who",
+          "which",
+          "whose",
+          "where"
+        ],
+        "correct": 2,
+        "explanation": "'Whose' shows possession."
+      },
+      {
+        "q": "I remember ___ him at the conference.",
+        "options": [
+          "meet",
+          "to meet",
+          "meeting",
+          "met"
+        ],
+        "correct": 2,
+        "explanation": "'Remember + gerund' refers to recalling a past event."
+      },
+      {
+        "q": "He apologized for ___ late.",
+        "options": [
+          "be",
+          "being",
+          "been",
+          "to be"
+        ],
+        "correct": 1,
+        "explanation": "The preposition 'for' is followed by a gerund here."
+      },
+      {
+        "q": "If I were you, I ___ the offer.",
+        "options": [
+          "accept",
+          "accepted",
+          "would accept",
+          "will accept"
+        ],
+        "correct": 2,
+        "explanation": "The second conditional uses 'would + base verb' in the result."
+      },
+      {
+        "q": "She said that she ___ the report the next day.",
+        "options": [
+          "finishes",
+          "would finish",
+          "will finish",
+          "has finished"
+        ],
+        "correct": 1,
+        "explanation": "Reported speech commonly changes 'will' to 'would' for a future-in-the-past meaning."
+      },
+      {
+        "q": "By next June, they ___ here for five years.",
+        "options": [
+          "will live",
+          "will have lived",
+          "lived",
+          "have lived"
+        ],
+        "correct": 1,
+        "explanation": "Future perfect describes duration completed by a future point."
+      },
+      {
+        "q": "They had the house ___ before selling it.",
+        "options": [
+          "paint",
+          "painted",
+          "painting",
+          "to paint"
+        ],
+        "correct": 1,
+        "explanation": "'Have something done' uses the past participle."
+      },
+      {
+        "q": "She is interested in ___ abroad.",
+        "options": [
+          "work",
+          "worked",
+          "working",
+          "to working"
+        ],
+        "correct": 2,
+        "explanation": "After 'interested in', use a gerund."
+      },
+      {
+        "q": "The new bridge ___ next year.",
+        "options": [
+          "will complete",
+          "will be completed",
+          "completed",
+          "is completing"
+        ],
+        "correct": 1,
+        "explanation": "A passive construction is needed because the bridge receives the action."
+      },
+      {
+        "q": "I didn't expect the exam to be so ___.",
+        "options": [
+          "challenge",
+          "challenging",
+          "challenged",
+          "challenger"
+        ],
+        "correct": 1,
+        "explanation": "'Challenging' describes the exam as difficult."
+      },
+      {
+        "q": "He avoided ___ about the mistake.",
+        "options": [
+          "talk",
+          "to talk",
+          "talking",
+          "talked"
+        ],
+        "correct": 2,
+        "explanation": "'Avoid' is followed by a gerund."
+      },
+      {
+        "q": "The book was written by an author who ___ in Canada.",
+        "options": [
+          "lives",
+          "live",
+          "living",
+          "to live"
+        ],
+        "correct": 0,
+        "explanation": "The relative clause needs the third-person singular present form 'lives'."
+      },
+      {
+        "q": "He is expected ___ the contract today.",
+        "options": [
+          "sign",
+          "to sign",
+          "signing",
+          "signed"
+        ],
+        "correct": 1,
+        "explanation": "Passive reporting structure uses 'to + infinitive'."
+      },
+      {
+        "q": "She told me she ___ the answer.",
+        "options": [
+          "knows",
+          "knew",
+          "will know",
+          "has know"
+        ],
+        "correct": 1,
+        "explanation": "Reported speech commonly shifts 'knows' to 'knew'."
+      },
+      {
+        "q": "The package ___ yesterday.",
+        "options": [
+          "delivered",
+          "was delivered",
+          "is delivering",
+          "has deliver"
+        ],
+        "correct": 1,
+        "explanation": "The package receives the action, so a passive form is needed."
+      },
+      {
+        "q": "I have been ___ for two hours.",
+        "options": [
+          "study",
+          "studied",
+          "studying",
+          "to study"
+        ],
+        "correct": 2,
+        "explanation": "Present perfect continuous uses 'have been + -ing'."
+      },
+      {
+        "q": "We should have ___ earlier.",
+        "options": [
+          "leave",
+          "left",
+          "leaving",
+          "to left"
+        ],
+        "correct": 1,
+        "explanation": "Modal perfect uses 'should have + past participle'."
+      },
+      {
+        "q": "I wish I ___ closer to work.",
+        "options": [
+          "live",
+          "lived",
+          "will live",
+          "am living"
+        ],
+        "correct": 1,
+        "explanation": "After 'I wish' for a present unreal situation, use past simple."
+      },
+      {
+        "q": "You needn't ___ everything today.",
+        "options": [
+          "to finish",
+          "finishing",
+          "finish",
+          "finished"
+        ],
+        "correct": 2,
+        "explanation": "Modal verbs are followed by the base form."
+      },
+      {
+        "q": "I had my laptop ___ yesterday.",
+        "options": [
+          "repair",
+          "repaired",
+          "repairing",
+          "to repair"
+        ],
+        "correct": 1,
+        "explanation": "'Have something done' uses the past participle."
+      },
+      {
+        "q": "By the time we arrived, the film ___.",
+        "options": [
+          "started",
+          "had started",
+          "has started",
+          "starts"
+        ],
+        "correct": 1,
+        "explanation": "Past perfect shows the earlier of two past events."
+      },
+      {
+        "q": "If I ___ more time, I would learn another language.",
+        "options": [
+          "have",
+          "had",
+          "will have",
+          "am having"
+        ],
+        "correct": 1,
+        "explanation": "The second conditional uses past simple in the if-clause."
+      },
+      {
+        "q": "The woman ___ lives next door is a doctor.",
+        "options": [
+          "which",
+          "where",
+          "who",
+          "whose"
+        ],
+        "correct": 2,
+        "explanation": "'Who' refers to a person in a defining relative clause."
+      },
+      {
+        "q": "The manager asked me whether I ___ available.",
+        "options": [
+          "am",
+          "was",
+          "will",
+          "be"
+        ],
+        "correct": 1,
+        "explanation": "Reported questions commonly shift the present form to past in this context."
+      },
+      {
+        "q": "Unless you hurry, you ___ the bus.",
+        "options": [
+          "miss",
+          "missed",
+          "will miss",
+          "missing"
+        ],
+        "correct": 2,
+        "explanation": "The first conditional result uses 'will + base verb'."
       }
     ],
     "vocabulary": [
@@ -1002,6 +3239,336 @@
         ],
         "correct": 1,
         "explanation": "'Frequently' means happening often."
+      },
+      {
+        "q": "If a result is 'significant', it is ___.",
+        "options": [
+          "important or meaningful",
+          "imaginary",
+          "unrelated",
+          "tiny in every context"
+        ],
+        "correct": 0,
+        "explanation": "Significant can mean important or meaningful."
+      },
+      {
+        "q": "A 'factor' is something that ___.",
+        "options": [
+          "contributes to a result",
+          "is always irrelevant",
+          "has no effect",
+          "must be avoided"
+        ],
+        "correct": 0,
+        "explanation": "A factor is an element that contributes to a result."
+      },
+      {
+        "q": "To 'retain' information means to ___.",
+        "options": [
+          "keep it in memory",
+          "delete it",
+          "publish it",
+          "translate it"
+        ],
+        "correct": 0,
+        "explanation": "Retain can mean keep or remember information."
+      },
+      {
+        "q": "If a person is 'reluctant', they are ___.",
+        "options": [
+          "unwilling or hesitant",
+          "very excited",
+          "certain",
+          "wealthy"
+        ],
+        "correct": 0,
+        "explanation": "Reluctant means unwilling or hesitant."
+      },
+      {
+        "q": "A 'trend' is a general ___.",
+        "options": [
+          "direction of change",
+          "building",
+          "deadline",
+          "mistake"
+        ],
+        "correct": 0,
+        "explanation": "A trend is a general direction in which something develops."
+      },
+      {
+        "q": "If a plan is 'feasible', it is ___.",
+        "options": [
+          "impossible",
+          "practical and possible",
+          "secret",
+          "expensive"
+        ],
+        "correct": 1,
+        "explanation": "'Feasible' means capable of being done successfully."
+      },
+      {
+        "q": "To 'maintain' a machine means to ___.",
+        "options": [
+          "look after it so it keeps working",
+          "throw it away",
+          "sell it immediately",
+          "paint it only"
+        ],
+        "correct": 0,
+        "explanation": "Maintain means keep something in good condition."
+      },
+      {
+        "q": "To 'negotiate' means to ___.",
+        "options": [
+          "discuss in order to reach an agreement",
+          "refuse to communicate",
+          "copy a document",
+          "travel abroad"
+        ],
+        "correct": 0,
+        "explanation": "Negotiation involves discussion aimed at agreement."
+      },
+      {
+        "q": "To 'adapt' means to ___.",
+        "options": [
+          "change to suit new conditions",
+          "refuse all change",
+          "stop working",
+          "repeat exactly"
+        ],
+        "correct": 0,
+        "explanation": "Adapt means adjust to new conditions."
+      },
+      {
+        "q": "A 'shortage' means there is ___.",
+        "options": [
+          "not enough of something",
+          "too much of something",
+          "a new opportunity",
+          "a formal agreement"
+        ],
+        "correct": 0,
+        "explanation": "A shortage is a lack of something needed."
+      },
+      {
+        "q": "If evidence is 'convincing', it is ___.",
+        "options": [
+          "persuasive",
+          "hidden",
+          "irrelevant",
+          "false"
+        ],
+        "correct": 0,
+        "explanation": "Convincing evidence persuades people that something is true."
+      },
+      {
+        "q": "To 'assess' something means to ___.",
+        "options": [
+          "evaluate it",
+          "hide it",
+          "copy it",
+          "destroy it"
+        ],
+        "correct": 0,
+        "explanation": "Assess means evaluate or judge its quality or value."
+      },
+      {
+        "q": "If a person 'participates', they ___.",
+        "options": [
+          "take part",
+          "leave early",
+          "complain privately",
+          "observe only"
+        ],
+        "correct": 0,
+        "explanation": "Participate means take part in something."
+      },
+      {
+        "q": "To 'enhance' a skill means to ___.",
+        "options": [
+          "improve or strengthen it",
+          "remove it",
+          "hide it",
+          "measure it"
+        ],
+        "correct": 0,
+        "explanation": "Enhance means improve or increase quality."
+      },
+      {
+        "q": "To 'implement' a plan means to ___.",
+        "options": [
+          "put it into action",
+          "forget it",
+          "criticize it only",
+          "translate it"
+        ],
+        "correct": 0,
+        "explanation": "Implement means put a plan or decision into effect."
+      },
+      {
+        "q": "A 'benefit' is an ___.",
+        "options": [
+          "advantage or positive result",
+          "argument",
+          "expense",
+          "error"
+        ],
+        "correct": 0,
+        "explanation": "A benefit is an advantage or helpful result."
+      },
+      {
+        "q": "A 'consequence' is ___.",
+        "options": [
+          "a result of an action",
+          "a prediction",
+          "a question",
+          "a schedule"
+        ],
+        "correct": 0,
+        "explanation": "A consequence is an effect or result."
+      },
+      {
+        "q": "To 'postpone' a meeting means to ___.",
+        "options": [
+          "cancel it forever",
+          "move it to a later time",
+          "attend it early",
+          "shorten it"
+        ],
+        "correct": 1,
+        "explanation": "'Postpone' means delay until a later time."
+      },
+      {
+        "q": "A 'priority' is something that ___.",
+        "options": [
+          "is especially important",
+          "has no value",
+          "is always optional",
+          "must be avoided"
+        ],
+        "correct": 0,
+        "explanation": "A priority is something treated as more important than other things."
+      },
+      {
+        "q": "A 'requirement' is something that is ___.",
+        "options": [
+          "necessary",
+          "optional",
+          "hidden",
+          "unrelated"
+        ],
+        "correct": 0,
+        "explanation": "A requirement is something necessary or demanded."
+      },
+      {
+        "q": "If a task is 'efficient', it is done ___.",
+        "options": [
+          "without wasting time or resources",
+          "very slowly",
+          "without a goal",
+          "only once a year"
+        ],
+        "correct": 0,
+        "explanation": "Efficient means achieving results with little waste."
+      },
+      {
+        "q": "If an event is 'annual', it happens ___.",
+        "options": [
+          "once a year",
+          "every day",
+          "twice a week",
+          "every decade"
+        ],
+        "correct": 0,
+        "explanation": "Annual means occurring once each year."
+      },
+      {
+        "q": "Someone who is 'reliable' can usually be ___.",
+        "options": [
+          "trusted",
+          "ignored",
+          "avoided",
+          "surprised"
+        ],
+        "correct": 0,
+        "explanation": "A reliable person can be depended on."
+      },
+      {
+        "q": "A 'proposal' is a ___.",
+        "options": [
+          "suggested plan or idea",
+          "final payment",
+          "weather report",
+          "type of machine"
+        ],
+        "correct": 0,
+        "explanation": "A proposal is a plan or suggestion put forward for consideration."
+      },
+      {
+        "q": "If prices 'decline', they ___.",
+        "options": [
+          "increase",
+          "fall",
+          "stay hidden",
+          "disappear"
+        ],
+        "correct": 1,
+        "explanation": "'Decline' can mean decrease or fall."
+      },
+      {
+        "q": "If a situation is 'challenging', it is ___.",
+        "options": [
+          "difficult but requiring effort",
+          "completely impossible",
+          "boring and easy",
+          "unrelated"
+        ],
+        "correct": 0,
+        "explanation": "Challenging means demanding effort or ability."
+      },
+      {
+        "q": "To 'resolve' a problem means to ___.",
+        "options": [
+          "solve it",
+          "create it",
+          "hide it",
+          "repeat it"
+        ],
+        "correct": 0,
+        "explanation": "Resolve means solve or settle."
+      },
+      {
+        "q": "If a source is 'credible', it is ___.",
+        "options": [
+          "believable and trustworthy",
+          "always short",
+          "anonymous only",
+          "expensive"
+        ],
+        "correct": 0,
+        "explanation": "Credible sources are believable and trustworthy."
+      },
+      {
+        "q": "To 'estimate' a cost means to ___.",
+        "options": [
+          "calculate it approximately",
+          "pay it immediately",
+          "avoid it",
+          "double it"
+        ],
+        "correct": 0,
+        "explanation": "Estimate means make an approximate calculation."
+      },
+      {
+        "q": "A 'deadline' is ___.",
+        "options": [
+          "a final time or date for something",
+          "a type of contract",
+          "a holiday",
+          "a salary"
+        ],
+        "correct": 0,
+        "explanation": "A deadline is the latest time by which something should be completed."
       }
     ],
     "reading": [
@@ -1100,6 +3667,294 @@
         ],
         "correct": 1,
         "explanation": "The passage says the flexibility 'has improved job satisfaction.'"
+      },
+      {
+        "q": "What did managers discover about project tasks?",
+        "options": [
+          "They lacked clear priorities.",
+          "They were always completed early.",
+          "They were too simple.",
+          "They were assigned to customers."
+        ],
+        "correct": 0,
+        "explanation": "The team discovered that tasks were assigned without clear priorities.",
+        "passage": "A delivery company tested electric vans on routes that were mostly within the city. The vans required charging during longer shifts, but they produced less noise than the company's conventional vehicles."
+      },
+      {
+        "q": "What prompted the restaurant to change its menu?",
+        "options": [
+          "A new chef arrived.",
+          "Customers requested more vegetarian choices.",
+          "Food prices fell.",
+          "The restaurant moved."
+        ],
+        "correct": 1,
+        "explanation": "Customer requests prompted the change.",
+        "passage": "A restaurant changed its menu after customers asked for more vegetarian choices. The chef added several plant-based dishes and clearly marked them on the menu. Within a month, these dishes accounted for a noticeable share of orders."
+      },
+      {
+        "q": "What did the newspaper teach teenage writers?",
+        "options": [
+          "How to check sources.",
+          "How to repair computers.",
+          "How to sell advertisements.",
+          "How to drive."
+        ],
+        "correct": 0,
+        "explanation": "Editors trained students to check sources and distinguish facts from opinions.",
+        "passage": "A museum loaned several paintings to a traveling exhibition. Before the paintings were transported, specialists photographed and documented their condition. This record will be used to check for any changes when the paintings return."
+      },
+      {
+        "q": "What condition did flexible workers have to meet?",
+        "options": [
+          "They had to work fewer hours.",
+          "They had to complete their required hours.",
+          "They had to work only at night.",
+          "They had to change offices."
+        ],
+        "correct": 1,
+        "explanation": "Workers could vary their start time but had to complete required hours.",
+        "passage": "A company introduced flexible working hours after employees reported difficulties commuting during peak traffic. Workers could start earlier or later as long as they completed their required hours. After six months, managers found that most employees were using the option."
+      },
+      {
+        "q": "Why were paintings photographed before transport?",
+        "options": [
+          "To create a condition record.",
+          "To change their appearance.",
+          "To advertise them online.",
+          "To estimate their age."
+        ],
+        "correct": 0,
+        "explanation": "The record would be used to compare their condition later.",
+        "passage": "Researchers studying urban trees found that streets with more mature trees were generally cooler during summer afternoons. They suggested that tree canopies could help reduce the amount of heat absorbed by roads and buildings."
+      },
+      {
+        "q": "Who wrote the newspaper's new section?",
+        "options": [
+          "Teenagers.",
+          "University professors.",
+          "Retired editors.",
+          "Tourists."
+        ],
+        "correct": 0,
+        "explanation": "The section was written by teenagers.",
+        "passage": "A local newspaper began publishing a weekly section written by teenagers. Editors trained the students to check sources and distinguish facts from opinions. The section quickly became one of the paper's most-read features among younger readers."
+      },
+      {
+        "q": "What made the garden project successful as a community activity?",
+        "options": [
+          "It was run by professional farmers.",
+          "Residents contributed in different ways.",
+          "It was only open to children.",
+          "The garden was moved to another location."
+        ],
+        "correct": 1,
+        "explanation": "Residents took part by planting and building, helping turn it into a shared activity.",
+        "passage": "When the community center opened a small garden behind the building, residents began volunteering to maintain it. Some planted vegetables, while others built wooden boxes for herbs. The project soon became a regular meeting place for neighbors."
+      },
+      {
+        "q": "What advantage did the electric vans have?",
+        "options": [
+          "They produced less noise.",
+          "They needed no charging.",
+          "They were larger.",
+          "They were faster in every situation."
+        ],
+        "correct": 0,
+        "explanation": "The passage says they produced less noise.",
+        "passage": "A delivery company tested electric vans on routes that were mostly within the city. The vans required charging during longer shifts, but they produced less noise than the company's conventional vehicles."
+      },
+      {
+        "q": "How were the vegetarian dishes marked?",
+        "options": [
+          "With special labels on the menu.",
+          "By different prices only.",
+          "They were not marked.",
+          "With photographs."
+        ],
+        "correct": 0,
+        "explanation": "The chef clearly marked the vegetarian dishes.",
+        "passage": "A restaurant changed its menu after customers asked for more vegetarian choices. The chef added several plant-based dishes and clearly marked them on the menu. Within a month, these dishes accounted for a noticeable share of orders."
+      },
+      {
+        "q": "What did the residents maintain?",
+        "options": [
+          "A community garden.",
+          "A parking garage.",
+          "A museum.",
+          "A sports stadium."
+        ],
+        "correct": 0,
+        "explanation": "Residents volunteered to maintain the garden.",
+        "passage": "After missing several deadlines, a project team reviewed its workflow. They discovered that tasks were being assigned without clear priorities. The team introduced weekly planning meetings and began ranking tasks by urgency."
+      },
+      {
+        "q": "What did residents build in the garden?",
+        "options": [
+          "Wooden boxes for herbs.",
+          "A swimming pool.",
+          "A parking area.",
+          "A greenhouse only."
+        ],
+        "correct": 0,
+        "explanation": "Some residents built wooden boxes for herbs.",
+        "passage": "When the community center opened a small garden behind the building, residents began volunteering to maintain it. Some planted vegetables, while others built wooden boxes for herbs. The project soon became a regular meeting place for neighbors."
+      },
+      {
+        "q": "Why did the company introduce flexible hours?",
+        "options": [
+          "To reduce salaries.",
+          "Because employees had commuting difficulties.",
+          "To shorten the working week.",
+          "Because the office was closing."
+        ],
+        "correct": 1,
+        "explanation": "The policy was introduced after employees reported commuting difficulties.",
+        "passage": "A company introduced flexible working hours after employees reported difficulties commuting during peak traffic. Workers could start earlier or later as long as they completed their required hours. After six months, managers found that most employees were using the option."
+      },
+      {
+        "q": "What is one expected benefit of the new lights?",
+        "options": [
+          "Higher electricity use.",
+          "Lower long-term costs.",
+          "Less illumination.",
+          "More frequent repairs."
+        ],
+        "correct": 1,
+        "explanation": "The council expects lower maintenance and energy costs.",
+        "passage": "A small town replaced several old streetlights with energy-efficient models. The new lights use less electricity while providing similar levels of illumination. The local council expects the change to lower long-term maintenance and energy costs."
+      },
+      {
+        "q": "Who initially watched the student's videos?",
+        "options": [
+          "Only classmates.",
+          "Only teachers.",
+          "International researchers.",
+          "No one."
+        ],
+        "correct": 0,
+        "explanation": "At first, only classmates watched them.",
+        "passage": "A university student started recording short videos to explain difficult mathematics problems. At first, only classmates watched them, but the videos gradually attracted viewers from other schools. The student now organizes the videos by topic to make them easier to find."
+      },
+      {
+        "q": "What did the new streetlights use less of?",
+        "options": [
+          "Electricity.",
+          "Water.",
+          "Wood.",
+          "Space."
+        ],
+        "correct": 0,
+        "explanation": "The new lights use less electricity.",
+        "passage": "A small town replaced several old streetlights with energy-efficient models. The new lights use less electricity while providing similar levels of illumination. The local council expects the change to lower long-term maintenance and energy costs."
+      },
+      {
+        "q": "What problem did the team identify?",
+        "options": [
+          "There were too many employees.",
+          "Tasks lacked clear priorities.",
+          "Meetings were too frequent.",
+          "The project had ended."
+        ],
+        "correct": 1,
+        "explanation": "The team found that tasks were being assigned without clear priorities.",
+        "passage": "After missing several deadlines, a project team reviewed its workflow. They discovered that tasks were being assigned without clear priorities. The team introduced weekly planning meetings and began ranking tasks by urgency."
+      },
+      {
+        "q": "What did the researchers suggest?",
+        "options": [
+          "Trees increase summer heat.",
+          "Tree canopies may help reduce urban heat.",
+          "Mature trees should be removed.",
+          "Buildings absorb no heat."
+        ],
+        "correct": 1,
+        "explanation": "They suggested that tree canopies could reduce heat absorbed by urban surfaces.",
+        "passage": "Researchers studying urban trees found that streets with more mature trees were generally cooler during summer afternoons. They suggested that tree canopies could help reduce the amount of heat absorbed by roads and buildings."
+      },
+      {
+        "q": "How did the student improve the videos' accessibility?",
+        "options": [
+          "By deleting older videos.",
+          "By organizing them by topic.",
+          "By making them longer.",
+          "By charging viewers."
+        ],
+        "correct": 1,
+        "explanation": "The student organizes the videos by topic so viewers can find them more easily.",
+        "passage": "A university student started recording short videos to explain difficult mathematics problems. At first, only classmates watched them, but the videos gradually attracted viewers from other schools. The student now organizes the videos by topic to make them easier to find."
+      },
+      {
+        "q": "When were the streets with mature trees generally cooler?",
+        "options": [
+          "During winter mornings.",
+          "During summer afternoons.",
+          "At midnight.",
+          "During rainy evenings."
+        ],
+        "correct": 1,
+        "explanation": "The study focused on cooler summer afternoons.",
+        "passage": "Researchers studying urban trees found that streets with more mature trees were generally cooler during summer afternoons. They suggested that tree canopies could help reduce the amount of heat absorbed by roads and buildings."
+      },
+      {
+        "q": "Why were the paintings documented before transport?",
+        "options": [
+          "To advertise the museum.",
+          "To compare their condition later.",
+          "To sell them immediately.",
+          "To change their frames."
+        ],
+        "correct": 1,
+        "explanation": "The documentation provides a baseline for checking their condition after the exhibition.",
+        "passage": "A museum loaned several paintings to a traveling exhibition. Before the paintings were transported, specialists photographed and documented their condition. This record will be used to check for any changes when the paintings return."
+      },
+      {
+        "q": "What limitation did the electric vans have?",
+        "options": [
+          "They were louder.",
+          "They needed charging during longer shifts.",
+          "They could not travel in cities.",
+          "They were impossible to drive."
+        ],
+        "correct": 1,
+        "explanation": "The passage notes that charging was required during longer shifts.",
+        "passage": "A delivery company tested electric vans on routes that were mostly within the city. The vans required charging during longer shifts, but they produced less noise than the company's conventional vehicles."
+      },
+      {
+        "q": "What skill did the editors emphasize?",
+        "options": [
+          "Cooking.",
+          "Checking sources and separating facts from opinions.",
+          "Graphic design only.",
+          "Public speaking."
+        ],
+        "correct": 1,
+        "explanation": "Editors trained students to check sources and distinguish facts from opinions.",
+        "passage": "A local newspaper began publishing a weekly section written by teenagers. Editors trained the students to check sources and distinguish facts from opinions. The section quickly became one of the paper's most-read features among younger readers."
+      },
+      {
+        "q": "What did specialists record about the paintings?",
+        "options": [
+          "Their condition.",
+          "Their selling price.",
+          "Their future location.",
+          "Their frame color only."
+        ],
+        "correct": 0,
+        "explanation": "They photographed and documented the paintings' condition.",
+        "passage": "A museum loaned several paintings to a traveling exhibition. Before the paintings were transported, specialists photographed and documented their condition. This record will be used to check for any changes when the paintings return."
+      },
+      {
+        "q": "What did the project team begin doing weekly?",
+        "options": [
+          "Hiring staff.",
+          "Planning meetings.",
+          "Traveling.",
+          "Publishing reports."
+        ],
+        "correct": 1,
+        "explanation": "They introduced weekly planning meetings.",
+        "passage": "After missing several deadlines, a project team reviewed its workflow. They discovered that tasks were being assigned without clear priorities. The team introduced weekly planning meetings and began ranking tasks by urgency."
       }
     ]
   },
@@ -1236,6 +4091,336 @@
         ],
         "correct": 2,
         "explanation": "'Can't help' is followed by a gerund: 'thinking'."
+      },
+      {
+        "q": "There is little point in ___ the same argument again.",
+        "options": [
+          "repeat",
+          "to repeat",
+          "repeating",
+          "repeated"
+        ],
+        "correct": 2,
+        "explanation": "'Point in' is followed by a gerund."
+      },
+      {
+        "q": "The proposal, ___ was submitted yesterday, will be reviewed tomorrow.",
+        "options": [
+          "that",
+          "what",
+          "which",
+          "where"
+        ],
+        "correct": 2,
+        "explanation": "'Which' introduces a non-defining relative clause referring to the proposal."
+      },
+      {
+        "q": "No sooner ___ the announcement than the phones started ringing.",
+        "options": [
+          "had she made",
+          "she had made",
+          "did she make",
+          "she made"
+        ],
+        "correct": 0,
+        "explanation": "After 'no sooner' at the beginning, inversion with past perfect is standard."
+      },
+      {
+        "q": "It is high time the company ___ its procedures.",
+        "options": [
+          "reviews",
+          "reviewed",
+          "will review",
+          "has reviewed"
+        ],
+        "correct": 1,
+        "explanation": "'It is high time' is followed by a past form for a present recommendation."
+      },
+      {
+        "q": "The project might have succeeded if the team ___ more funding.",
+        "options": [
+          "receives",
+          "received",
+          "had received",
+          "would receive"
+        ],
+        "correct": 2,
+        "explanation": "A past unreal condition uses past perfect in the if-clause."
+      },
+      {
+        "q": "So complex ___ the problem that several teams were involved.",
+        "options": [
+          "was",
+          "were",
+          "did",
+          "has"
+        ],
+        "correct": 0,
+        "explanation": "The structure 'so + adjective + be + subject + that' uses 'was' here."
+      },
+      {
+        "q": "He denied ___ confidential information.",
+        "options": [
+          "to leak",
+          "leaking",
+          "leak",
+          "to leaking"
+        ],
+        "correct": 1,
+        "explanation": "'Deny' is followed by a gerund."
+      },
+      {
+        "q": "Rarely ___ such a rapid change in the market.",
+        "options": [
+          "we see",
+          "do we see",
+          "we saw",
+          "did we seeing"
+        ],
+        "correct": 1,
+        "explanation": "Negative/limiting adverb 'rarely' at the beginning requires inversion."
+      },
+      {
+        "q": "Had the warning been taken seriously, the accident ___ avoided.",
+        "options": [
+          "can be",
+          "could have been",
+          "will be",
+          "is"
+        ],
+        "correct": 1,
+        "explanation": "A third conditional result uses 'could have been + past participle'."
+      },
+      {
+        "q": "Only after the audit ___ the discrepancy discovered.",
+        "options": [
+          "was",
+          "did",
+          "has",
+          "had"
+        ],
+        "correct": 0,
+        "explanation": "After 'only after' fronting, inversion occurs; passive 'was the discrepancy discovered' is required."
+      },
+      {
+        "q": "Little ___ that the decision would have such consequences.",
+        "options": [
+          "they knew",
+          "did they know",
+          "they had known",
+          "knew they"
+        ],
+        "correct": 1,
+        "explanation": "Negative/limiting adverb fronting causes inversion."
+      },
+      {
+        "q": "He is thought ___ the company before the merger.",
+        "options": [
+          "to leave",
+          "to have left",
+          "leaving",
+          "left"
+        ],
+        "correct": 1,
+        "explanation": "The perfect infinitive 'to have left' refers to an earlier action."
+      },
+      {
+        "q": "If the data had been available, the researchers ___ a different conclusion.",
+        "options": [
+          "reach",
+          "would reach",
+          "would have reached",
+          "will reach"
+        ],
+        "correct": 2,
+        "explanation": "A third conditional result uses 'would have + past participle'."
+      },
+      {
+        "q": "Under no circumstances ___ confidential data be shared.",
+        "options": [
+          "should",
+          "does",
+          "is",
+          "has"
+        ],
+        "correct": 0,
+        "explanation": "Negative fronting with 'under no circumstances' triggers inversion."
+      },
+      {
+        "q": "She objected to ___ treated unfairly.",
+        "options": [
+          "be",
+          "being",
+          "been",
+          "to be"
+        ],
+        "correct": 1,
+        "explanation": "The preposition 'to' in 'object to' is followed by a gerund."
+      },
+      {
+        "q": "Had I known about the delay, I ___ earlier.",
+        "options": [
+          "would leave",
+          "would have left",
+          "will leave",
+          "left"
+        ],
+        "correct": 1,
+        "explanation": "This is a third conditional inversion; the result uses 'would have + past participle'."
+      },
+      {
+        "q": "It is essential that every applicant ___ the form carefully.",
+        "options": [
+          "reads",
+          "read",
+          "reading",
+          "has read"
+        ],
+        "correct": 1,
+        "explanation": "After expressions of necessity in formal English, the mandative subjunctive uses the base form."
+      },
+      {
+        "q": "The report appears ___ several important variables.",
+        "options": [
+          "to overlook",
+          "overlooked",
+          "overlooking",
+          "to have overlooked"
+        ],
+        "correct": 3,
+        "explanation": "The perfect infinitive indicates that the overlooking occurred before now."
+      },
+      {
+        "q": "The proposal is worth ___ in greater detail.",
+        "options": [
+          "consider",
+          "to consider",
+          "considering",
+          "considered"
+        ],
+        "correct": 2,
+        "explanation": "'Worth' is followed by a gerund."
+      },
+      {
+        "q": "He spoke as though he ___ the answer already.",
+        "options": [
+          "knows",
+          "knew",
+          "will know",
+          "has know"
+        ],
+        "correct": 1,
+        "explanation": "'As though' for an unreal present situation commonly takes past simple."
+      },
+      {
+        "q": "Were the company ___ its policy, many customers would benefit.",
+        "options": [
+          "change",
+          "to change",
+          "changed",
+          "changing"
+        ],
+        "correct": 1,
+        "explanation": "In formal conditional inversion, 'were + subject + to-infinitive' is possible for hypothetical situations."
+      },
+      {
+        "q": "She would have attended if she ___ about the meeting.",
+        "options": [
+          "knew",
+          "had known",
+          "knows",
+          "would know"
+        ],
+        "correct": 1,
+        "explanation": "Third conditional uses past perfect in the condition."
+      },
+      {
+        "q": "The committee recommended that the policy ___ revised.",
+        "options": [
+          "is",
+          "be",
+          "was",
+          "being"
+        ],
+        "correct": 1,
+        "explanation": "Formal mandative subjunctive uses the base form 'be' after 'recommended that'."
+      },
+      {
+        "q": "She would rather you ___ the issue directly.",
+        "options": [
+          "address",
+          "addressed",
+          "will address",
+          "have addressed"
+        ],
+        "correct": 1,
+        "explanation": "'Would rather + subject' for a present preference takes past simple."
+      },
+      {
+        "q": "What the committee needs ___ a clearer set of guidelines.",
+        "options": [
+          "are",
+          "is",
+          "be",
+          "have"
+        ],
+        "correct": 1,
+        "explanation": "The subject is the singular noun phrase 'what the committee needs', so 'is' is used."
+      },
+      {
+        "q": "The documents need ___ before publication.",
+        "options": [
+          "check",
+          "checking",
+          "to checking",
+          "checked"
+        ],
+        "correct": 1,
+        "explanation": "'Need + gerund' is possible with passive meaning: need checking."
+      },
+      {
+        "q": "The report is unlikely ___ before Friday.",
+        "options": [
+          "to finish",
+          "to be finished",
+          "finishing",
+          "finished"
+        ],
+        "correct": 1,
+        "explanation": "The report receives the action, so passive infinitive is needed."
+      },
+      {
+        "q": "The findings are consistent with what the theory ___ .",
+        "options": [
+          "predicts",
+          "predict",
+          "predicting",
+          "has predict"
+        ],
+        "correct": 0,
+        "explanation": "The singular subject 'the theory' takes 'predicts'."
+      },
+      {
+        "q": "The report is believed ___ several errors.",
+        "options": [
+          "contain",
+          "containing",
+          "to contain",
+          "contained"
+        ],
+        "correct": 2,
+        "explanation": "The passive reporting structure uses 'to + infinitive'."
+      },
+      {
+        "q": "Not until the results arrived ___ the researchers understand the scale of the problem.",
+        "options": [
+          "did",
+          "had",
+          "they did",
+          "were"
+        ],
+        "correct": 0,
+        "explanation": "Negative fronting triggers subject-auxiliary inversion."
       }
     ],
     "vocabulary": [
@@ -1370,6 +4555,336 @@
         ],
         "correct": 0,
         "explanation": "'Opaque' means not able to be seen through, the opposite of transparent."
+      },
+      {
+        "q": "To 'constrain' an activity means to ___.",
+        "options": [
+          "limit it",
+          "expand it",
+          "celebrate it",
+          "explain it"
+        ],
+        "correct": 0,
+        "explanation": "Constrain means limit or restrict."
+      },
+      {
+        "q": "To 'mitigate' a problem means to ___.",
+        "options": [
+          "make it less severe",
+          "ignore it completely",
+          "cause it",
+          "measure it"
+        ],
+        "correct": 0,
+        "explanation": "Mitigate means reduce the severity or impact."
+      },
+      {
+        "q": "A 'substantial' amount is ___.",
+        "options": [
+          "very small",
+          "considerable",
+          "uncertain",
+          "imaginary"
+        ],
+        "correct": 1,
+        "explanation": "Substantial means large or considerable in amount."
+      },
+      {
+        "q": "A 'discrepancy' is a ___.",
+        "options": [
+          "difference that suggests something is inconsistent",
+          "formal agreement",
+          "financial reward",
+          "clear explanation"
+        ],
+        "correct": 0,
+        "explanation": "A discrepancy is a difference or inconsistency between things expected to match."
+      },
+      {
+        "q": "To 'scrutinize' something means to ___.",
+        "options": [
+          "examine it very carefully",
+          "destroy it",
+          "summarize it quickly",
+          "avoid it"
+        ],
+        "correct": 0,
+        "explanation": "Scrutinize means inspect or examine closely."
+      },
+      {
+        "q": "To 'exacerbate' a problem means to ___.",
+        "options": [
+          "make it worse",
+          "solve it",
+          "measure it",
+          "ignore it"
+        ],
+        "correct": 0,
+        "explanation": "Exacerbate means make a problem more severe."
+      },
+      {
+        "q": "If evidence is 'conclusive', it ___.",
+        "options": [
+          "settles the issue decisively",
+          "creates uncertainty",
+          "is unrelated",
+          "needs no interpretation ever"
+        ],
+        "correct": 0,
+        "explanation": "Conclusive evidence decisively establishes an outcome."
+      },
+      {
+        "q": "If an approach is 'counterproductive', it ___.",
+        "options": [
+          "has the opposite of the intended effect",
+          "always succeeds",
+          "costs nothing",
+          "is purely theoretical"
+        ],
+        "correct": 0,
+        "explanation": "Counterproductive means having an effect opposite to the intended result."
+      },
+      {
+        "q": "An 'inherent' quality is one that is ___.",
+        "options": [
+          "essential or naturally part of something",
+          "temporarily added",
+          "completely unrelated",
+          "legally forbidden"
+        ],
+        "correct": 0,
+        "explanation": "Inherent means existing as a natural or essential part."
+      },
+      {
+        "q": "A 'viable' solution is one that is ___.",
+        "options": [
+          "practical and capable of working",
+          "impossible",
+          "purely theoretical",
+          "already rejected"
+        ],
+        "correct": 0,
+        "explanation": "Viable means capable of working successfully."
+      },
+      {
+        "q": "To 'foster' cooperation means to ___.",
+        "options": [
+          "encourage it to develop",
+          "prevent it",
+          "measure it",
+          "replace it"
+        ],
+        "correct": 0,
+        "explanation": "Foster means encourage or promote development."
+      },
+      {
+        "q": "To 'allocate' resources means to ___.",
+        "options": [
+          "distribute them for particular purposes",
+          "hide them",
+          "destroy them",
+          "borrow them"
+        ],
+        "correct": 0,
+        "explanation": "Allocate means assign or distribute resources."
+      },
+      {
+        "q": "A 'nuanced' argument recognizes ___.",
+        "options": [
+          "subtle distinctions",
+          "only one possible view",
+          "no evidence",
+          "simple errors"
+        ],
+        "correct": 0,
+        "explanation": "Nuanced arguments account for subtle differences and complexities."
+      },
+      {
+        "q": "If a policy is 'stringent', it is ___.",
+        "options": [
+          "strict",
+          "optional",
+          "temporary",
+          "informal"
+        ],
+        "correct": 0,
+        "explanation": "Stringent means strict or demanding."
+      },
+      {
+        "q": "An 'outcome' is the ___.",
+        "options": [
+          "result",
+          "starting point",
+          "method",
+          "question"
+        ],
+        "correct": 0,
+        "explanation": "Outcome means result or consequence."
+      },
+      {
+        "q": "A 'distinction' is a meaningful ___.",
+        "options": [
+          "difference",
+          "agreement",
+          "delay",
+          "expense"
+        ],
+        "correct": 0,
+        "explanation": "A distinction is a difference between things."
+      },
+      {
+        "q": "If two results are 'consistent', they ___.",
+        "options": [
+          "do not contradict each other",
+          "are always identical",
+          "are both incorrect",
+          "cannot be compared"
+        ],
+        "correct": 0,
+        "explanation": "Consistent results agree or do not contradict one another."
+      },
+      {
+        "q": "To 'articulate' an idea means to ___.",
+        "options": [
+          "express it clearly",
+          "hide it",
+          "forget it",
+          "simplify it into one word"
+        ],
+        "correct": 0,
+        "explanation": "Articulate means express an idea clearly."
+      },
+      {
+        "q": "A 'plausible' explanation is ___.",
+        "options": [
+          "reasonable and believable",
+          "obviously impossible",
+          "completely unrelated",
+          "necessarily proven"
+        ],
+        "correct": 0,
+        "explanation": "Plausible means seeming reasonable or credible."
+      },
+      {
+        "q": "If a claim is 'ambiguous', it ___.",
+        "options": [
+          "has only one meaning",
+          "can be understood in more than one way",
+          "is definitely false",
+          "is legally binding"
+        ],
+        "correct": 1,
+        "explanation": "Ambiguous language allows multiple interpretations."
+      },
+      {
+        "q": "To 'infer' something is to ___.",
+        "options": [
+          "reach a conclusion from evidence",
+          "state it without evidence",
+          "forget it",
+          "translate it literally"
+        ],
+        "correct": 0,
+        "explanation": "Infer means derive a conclusion from evidence or reasoning."
+      },
+      {
+        "q": "If a policy is 'controversial', it is likely to ___.",
+        "options": [
+          "cause disagreement",
+          "be universally accepted",
+          "have no effect",
+          "remain secret"
+        ],
+        "correct": 0,
+        "explanation": "Controversial issues generate disagreement."
+      },
+      {
+        "q": "To 'derive' a conclusion means to ___ it from evidence.",
+        "options": [
+          "obtain",
+          "hide",
+          "contradict",
+          "delete"
+        ],
+        "correct": 0,
+        "explanation": "Derive means obtain or draw from a source."
+      },
+      {
+        "q": "A 'robust' method is ___.",
+        "options": [
+          "strong and reliable",
+          "fragile and uncertain",
+          "temporary",
+          "unrelated"
+        ],
+        "correct": 0,
+        "explanation": "Robust methods are strong and reliable."
+      },
+      {
+        "q": "To 'comply with' a rule means to ___.",
+        "options": [
+          "follow it",
+          "question it",
+          "remove it",
+          "translate it"
+        ],
+        "correct": 0,
+        "explanation": "Comply with means obey or follow."
+      },
+      {
+        "q": "A 'constraint' is a factor that ___.",
+        "options": [
+          "limits what can be done",
+          "guarantees success",
+          "creates a reward",
+          "removes all risk"
+        ],
+        "correct": 0,
+        "explanation": "A constraint places a limit on an action or system."
+      },
+      {
+        "q": "A 'tentative' conclusion is ___.",
+        "options": [
+          "not final or certain",
+          "completely proven",
+          "legally binding",
+          "irrelevant"
+        ],
+        "correct": 0,
+        "explanation": "Tentative means provisional rather than final."
+      },
+      {
+        "q": "If an argument is 'coherent', it is ___.",
+        "options": [
+          "logical and well connected",
+          "emotionally aggressive",
+          "very short",
+          "unrelated"
+        ],
+        "correct": 0,
+        "explanation": "Coherent ideas are logically connected and easy to follow."
+      },
+      {
+        "q": "If an outcome is 'inevitable', it ___.",
+        "options": [
+          "cannot be avoided",
+          "is impossible to predict",
+          "has already been canceled",
+          "is optional"
+        ],
+        "correct": 0,
+        "explanation": "Inevitable means certain to happen or unavoidable."
+      },
+      {
+        "q": "To 'underscore' a point means to ___.",
+        "options": [
+          "emphasize it",
+          "remove it",
+          "question it",
+          "hide it"
+        ],
+        "correct": 0,
+        "explanation": "Underscore means emphasize."
       }
     ],
     "reading": [
@@ -1468,6 +4983,294 @@
         ],
         "correct": 1,
         "explanation": "The passage says critics argue it 'has also eroded traditional employment protections such as sick pay and pension contributions.'"
+      },
+      {
+        "q": "What did the film festival not rely on solely?",
+        "options": [
+          "Production budgets.",
+          "Storytelling.",
+          "Experimentation.",
+          "First-time directors."
+        ],
+        "correct": 0,
+        "explanation": "The organizers did not judge films solely by production budgets.",
+        "passage": "An independent film festival introduced a program for first-time directors. Instead of judging films solely by production budgets, the organizers emphasized storytelling and experimentation. Several selected films later received invitations to larger international festivals."
+      },
+      {
+        "q": "Why did the company adopt the new packaging?",
+        "options": [
+          "It used less material in every case.",
+          "It reduced damage and lowered overall costs.",
+          "It made products harder to transport.",
+          "It eliminated packaging entirely."
+        ],
+        "correct": 1,
+        "explanation": "Although it used slightly more material, it reduced breakage enough to lower total costs.",
+        "passage": "A manufacturer discovered that a small change in packaging reduced damage during transportation. The new design used slightly more material but reduced breakage enough to lower total costs. The company decided to adopt the design across several product lines."
+      },
+      {
+        "q": "What changed in the wetland project's budget?",
+        "options": [
+          "More funds went toward the drainage channel.",
+          "All funds went to tourism.",
+          "The budget was eliminated.",
+          "All funds went to planting immediately."
+        ],
+        "correct": 0,
+        "explanation": "Managers shifted part of the budget toward modifying the drainage channel.",
+        "passage": "A research team examined how remote work affected communication in several large organizations. They found that digital tools made routine exchanges easier, but complex discussions sometimes took longer because participants lacked the informal cues available in face-to-face meetings. The researchers therefore recommended matching the communication method to the task rather than treating remote work as a single uniform practice."
+      },
+      {
+        "q": "When were the workshops most popular?",
+        "options": [
+          "During summer holidays.",
+          "Before major research assignments.",
+          "After graduation.",
+          "During sports events."
+        ],
+        "correct": 1,
+        "explanation": "Attendance was highest before major research assignments.",
+        "passage": "A university library noticed that students often searched for articles using very broad keywords. Librarians created short workshops on search strategies, including how to combine terms and evaluate sources. Attendance was highest during the weeks before major research assignments."
+      },
+      {
+        "q": "What did the wetland monitoring reveal?",
+        "options": [
+          "An old drainage channel still disrupted water flow.",
+          "The native plants had all died.",
+          "The budget was unlimited.",
+          "The site needed no changes."
+        ],
+        "correct": 0,
+        "explanation": "Monitoring identified the drainage channel as a continuing problem.",
+        "passage": "A coastal wetland restoration project initially focused on planting native vegetation. However, monitoring showed that water flow was still being disrupted by an old drainage channel. Project managers therefore shifted part of their budget toward modifying the channel before expanding the planting program."
+      },
+      {
+        "q": "What did the city intend to evaluate after a year?",
+        "options": [
+          "The congestion charge's effects.",
+          "The weather.",
+          "Museum attendance.",
+          "School results."
+        ],
+        "correct": 0,
+        "explanation": "The city announced a review of the policy's effects.",
+        "passage": "A financial analyst warned that a company's strong quarterly results did not necessarily indicate a lasting improvement. Several temporary factors had boosted revenue, while the underlying demand for one major product remained uncertain. The analyst advised examining longer-term trends before drawing conclusions."
+      },
+      {
+        "q": "Why did the managers change their priorities?",
+        "options": [
+          "The plants were illegal.",
+          "Water flow remained disrupted.",
+          "The budget increased dramatically.",
+          "The wetland was already fully restored."
+        ],
+        "correct": 1,
+        "explanation": "Monitoring showed that the drainage channel was still disrupting water flow.",
+        "passage": "A coastal wetland restoration project initially focused on planting native vegetation. However, monitoring showed that water flow was still being disrupted by an old drainage channel. Project managers therefore shifted part of their budget toward modifying the channel before expanding the planting program."
+      },
+      {
+        "q": "Why did the city plan a review?",
+        "options": [
+          "To assess the policy's effects.",
+          "To close the district.",
+          "To remove public transport.",
+          "To increase office rents."
+        ],
+        "correct": 0,
+        "explanation": "The city planned to review the effects after one year.",
+        "passage": "A city introduced a congestion charge in its busiest district. Supporters argued that it could reduce traffic and encourage public transport, while critics questioned whether the policy would affect lower-income commuters disproportionately. The city announced that it would review the effects after the first year."
+      },
+      {
+        "q": "What search skill did librarians teach?",
+        "options": [
+          "Combining terms and evaluating sources.",
+          "Writing novels.",
+          "Using only one keyword.",
+          "Avoiding research articles."
+        ],
+        "correct": 0,
+        "explanation": "The workshops taught search strategies including combining terms and evaluating sources.",
+        "passage": "A university library noticed that students often searched for articles using very broad keywords. Librarians created short workshops on search strategies, including how to combine terms and evaluate sources. Attendance was highest during the weeks before major research assignments."
+      },
+      {
+        "q": "What did the remote-work study distinguish between?",
+        "options": [
+          "Routine exchanges and complex discussions.",
+          "Morning and evening shifts.",
+          "Small and large buildings.",
+          "Printed and handwritten reports."
+        ],
+        "correct": 0,
+        "explanation": "It noted that routine exchanges could be easier while complex discussions could take longer.",
+        "passage": "An archaeological team uncovered pottery fragments at a site that had previously been thought to be mainly agricultural. Chemical analysis suggested that some vessels had contained imported materials. The finding has led researchers to reconsider the extent of the settlement's trade connections."
+      },
+      {
+        "q": "Why did the new packaging lower total costs?",
+        "options": [
+          "It reduced breakage enough to offset extra material.",
+          "It used no material.",
+          "It made products smaller.",
+          "It increased damage."
+        ],
+        "correct": 0,
+        "explanation": "Reduced breakage lowered total costs despite slightly more material.",
+        "passage": "A manufacturer discovered that a small change in packaging reduced damage during transportation. The new design used slightly more material but reduced breakage enough to lower total costs. The company decided to adopt the design across several product lines."
+      },
+      {
+        "q": "What did the evaluation reveal?",
+        "options": [
+          "Posters were the only effective method.",
+          "Direct discussion through local organizations improved message recall.",
+          "Residents disliked all information.",
+          "The campaign stopped using community groups."
+        ],
+        "correct": 1,
+        "explanation": "The evaluation found better recall when local organizations discussed the messages directly.",
+        "passage": "A public health campaign initially focused on providing information through posters. Evaluation showed that people remembered the messages more often when local organizations discussed them directly with residents. The campaign subsequently expanded its partnerships with community groups."
+      },
+      {
+        "q": "Why did the packaging company keep the new design?",
+        "options": [
+          "It lowered total costs by reducing breakage.",
+          "It eliminated all materials.",
+          "It made every product heavier.",
+          "It increased transportation damage."
+        ],
+        "correct": 0,
+        "explanation": "Reduced breakage lowered total costs.",
+        "passage": "A manufacturer discovered that a small change in packaging reduced damage during transportation. The new design used slightly more material but reduced breakage enough to lower total costs. The company decided to adopt the design across several product lines."
+      },
+      {
+        "q": "What did the archaeological finding cause researchers to reconsider?",
+        "options": [
+          "The settlement's trade connections.",
+          "The site's climate.",
+          "The age of the researchers.",
+          "The color of the pottery."
+        ],
+        "correct": 0,
+        "explanation": "The finding led them to reconsider the extent of trade connections.",
+        "passage": "An archaeological team uncovered pottery fragments at a site that had previously been thought to be mainly agricultural. Chemical analysis suggested that some vessels had contained imported materials. The finding has led researchers to reconsider the extent of the settlement's trade connections."
+      },
+      {
+        "q": "What did the chemical analysis suggest?",
+        "options": [
+          "The settlement had no trade.",
+          "Some vessels contained imported materials.",
+          "The site was completely modern.",
+          "All pottery was locally made."
+        ],
+        "correct": 1,
+        "explanation": "The analysis suggested that some vessels had contained imported materials.",
+        "passage": "An archaeological team uncovered pottery fragments at a site that had previously been thought to be mainly agricultural. Chemical analysis suggested that some vessels had contained imported materials. The finding has led researchers to reconsider the extent of the settlement's trade connections."
+      },
+      {
+        "q": "What improved message recall in the health campaign?",
+        "options": [
+          "Direct discussion by local organizations.",
+          "Posters alone.",
+          "Longer advertisements.",
+          "Removing community groups."
+        ],
+        "correct": 0,
+        "explanation": "People remembered messages more often after direct discussion through local organizations.",
+        "passage": "A public health campaign initially focused on providing information through posters. Evaluation showed that people remembered the messages more often when local organizations discussed them directly with residents. The campaign subsequently expanded its partnerships with community groups."
+      },
+      {
+        "q": "What did the analyst recommend examining?",
+        "options": [
+          "Longer-term trends.",
+          "Only one day's sales.",
+          "Employee hobbies.",
+          "Office locations."
+        ],
+        "correct": 0,
+        "explanation": "The analyst advised examining longer-term trends before drawing conclusions.",
+        "passage": "A financial analyst warned that a company's strong quarterly results did not necessarily indicate a lasting improvement. Several temporary factors had boosted revenue, while the underlying demand for one major product remained uncertain. The analyst advised examining longer-term trends before drawing conclusions."
+      },
+      {
+        "q": "What caution did the analyst make?",
+        "options": [
+          "Quarterly results always predict the future.",
+          "Temporary factors may have affected the strong results.",
+          "The company had no revenue.",
+          "Long-term trends are irrelevant."
+        ],
+        "correct": 1,
+        "explanation": "The analyst warned that temporary factors had boosted revenue and longer-term demand remained uncertain.",
+        "passage": "A financial analyst warned that a company's strong quarterly results did not necessarily indicate a lasting improvement. Several temporary factors had boosted revenue, while the underlying demand for one major product remained uncertain. The analyst advised examining longer-term trends before drawing conclusions."
+      },
+      {
+        "q": "What communication problem did researchers identify?",
+        "options": [
+          "Complex discussions could take longer remotely.",
+          "Routine exchanges were impossible.",
+          "Digital tools were unavailable.",
+          "Face-to-face meetings were always inefficient."
+        ],
+        "correct": 0,
+        "explanation": "They found complex discussions could take longer because informal cues were missing.",
+        "passage": "A research team examined how remote work affected communication in several large organizations. They found that digital tools made routine exchanges easier, but complex discussions sometimes took longer because participants lacked the informal cues available in face-to-face meetings. The researchers therefore recommended matching the communication method to the task rather than treating remote work as a single uniform practice."
+      },
+      {
+        "q": "What did the festival emphasize in its selection process?",
+        "options": [
+          "Production budget alone.",
+          "Storytelling and experimentation.",
+          "The directors' age.",
+          "Commercial advertising."
+        ],
+        "correct": 1,
+        "explanation": "The organizers emphasized storytelling and experimentation rather than budget alone.",
+        "passage": "An independent film festival introduced a program for first-time directors. Instead of judging films solely by production budgets, the organizers emphasized storytelling and experimentation. Several selected films later received invitations to larger international festivals."
+      },
+      {
+        "q": "What did managers focus on in quarterly conversations?",
+        "options": [
+          "Specific goals and obstacles.",
+          "Annual salaries only.",
+          "Office furniture.",
+          "Holiday plans."
+        ],
+        "correct": 0,
+        "explanation": "Managers were asked to focus on goals and obstacles.",
+        "passage": "A software company replaced annual performance reviews with shorter quarterly conversations. Managers were asked to focus on specific goals and obstacles rather than assigning a single yearly rating. Employees reported that the new system made it easier to raise problems before they became serious."
+      },
+      {
+        "q": "What concern did critics raise about the congestion charge?",
+        "options": [
+          "Its possible effect on lower-income commuters.",
+          "Its effect on tourism only.",
+          "Its lack of any traffic goal.",
+          "Its impact on museum attendance."
+        ],
+        "correct": 0,
+        "explanation": "Critics questioned whether it could disproportionately affect lower-income commuters.",
+        "passage": "A city introduced a congestion charge in its busiest district. Supporters argued that it could reduce traffic and encourage public transport, while critics questioned whether the policy would affect lower-income commuters disproportionately. The city announced that it would review the effects after the first year."
+      },
+      {
+        "q": "What was one purpose of the new system?",
+        "options": [
+          "To delay feedback.",
+          "To address goals and problems more regularly.",
+          "To eliminate communication with managers.",
+          "To assign only annual ratings."
+        ],
+        "correct": 1,
+        "explanation": "Quarterly conversations were intended to provide more regular discussion of goals and obstacles.",
+        "passage": "A software company replaced annual performance reviews with shorter quarterly conversations. Managers were asked to focus on specific goals and obstacles rather than assigning a single yearly rating. Employees reported that the new system made it easier to raise problems before they became serious."
+      },
+      {
+        "q": "What did the researchers recommend?",
+        "options": [
+          "Ending remote work entirely.",
+          "Using the same communication method for every task.",
+          "Choosing communication methods according to the task.",
+          "Replacing digital tools with paper."
+        ],
+        "correct": 2,
+        "explanation": "They recommended matching the communication method to the task.",
+        "passage": "A research team examined how remote work affected communication in several large organizations. They found that digital tools made routine exchanges easier, but complex discussions sometimes took longer because participants lacked the informal cues available in face-to-face meetings. The researchers therefore recommended matching the communication method to the task rather than treating remote work as a single uniform practice."
       }
     ]
   },
