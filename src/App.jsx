@@ -68,7 +68,7 @@ function GradientButton({ children, onClick, disabled, className = "", type = "b
       onClick={onClick}
       disabled={disabled}
       className={
-        "w-full flex items-center justify-center gap-2 rounded-2xl py-4 font-semibold text-white transition-transform active:scale-[0.98] disabled:opacity-40 disabled:active:scale-100 " +
+        "w-full flex items-center justify-center gap-2 rounded-2xl py-4 font-semibold text-white transition-all active:scale-[0.98] hover:brightness-110 disabled:opacity-40 disabled:active:scale-100 disabled:hover:brightness-100 " +
         className
       }
       style={{
@@ -89,7 +89,7 @@ function SecondaryButton({ children, onClick, disabled, className = "" }) {
       onClick={onClick}
       disabled={disabled}
       className={
-        "w-full flex items-center justify-center gap-2 rounded-2xl py-4 font-semibold border transition-colors disabled:opacity-40 " +
+        "w-full flex items-center justify-center gap-2 rounded-2xl py-4 font-semibold border transition-colors hover:bg-[#F7F9FF] disabled:opacity-40 disabled:hover:bg-white " +
         className
       }
       style={{ borderColor: "#DCE2F7", color: "#2B2F45", background: "#fff" }}
@@ -106,7 +106,7 @@ function SecondaryButton({ children, onClick, disabled, className = "" }) {
 function HomeScreen({ onStart, historyCount }) {
   return (
     <div className="flex flex-col h-full">
-      <div className="flex items-center justify-between px-5 pt-5 pb-2">
+      <div className="flex items-center justify-between px-5 md:px-8 pt-5 pb-2">
         <div className="flex items-center gap-2">
           <div
             className="w-8 h-8 rounded-xl flex items-center justify-center"
@@ -119,19 +119,19 @@ function HomeScreen({ onStart, historyCount }) {
         <Menu size={20} className="text-[#8890AE]" />
       </div>
 
-      <div className="px-5 pt-2">
+      <div className="px-5 md:px-8 pt-2">
         <p className="text-[13px] tracking-wide text-[#8890AE]">
           Practice, improve, and track your progress
         </p>
-        <h1 className="text-[32px] leading-[1.15] font-bold text-[#1B1E2B] mt-2">
+        <h1 className="text-[32px] md:text-[42px] leading-[1.15] font-bold text-[#1B1E2B] mt-2">
           Find Your <span style={{ color: BLUE }}>English Level</span>
         </h1>
-        <p className="text-[15px] text-[#6B7190] mt-3 leading-relaxed">
+        <p className="text-[15px] md:text-[16px] text-[#6B7190] mt-3 leading-relaxed md:max-w-[560px]">
           Take a personalized test and improve your skills. New questions every time you play.
         </p>
       </div>
 
-      <div className="px-5 mt-5">
+      <div className="px-5 md:px-8 mt-5">
         <div
           className="rounded-3xl p-5 relative overflow-hidden"
           style={{ background: `linear-gradient(135deg, ${BLUE} 0%, ${BLUE_DARK} 100%)` }}
@@ -150,7 +150,7 @@ function HomeScreen({ onStart, historyCount }) {
         </div>
       </div>
 
-      <div className="px-5 mt-6 grid grid-cols-3 gap-2.5">
+      <div className="px-5 md:px-8 mt-6 grid grid-cols-3 gap-2.5">
         {CATEGORIES.map(({ icon: Icon, label }) => (
           <div key={label} className="rounded-2xl border border-[#EAEDF9] p-3.5 bg-white">
             <div
@@ -164,7 +164,7 @@ function HomeScreen({ onStart, historyCount }) {
         ))}
       </div>
 
-      <div className="mt-auto px-5 pb-6 pt-6">
+      <div className="mt-auto px-5 md:px-8 pb-6 pt-6">
         <GradientButton onClick={onStart}>
           Start a Test <ArrowRight size={18} />
         </GradientButton>
@@ -199,7 +199,7 @@ function SetupScreen({ onBack, onStartTest }) {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex items-center gap-3 px-5 pt-5 pb-1">
+      <div className="flex items-center gap-3 px-5 md:px-8 pt-5 pb-1">
         <button onClick={onBack} className="text-[#1B1E2B]">
           <ArrowLeft size={22} />
         </button>
@@ -209,7 +209,7 @@ function SetupScreen({ onBack, onStartTest }) {
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto px-5 pb-4">
+      <div className="flex-1 overflow-y-auto px-5 md:px-8 pb-4">
         <p className="text-[13px] font-semibold text-[#1B1E2B] mt-5 mb-3">Choose your level</p>
         <div className="flex flex-col gap-2">
           {LEVELS.map((l) => {
@@ -347,7 +347,7 @@ function SetupScreen({ onBack, onStartTest }) {
         </div>
       </div>
 
-      <div className="px-5 pb-6 pt-3">
+      <div className="px-5 md:px-8 pb-6 pt-3">
         <GradientButton
           onClick={() => onStartTest({ level, count, timerOn, minutes, categories })}
         >
@@ -455,7 +455,7 @@ function QuizScreen({ config, onExit, onFinish }) {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="px-5 pt-5">
+      <div className="px-5 md:px-8 pt-5">
         <div className="flex items-center justify-between">
           <button onClick={onExit} className="text-[#1B1E2B]">
             <X size={22} />
@@ -499,13 +499,13 @@ function QuizScreen({ config, onExit, onFinish }) {
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto px-5 pt-5">
+      <div className="flex-1 overflow-y-auto px-5 md:px-8 pt-5">
         {current.passage && (
-          <div className="rounded-2xl p-4 mb-4 text-[14px] leading-relaxed text-[#3F4460]" style={{ background: "#F5F6FB" }}>
+          <div className="rounded-2xl p-4 md:p-5 mb-4 text-[14px] md:text-[15px] leading-relaxed text-[#3F4460]" style={{ background: "#F5F6FB" }}>
             {current.passage}
           </div>
         )}
-        <p className="text-[17px] font-semibold text-[#1B1E2B] leading-snug mb-5">
+        <p className="text-[17px] md:text-[20px] font-semibold text-[#1B1E2B] leading-snug mb-5">
           {current.q}
         </p>
         <div className="flex flex-col gap-3">
@@ -516,7 +516,7 @@ function QuizScreen({ config, onExit, onFinish }) {
               <button
                 key={i}
                 onClick={() => selectOption(i)}
-                className="flex items-center gap-3 rounded-2xl border p-3.5 text-left transition-colors"
+                className="flex items-center gap-3 rounded-2xl border p-3.5 md:p-4 text-left transition-colors hover:border-[#C3CFFB]"
                 style={{
                   borderColor: isSelected ? BLUE : "#EAEDF9",
                   background: isSelected ? "#F2F5FF" : "#fff",
@@ -531,14 +531,14 @@ function QuizScreen({ config, onExit, onFinish }) {
                 >
                   {letter}
                 </div>
-                <span className="text-[14px] text-[#292D42]">{opt}</span>
+                <span className="text-[14px] md:text-[15px] text-[#292D42]">{opt}</span>
               </button>
             );
           })}
         </div>
       </div>
 
-      <div className="px-5 pb-6 pt-3 flex gap-3">
+      <div className="px-5 md:px-8 pb-6 pt-3 flex gap-3">
         <SecondaryButton onClick={goPrev} disabled={index === 0} className="flex-1">
           <ArrowLeft size={16} /> Previous
         </SecondaryButton>
@@ -734,7 +734,7 @@ function ResultsScreen({ session, onReview, onNewTest, onChooseLevel }) {
   return (
     <div className="flex flex-col h-full">
       <canvas ref={canvasRef} className="hidden" />
-      <div className="flex-1 overflow-y-auto px-5 pt-8 pb-4">
+      <div className="flex-1 overflow-y-auto px-5 md:px-8 pt-8 pb-4">
         <div className="flex flex-col items-center text-center">
           <div
             className="w-16 h-16 rounded-full flex items-center justify-center"
@@ -811,7 +811,7 @@ function ResultsScreen({ session, onReview, onNewTest, onChooseLevel }) {
         </div>
       </div>
 
-      <div className="px-5 pb-6 pt-3 flex flex-col gap-2.5">
+      <div className="px-5 md:px-8 pb-6 pt-3 flex flex-col gap-2.5">
         <SecondaryButton onClick={onReview}>
           Review Answers <ChevronRight size={16} />
         </SecondaryButton>
@@ -847,14 +847,14 @@ function ReviewScreen({ session, onBack, onTryAgain, onChooseLevel }) {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex items-center gap-3 px-5 pt-5 pb-3">
+      <div className="flex items-center gap-3 px-5 md:px-8 pt-5 pb-3">
         <button onClick={onBack} className="text-[#1B1E2B]">
           <ArrowLeft size={22} />
         </button>
         <h2 className="text-[18px] font-bold text-[#1B1E2B]">Review Answers</h2>
       </div>
 
-      <div className="px-5 flex gap-2">
+      <div className="px-5 md:px-8 flex gap-2">
         {[
           { id: "all", label: `All (${items.length})` },
           { id: "correct", label: `Correct (${correctTotal})` },
@@ -875,7 +875,7 @@ function ReviewScreen({ session, onBack, onTryAgain, onChooseLevel }) {
         ))}
       </div>
 
-      <div className="flex-1 overflow-y-auto px-5 mt-4 flex flex-col gap-2.5">
+      <div className="flex-1 overflow-y-auto px-5 md:px-8 mt-4 flex flex-col gap-2.5">
         {filtered.map(({ q, i, isCorrect }) => {
           const open = openIdx === i;
           return (
@@ -936,7 +936,7 @@ function ReviewScreen({ session, onBack, onTryAgain, onChooseLevel }) {
         <div className="h-2" />
       </div>
 
-      <div className="px-5 pb-6 pt-3 flex flex-col gap-2.5">
+      <div className="px-5 md:px-8 pb-6 pt-3 flex flex-col gap-2.5">
         <GradientButton onClick={onTryAgain}>
           Try Again <RotateCcw size={16} />
         </GradientButton>
@@ -1058,14 +1058,14 @@ function AdminScreen({ onBack }) {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex items-center gap-3 px-5 pt-5 pb-3">
+      <div className="flex items-center gap-3 px-5 md:px-8 pt-5 pb-3">
         <button onClick={onBack} className="text-[#1B1E2B]">
           <ArrowLeft size={22} />
         </button>
         <h2 className="text-[18px] font-bold text-[#1B1E2B]">Admin — Add Questions</h2>
       </div>
 
-      <div className="flex-1 overflow-y-auto px-5 pb-4">
+      <div className="flex-1 overflow-y-auto px-5 md:px-8 pb-4">
         <div className="rounded-2xl p-3.5 mb-4 flex gap-2.5" style={{ background: "#F5F6FB" }}>
           <ShieldCheck size={18} style={{ color: BLUE }} className="shrink-0 mt-0.5" />
           <p className="text-[12px] text-[#5B6180] leading-relaxed">
@@ -1170,7 +1170,7 @@ function AdminScreen({ onBack }) {
         )}
       </div>
 
-      <div className="px-5 pb-6 pt-3">
+      <div className="px-5 md:px-8 pb-6 pt-3">
         <GradientButton
           onClick={handleUpload}
           disabled={!parsed || parsed.valid.length === 0 || !password || status === "uploading"}
@@ -1221,12 +1221,12 @@ export default function App() {
 
   return (
     <div
-      className="w-full flex justify-center"
+      className="w-full flex justify-center md:items-start"
       style={{ background: "linear-gradient(180deg, #F7F9FF 0%, #FFFFFF 30%)", minHeight: "100vh" }}
     >
       <div
-        className="w-full bg-white flex flex-col"
-        style={{ maxWidth: 430, minHeight: "100vh", boxShadow: "0 0 60px rgba(63,102,245,0.06)" }}
+        className="w-full bg-white flex flex-col min-h-screen max-w-[430px] md:max-w-[680px] lg:max-w-[820px] md:my-8 md:rounded-3xl md:min-h-[88vh]"
+        style={{ boxShadow: "0 0 60px rgba(63,102,245,0.06)" }}
       >
         {screen === "home" && (
           <HomeScreen onStart={() => setScreen("setup")} historyCount={historyCount} />
