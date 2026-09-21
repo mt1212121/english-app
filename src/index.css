@@ -12,3 +12,24 @@ body {
   background: #ffffff;
   -webkit-font-smoothing: antialiased;
 }
+
+@keyframes blob-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(20px, -30px) scale(1.08); }
+  66% { transform: translate(-15px, 20px) scale(0.95); }
+}
+.animate-blob { animation: blob-float 14s ease-in-out infinite; }
+.animate-blob-slow { animation: blob-float 20s ease-in-out infinite reverse; }
+
+@keyframes confetti-fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(220px) rotate(340deg); opacity: 0; }
+}
+.confetti-piece {
+  position: absolute;
+  top: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  animation: confetti-fall 1.6s ease-in forwards;
+}

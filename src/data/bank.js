@@ -113,6 +113,20 @@ export function categoryQuestionCounts() {
   return counts;
 }
 
+export function computeScore(questions, answers, hintsUsed = []) {
+  let weighted = 0;
+  let correctCount = 0;
+  questions.forEach((q, i) => {
+    if (answers[i] === q.correct) {
+      correctCount++;
+      weighted += hintsUsed[i] ? 0.5 : 1;
+    }
+  });
+  const total = questions.length;
+  const pct = total ? Math.round((weighted / total) * 100) : 0;
+  return { correctCount, weighted, total, pct };
+}
+
 export function levelName(id) {
   return LEVELS.find((l) => l.id === id)?.name || id;
 }

@@ -23,6 +23,9 @@ import {
   Upload,
   Download,
   Trash2,
+  Moon,
+  Home,
+  Lightbulb,
   AlertTriangle,
   ShieldCheck,
   TrendingUp,
@@ -31,7 +34,7 @@ import {
   BarChart3,
   GraduationCap,
 } from "lucide-react";
-import { LEVELS, CATEGORY_META, pickQuestions, estimateLevel, estimateExplanation, levelName, categoryQuestionCounts } from "./data/bank";
+import { LEVELS, CATEGORY_META, pickQuestions, estimateLevel, estimateExplanation, levelName, categoryQuestionCounts, computeScore } from "./data/bank";
 import { fetchAIQuestions } from "./lib/aiQuestions";
 import { getHistory, addHistoryEntry, getSeenUids, addSeenUids } from "./lib/storage";
 
@@ -96,10 +99,10 @@ function SecondaryButton({ children, onClick, disabled, className = "" }) {
       onClick={onClick}
       disabled={disabled}
       className={
-        "w-full flex items-center justify-center gap-2 rounded-2xl py-4 font-semibold border transition-colors hover:bg-[#F7F9FF] disabled:opacity-40 disabled:hover:bg-white " +
+        "w-full flex items-center justify-center gap-2 rounded-2xl py-4 font-semibold border transition-colors hover:bg-[#F7F9FF] dark:hover:bg-[#1E2440] disabled:opacity-40 disabled:hover:bg-white dark:disabled:hover:bg-[#161B2E] bg-white dark:bg-[#161B2E] text-[#2B2F45] dark:text-[#F0F2FA] " +
         className
       }
-      style={{ borderColor: "#DCE2F7", color: "#2B2F45", background: "#fff" }}
+      style={{ borderColor: "#DCE2F7" }}
     >
       {children}
     </button>
@@ -113,25 +116,25 @@ function SecondaryButton({ children, onClick, disabled, className = "" }) {
 function AccordionRow({ icon, title, soon, summary, onSeeMore }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="rounded-2xl border border-[#EAEDF9] bg-white overflow-hidden mb-2.5">
+    <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] overflow-hidden mb-2.5">
       <button
         onClick={() => setOpen((v) => !v)}
-        className="w-full flex items-center gap-2.5 p-3.5 text-left font-semibold text-[14px] text-[#1B1E2B]"
+        className="w-full flex items-center gap-2.5 p-3.5 text-left font-semibold text-[14px] text-[#1B1E2B] dark:text-[#F0F2FA]"
       >
         {icon}
         <span>{title}</span>
         {soon && (
-          <span className="text-[10px] font-bold bg-[#EEF1FE] text-[#3F66F5] px-1.5 py-0.5 rounded">soon</span>
+          <span className="text-[10px] font-bold bg-[#EEF1FE] dark:bg-[#20264A] text-[#3F66F5] px-1.5 py-0.5 rounded">soon</span>
         )}
         <ChevronRight
           size={16}
-          className="ml-auto text-[#8890AE] transition-transform"
+          className="ml-auto text-[#8890AE] dark:text-[#8A93B8] transition-transform"
           style={{ transform: open ? "rotate(90deg)" : "none" }}
         />
       </button>
       {open && (
         <div className="px-3.5 pb-3.5">
-          <p className="text-[12.5px] text-[#6B7190] leading-relaxed mb-2">{summary}</p>
+          <p className="text-[12.5px] text-[#6B7190] dark:text-[#9AA3C4] leading-relaxed mb-2">{summary}</p>
           {onSeeMore && (
             <button onClick={onSeeMore} className="text-[12px] font-semibold" style={{ color: BLUE }}>
               {`See full ${title} →`}
@@ -143,7 +146,7 @@ function AccordionRow({ icon, title, soon, summary, onSeeMore }) {
   );
 }
 
-function HomeScreen({ onStart, historyCount, history, onOpenHistory, onOpenProgress }) {
+function HomeScreen({ onStart, historyCount, history, onOpenHistory, onOpenProgress, darkMode, onToggleDark }) {
   const [dashOpen, setDashOpen] = useState(false);
   const counts = categoryQuestionCounts();
   const last = history[history.length - 1];
@@ -159,21 +162,21 @@ function HomeScreen({ onStart, historyCount, history, onOpenHistory, onOpenProgr
           >
             <BookOpen size={16} className="text-white" />
           </div>
-          <span className="font-semibold text-[17px] text-[#1B1E2B]">English Test</span>
+          <span className="font-semibold text-[17px] text-[#1B1E2B] dark:text-[#F0F2FA]">English Test</span>
         </div>
         <button onClick={() => setDashOpen(true)} className="w-8 h-8 flex items-center justify-center">
-          <Menu size={20} className="text-[#8890AE]" />
+          <Menu size={20} className="text-[#8890AE] dark:text-[#8A93B8]" />
         </button>
       </div>
 
       <div className="px-5 md:px-8 pt-2">
-        <p className="text-[13px] tracking-wide text-[#8890AE]">
+        <p className="text-[13px] tracking-wide text-[#8890AE] dark:text-[#8A93B8]">
           Practice, improve, and track your progress
         </p>
-        <h1 className="text-[32px] md:text-[42px] leading-[1.15] font-bold text-[#1B1E2B] mt-2">
+        <h1 className="text-[32px] md:text-[42px] leading-[1.15] font-bold text-[#1B1E2B] dark:text-[#F0F2FA] mt-2">
           Find Your <span style={{ color: BLUE }}>English Level</span>
         </h1>
-        <p className="text-[15px] md:text-[16px] text-[#6B7190] mt-3 leading-relaxed md:max-w-[560px]">
+        <p className="text-[15px] md:text-[16px] text-[#6B7190] dark:text-[#9AA3C4] mt-3 leading-relaxed md:max-w-[560px]">
           Take a personalized test and improve your skills. New questions every time you play.
         </p>
       </div>
@@ -183,8 +186,8 @@ function HomeScreen({ onStart, historyCount, history, onOpenHistory, onOpenProgr
           className="rounded-3xl p-5 relative overflow-hidden"
           style={{ background: `linear-gradient(135deg, ${BLUE} 0%, ${BLUE_DARK} 100%)` }}
         >
-          <div className="absolute -right-6 -top-10 w-32 h-32 rounded-full bg-white/10" />
-          <div className="absolute -right-2 bottom-0 w-20 h-20 rounded-full bg-white/10" />
+          <div className="absolute -right-6 -top-10 w-32 h-32 rounded-full bg-white dark:bg-[#161B2E]/10" />
+          <div className="absolute -right-2 bottom-0 w-20 h-20 rounded-full bg-white dark:bg-[#161B2E]/10" />
           <Sparkles className="text-white/80" size={22} />
           <p className="text-white font-semibold mt-3 text-[15px]">
             {historyCount > 0
@@ -199,18 +202,17 @@ function HomeScreen({ onStart, historyCount, history, onOpenHistory, onOpenProgr
 
       <div className="px-5 md:px-8 mt-6 flex flex-col gap-2.5">
         {CATEGORIES.map(({ id, icon: Icon, label, desc }) => (
-          <div key={id} className="flex items-start gap-3.5 rounded-2xl border border-[#EAEDF9] p-4 bg-white">
+          <div key={id} className="flex items-start gap-3.5 rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] p-4 bg-white dark:bg-[#161B2E]">
             <div
-              className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
-              style={{ background: "#EEF1FE" }}
+              className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 bg-[#EEF1FE] dark:bg-[#20264A]"
             >
               <Icon size={16} style={{ color: BLUE }} />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="font-semibold text-[14.5px] text-[#1B1E2B]">{label}</p>
-              <p className="text-[12.5px] text-[#8890AE] mt-0.5">{desc}</p>
+              <p className="font-semibold text-[14.5px] text-[#1B1E2B] dark:text-[#F0F2FA]">{label}</p>
+              <p className="text-[12.5px] text-[#8890AE] dark:text-[#8A93B8] mt-0.5">{desc}</p>
             </div>
-            <span className="text-[11.5px] text-[#8890AE] whitespace-nowrap pl-2">{counts[id]} questions</span>
+            <span className="text-[11.5px] text-[#8890AE] dark:text-[#8A93B8] whitespace-nowrap pl-2">{counts[id]} questions</span>
           </div>
         ))}
       </div>
@@ -227,14 +229,14 @@ function HomeScreen({ onStart, historyCount, history, onOpenHistory, onOpenProgr
       {dashOpen && (
         <div className="fixed inset-0 bg-black/30 z-40" onClick={() => setDashOpen(false)}>
           <div
-            className="absolute top-0 right-0 h-full w-[85%] max-w-[340px] bg-[#F7F9FF] p-5 overflow-y-auto"
+            className="absolute top-0 right-0 h-full w-[85%] max-w-[340px] bg-[#F7F9FF] dark:bg-[#10142A] p-5 overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-bold text-[16px] text-[#1B1E2B]">Your Dashboard</h3>
+              <h3 className="font-bold text-[16px] text-[#1B1E2B] dark:text-[#F0F2FA]">Your Dashboard</h3>
               <button
                 onClick={() => setDashOpen(false)}
-                className="w-7 h-7 rounded-lg border border-[#EAEDF9] bg-white flex items-center justify-center"
+                className="w-7 h-7 rounded-lg border border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] flex items-center justify-center"
               >
                 <X size={14} />
               </button>
@@ -266,6 +268,21 @@ function HomeScreen({ onStart, historyCount, history, onOpenHistory, onOpenProgr
               soon
               summary="This section will hold guided lessons and video content."
             />
+
+            <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] flex items-center gap-2.5 p-3.5 mt-1">
+              <Moon size={16} style={{ color: BLUE }} />
+              <span className="font-semibold text-[14px] text-[#1B1E2B] dark:text-[#F0F2FA] flex-1">Dark Mode</span>
+              <button
+                onClick={onToggleDark}
+                className="w-11 h-6 rounded-full relative transition-colors shrink-0"
+                style={{ background: darkMode ? BLUE : "#E2E6F0" }}
+              >
+                <div
+                  className="w-5 h-5 bg-white rounded-full absolute top-0.5 transition-all"
+                  style={{ left: darkMode ? "22px" : "2px" }}
+                />
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -297,17 +314,17 @@ function SetupScreen({ onBack, onStartTest }) {
   return (
     <div className="flex flex-col h-full">
       <div className="flex items-center gap-3 px-5 md:px-8 pt-5 pb-1">
-        <button onClick={onBack} className="text-[#1B1E2B]">
+        <button onClick={onBack} className="text-[#1B1E2B] dark:text-[#F0F2FA]">
           <ArrowLeft size={22} />
         </button>
         <div>
-          <h2 className="text-[19px] font-bold text-[#1B1E2B]">Test Settings</h2>
-          <p className="text-[12px] text-[#8890AE]">Customize your test experience</p>
+          <h2 className="text-[19px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">Test Settings</h2>
+          <p className="text-[12px] text-[#8890AE] dark:text-[#8A93B8]">Customize your test experience</p>
         </div>
       </div>
 
       <div className="flex-1 overflow-y-auto px-5 md:px-8 pb-4">
-        <p className="text-[13px] font-semibold text-[#1B1E2B] mt-5 mb-3">Choose your level</p>
+        <p className="text-[13px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA] mt-5 mb-3">Choose your level</p>
         <div className="flex flex-col gap-2">
           {LEVELS.map((l) => {
             const active = level === l.id;
@@ -325,13 +342,13 @@ function SetupScreen({ onBack, onStartTest }) {
                   className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
                   style={{ background: active ? BLUE : "#F1F3FA" }}
                 >
-                  <span className={"text-[12px] font-bold " + (active ? "text-white" : "text-[#8890AE]")}>
+                  <span className={"text-[12px] font-bold " + (active ? "text-white" : "text-[#8890AE] dark:text-[#8A93B8]")}>
                     {l.id}
                   </span>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-[14px] font-semibold text-[#1B1E2B]">{l.name}</p>
-                  <p className="text-[12px] text-[#8890AE] truncate">{l.desc}</p>
+                  <p className="text-[14px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA]">{l.name}</p>
+                  <p className="text-[12px] text-[#8890AE] dark:text-[#8A93B8] truncate">{l.desc}</p>
                 </div>
                 <DifficultyBars count={l.bars} />
                 <div
@@ -345,8 +362,8 @@ function SetupScreen({ onBack, onStartTest }) {
           })}
         </div>
 
-        <p className="text-[13px] font-semibold text-[#1B1E2B] mt-6 mb-1">Focus on</p>
-        <p className="text-[12px] text-[#8890AE] mb-3">
+        <p className="text-[13px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA] mt-6 mb-1">Focus on</p>
+        <p className="text-[12px] text-[#8890AE] dark:text-[#8A93B8] mb-3">
           Pick the areas you want to practice — great for targeting your weak points
         </p>
         <div className="flex flex-col gap-2">
@@ -369,7 +386,7 @@ function SetupScreen({ onBack, onStartTest }) {
                 >
                   <Icon size={16} style={{ color: active ? "#fff" : "#8890AE" }} />
                 </div>
-                <span className="flex-1 text-[14px] font-medium text-[#1B1E2B]">{cat.label}</span>
+                <span className="flex-1 text-[14px] font-medium text-[#1B1E2B] dark:text-[#F0F2FA]">{cat.label}</span>
                 <div
                   className="w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0"
                   style={{ borderColor: active ? BLUE : "#D8DCEE", background: active ? BLUE : "#fff" }}
@@ -381,10 +398,10 @@ function SetupScreen({ onBack, onStartTest }) {
           })}
         </div>
 
-        <p className="text-[13px] font-semibold text-[#1B1E2B] mt-6 mb-3">Test options</p>
+        <p className="text-[13px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA] mt-6 mb-3">Test options</p>
 
-        <div className="rounded-2xl border border-[#EAEDF9] p-4">
-          <p className="text-[13px] font-medium text-[#1B1E2B] mb-2">Number of questions</p>
+        <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] p-4">
+          <p className="text-[13px] font-medium text-[#1B1E2B] dark:text-[#F0F2FA] mb-2">Number of questions</p>
           <div className="grid grid-cols-3 gap-2">
             {[10, 20, 30].map((n) => (
               <button
@@ -403,13 +420,13 @@ function SetupScreen({ onBack, onStartTest }) {
           </div>
         </div>
 
-        <div className="rounded-2xl border border-[#EAEDF9] p-4 mt-3">
+        <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] p-4 mt-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5">
               <Clock size={18} style={{ color: BLUE }} />
               <div>
-                <p className="text-[13px] font-medium text-[#1B1E2B]">Time limit</p>
-                <p className="text-[11px] text-[#8890AE]">Set a time for your test</p>
+                <p className="text-[13px] font-medium text-[#1B1E2B] dark:text-[#F0F2FA]">Time limit</p>
+                <p className="text-[11px] text-[#8890AE] dark:text-[#8A93B8]">Set a time for your test</p>
               </div>
             </div>
             <button
@@ -418,7 +435,7 @@ function SetupScreen({ onBack, onStartTest }) {
               style={{ background: timerOn ? BLUE : "#E2E6F0" }}
             >
               <div
-                className="w-5 h-5 bg-white rounded-full absolute top-0.5 transition-all"
+                className="w-5 h-5 bg-white dark:bg-[#161B2E] rounded-full absolute top-0.5 transition-all"
                 style={{ left: timerOn ? "22px" : "2px" }}
               />
             </button>
@@ -476,6 +493,7 @@ function QuizScreen({ config, onExit, onFinish }) {
   const [source, setSource] = useState(null); // "ai" | "bank"
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState([]);
+  const [hintsUsed, setHintsUsed] = useState([]);
   const [secondsLeft, setSecondsLeft] = useState(config.timerOn ? config.minutes * 60 : null);
   const finishedRef = useRef(false);
 
@@ -497,6 +515,7 @@ function QuizScreen({ config, onExit, onFinish }) {
         addSeenUids(config.level, picked.map((q) => q.uid));
       }
       setAnswers((prev) => (prev.length ? prev : Array(config.count).fill(null)));
+      setHintsUsed((prev) => (prev.length ? prev : Array(config.count).fill(false)));
     })();
     return () => {
       cancelled = true;
@@ -509,7 +528,7 @@ function QuizScreen({ config, onExit, onFinish }) {
     if (secondsLeft <= 0) {
       if (!finishedRef.current) {
         finishedRef.current = true;
-        onFinish(questions, answers);
+        onFinish(questions, answers, hintsUsed);
       }
       return;
     }
@@ -522,8 +541,8 @@ function QuizScreen({ config, onExit, onFinish }) {
     return (
       <div className="flex flex-col h-full items-center justify-center px-8 text-center">
         <Loader2 size={28} className="animate-spin" style={{ color: BLUE }} />
-        <p className="text-[14px] font-medium text-[#1B1E2B] mt-4">Preparing your test…</p>
-        <p className="text-[12.5px] text-[#8890AE] mt-1">Generating a fresh set of questions</p>
+        <p className="text-[14px] font-medium text-[#1B1E2B] dark:text-[#F0F2FA] mt-4">Preparing your test…</p>
+        <p className="text-[12.5px] text-[#8890AE] dark:text-[#8A93B8] mt-1">Generating a fresh set of questions</p>
       </div>
     );
   }
@@ -540,12 +559,21 @@ function QuizScreen({ config, onExit, onFinish }) {
     });
   }
 
+  function useHint() {
+    if (hintsUsed[index]) return;
+    setHintsUsed((prev) => {
+      const next = [...prev];
+      next[index] = true;
+      return next;
+    });
+  }
+
   function goNext() {
     if (index < questions.length - 1) {
       setIndex((i) => i + 1);
     } else {
       finishedRef.current = true;
-      onFinish(questions, answers);
+      onFinish(questions, answers, hintsUsed);
     }
   }
 
@@ -560,18 +588,18 @@ function QuizScreen({ config, onExit, onFinish }) {
     <div className="flex flex-col h-full">
       <div className="px-5 md:px-8 pt-5">
         <div className="flex items-center justify-between">
-          <button onClick={onExit} className="text-[#1B1E2B]">
+          <button onClick={onExit} className="text-[#1B1E2B] dark:text-[#F0F2FA]">
             <X size={22} />
           </button>
           <div className="flex items-center gap-1.5">
             <catMeta.icon size={15} style={{ color: BLUE }} />
-            <span className="text-[15px] font-bold text-[#1B1E2B]">
+            <span className="text-[15px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">
               {catMeta.label} {index + 1}/{questions.length}
             </span>
           </div>
           <div className="w-[22px]" />
         </div>
-        <div className="w-full h-1.5 bg-[#EEF1FA] rounded-full mt-4 overflow-hidden">
+        <div className="w-full h-1.5 bg-[#EEF1FA] dark:bg-[#232A47] rounded-full mt-4 overflow-hidden">
           <div
             className="h-full rounded-full transition-all duration-300"
             style={{ width: `${progressPct}%`, background: BLUE }}
@@ -604,13 +632,31 @@ function QuizScreen({ config, onExit, onFinish }) {
 
       <div className="flex-1 overflow-y-auto px-5 md:px-8 pt-5">
         {current.passage && (
-          <div className="rounded-2xl p-4 md:p-5 mb-4 text-[14px] md:text-[15px] leading-relaxed text-[#3F4460]" style={{ background: "#F5F6FB" }}>
+          <div className="rounded-2xl p-4 md:p-5 mb-4 text-[14px] md:text-[15px] leading-relaxed text-[#3F4460] dark:text-[#C5CBE8] bg-[#F5F6FB] dark:bg-[#1B2140]">
             {current.passage}
           </div>
         )}
-        <p className="text-[17px] md:text-[20px] font-semibold text-[#1B1E2B] leading-snug mb-5">
+        <p className="text-[17px] md:text-[20px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA] leading-snug mb-3">
           {current.q}
         </p>
+
+        <div className="mb-5">
+          {hintsUsed[index] ? (
+            <div className="flex items-start gap-2 rounded-xl p-3 text-[12.5px] leading-relaxed" style={{ background: "#FFF3E6", color: "#B4600A" }}>
+              <Lightbulb size={15} className="shrink-0 mt-0.5" />
+              <span>{current.explanation}</span>
+            </div>
+          ) : (
+            <button
+              onClick={useHint}
+              className="flex items-center gap-1.5 text-[12.5px] font-semibold px-3 py-1.5 rounded-full"
+              style={{ background: "#FFF3E6", color: "#D97706" }}
+            >
+              <Lightbulb size={13} /> Use a hint (half credit if correct)
+            </button>
+          )}
+        </div>
+
         <div className="flex flex-col gap-3">
           {current.options.map((opt, i) => {
             const isSelected = selected === i;
@@ -761,20 +807,54 @@ function drawShareCard(canvas, { pct, correctCount, total, level, estLevel, byCa
   return canvas.toDataURL("image/png");
 }
 
-function ResultsScreen({ session, onReview, onNewTest, onChooseLevel }) {
-  const { questions, answers, config } = session;
+const CONFETTI_COLORS = [BLUE, "#7C97FF", "#FFC24B", "#2FAE6B", "#FF7A7A"];
+
+function Confetti() {
+  const pieces = useMemo(
+    () =>
+      Array.from({ length: 18 }, (_, i) => ({
+        left: 5 + Math.random() * 90,
+        delay: Math.random() * 0.4,
+        color: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
+        rotate: Math.random() * 360,
+      })),
+    []
+  );
+  return (
+    <div className="absolute inset-x-0 top-0 h-0 overflow-visible pointer-events-none">
+      {pieces.map((p, i) => (
+        <div
+          key={i}
+          className="confetti-piece"
+          style={{
+            left: `${p.left}%`,
+            background: p.color,
+            animationDelay: `${p.delay}s`,
+            transform: `rotate(${p.rotate}deg)`,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+function ResultsScreen({ session, onReview, onNewTest, onChooseLevel, onHome }) {
+  const { questions, answers, config, hintsUsed = [] } = session;
   const total = questions.length;
-  const correctCount = questions.filter((q, i) => answers[i] === q.correct).length;
-  const pct = Math.round((correctCount / total) * 100);
+  const { correctCount, weighted, pct } = computeScore(questions, answers, hintsUsed);
+  const hintCount = hintsUsed.filter(Boolean).length;
   const estLevel = estimateLevel(config.level, pct);
 
   const byCategory = CATEGORIES.map((cat) => {
     const qs = questions
       .map((q, i) => ({ q, i }))
       .filter(({ q }) => q.category === cat.id);
-    const correct = qs.filter(({ q, i }) => answers[i] === q.correct).length;
-    const p = qs.length ? Math.round((correct / qs.length) * 100) : 0;
-    return { ...cat, correct, of: qs.length, pct: p };
+    const catWeighted = qs.reduce((sum, { q, i }) => {
+      if (answers[i] !== q.correct) return sum;
+      return sum + (hintsUsed[i] ? 0.5 : 1);
+    }, 0);
+    const p = qs.length ? Math.round((catWeighted / qs.length) * 100) : 0;
+    return { ...cat, correct: catWeighted, of: qs.length, pct: p };
   });
 
   const canvasRef = useRef(null);
@@ -839,20 +919,21 @@ function ResultsScreen({ session, onReview, onNewTest, onChooseLevel }) {
     <div className="flex flex-col h-full">
       <canvas ref={canvasRef} className="hidden" />
       <div className="flex-1 overflow-y-auto px-5 md:px-8 pt-8 pb-4 md:max-w-[640px] md:mx-auto md:w-full">
-        <div className="flex flex-col items-center text-center">
+        <div className="flex flex-col items-center text-center relative">
+          <Confetti />
           <div
             className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center"
             style={{ background: `linear-gradient(135deg, ${BLUE}, ${BLUE_LIGHT})` }}
           >
             <Trophy className="text-white" size={28} />
           </div>
-          <h2 className="text-[20px] md:text-[24px] font-bold text-[#1B1E2B] mt-4">Test Completed!</h2>
-          <p className="text-[13px] md:text-[14px] text-[#8890AE] mt-1">Here are your results</p>
+          <h2 className="text-[20px] md:text-[24px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA] mt-4">Test Completed!</h2>
+          <p className="text-[13px] md:text-[14px] text-[#8890AE] dark:text-[#8A93B8] mt-1">Here are your results</p>
           <button
             onClick={handleShare}
             disabled={shareState === "working"}
-            className="flex items-center gap-1.5 text-[12.5px] font-semibold mt-3 px-3.5 py-1.5 rounded-full disabled:opacity-60"
-            style={{ background: "#EEF1FE", color: BLUE }}
+            className="flex items-center gap-1.5 text-[12.5px] font-semibold mt-3 px-3.5 py-1.5 rounded-full disabled:opacity-60 bg-[#EEF1FE] dark:bg-[#20264A]"
+            style={{ color: BLUE }}
           >
             {shareState === "done" ? (
               <>
@@ -866,36 +947,41 @@ function ResultsScreen({ session, onReview, onNewTest, onChooseLevel }) {
           </button>
         </div>
 
-        <div className="rounded-2xl border border-[#EAEDF9] p-4 md:p-6 mt-6">
+        <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] p-4 md:p-6 mt-6">
           <div className="flex items-end justify-between">
             <div>
-              <p className="text-[12px] text-[#8890AE]">Your score</p>
-              <p className="text-[28px] md:text-[34px] font-bold text-[#1B1E2B] mt-0.5">
-                {correctCount}
-                <span className="text-[16px] text-[#8890AE] font-medium"> / {total}</span>
+              <p className="text-[12px] text-[#8890AE] dark:text-[#8A93B8]">Your score</p>
+              <p className="text-[28px] md:text-[34px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA] mt-0.5">
+                {weighted % 1 === 0 ? weighted : weighted.toFixed(1)}
+                <span className="text-[16px] text-[#8890AE] dark:text-[#8A93B8] font-medium"> / {total}</span>
               </p>
+              {hintCount > 0 && (
+                <p className="text-[11px] mt-1" style={{ color: "#D97706" }}>
+                  💡 {hintCount} hint{hintCount > 1 ? "s" : ""} used ({correctCount} correct, half credit on hinted ones)
+                </p>
+              )}
             </div>
             <div className="text-right">
-              <p className="text-[12px] text-[#8890AE]">
-                Level Tested : <span className="font-bold text-[#1B1E2B]">{config.level}</span>
+              <p className="text-[12px] text-[#8890AE] dark:text-[#8A93B8]">
+                Level Tested : <span className="font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">{config.level}</span>
               </p>
               <p className="text-[26px] md:text-[32px] font-bold mt-0.5" style={{ color: BLUE }}>
                 {pct}%
               </p>
             </div>
           </div>
-          <div className="w-full h-2 bg-[#EEF1FA] rounded-full mt-3 overflow-hidden">
+          <div className="w-full h-2 bg-[#EEF1FA] dark:bg-[#232A47] rounded-full mt-3 overflow-hidden">
             <div className="h-full rounded-full" style={{ width: `${pct}%`, background: BLUE }} />
           </div>
         </div>
 
-        <div className="rounded-2xl border border-[#EAEDF9] p-4 md:p-5 mt-3 flex items-start gap-3">
-          <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: "#EEF1FE" }}>
+        <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] p-4 md:p-5 mt-3 flex items-start gap-3">
+          <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-[#EEF1FE] dark:bg-[#20264A]">
             <Sparkles size={18} style={{ color: BLUE }} />
           </div>
           <div>
-            <p className="text-[12px] text-[#8890AE]">Your estimated level</p>
-            <p className="text-[15px] md:text-[17px] font-bold text-[#1B1E2B]">
+            <p className="text-[12px] text-[#8890AE] dark:text-[#8A93B8]">Your estimated level</p>
+            <p className="text-[15px] md:text-[17px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">
               {estLevel} · {levelName(estLevel)}
             </p>
             <button
@@ -906,7 +992,7 @@ function ResultsScreen({ session, onReview, onNewTest, onChooseLevel }) {
               {showExplain ? "Read Less" : "Read More"}
             </button>
             {showExplain && (
-              <p className="text-[12.5px] text-[#6B7190] leading-relaxed mt-2">
+              <p className="text-[12.5px] text-[#6B7190] dark:text-[#9AA3C4] leading-relaxed mt-2">
                 {estimateExplanation(config.level, pct, estLevel)}
               </p>
             )}
@@ -914,16 +1000,16 @@ function ResultsScreen({ session, onReview, onNewTest, onChooseLevel }) {
         </div>
 
         <div className="mt-5">
-          <p className="text-[13px] font-semibold text-[#1B1E2B] mb-3">Breakdown by category</p>
+          <p className="text-[13px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA] mb-3">Breakdown by category</p>
           <div className="flex flex-col gap-2.5">
             {byCategory.map((c) => (
-              <div key={c.id} className="flex items-center gap-3 rounded-2xl border border-[#EAEDF9] p-3">
+              <div key={c.id} className="flex items-center gap-3 rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] p-3">
                 <c.icon size={16} style={{ color: BLUE }} className="shrink-0" />
                 <span className="text-[13px] text-[#3F4460] w-20 shrink-0">{c.label}</span>
-                <div className="flex-1 h-2 bg-[#EEF1FA] rounded-full overflow-hidden">
+                <div className="flex-1 h-2 bg-[#EEF1FA] dark:bg-[#232A47] rounded-full overflow-hidden">
                   <div className="h-full rounded-full" style={{ width: `${c.pct}%`, background: BLUE }} />
                 </div>
-                <span className="text-[12px] font-semibold text-[#6B7190] w-14 text-right">
+                <span className="text-[12px] font-semibold text-[#6B7190] dark:text-[#9AA3C4] w-14 text-right">
                   {c.of ? `${c.pct}%` : "—"}
                 </span>
               </div>
@@ -939,7 +1025,13 @@ function ResultsScreen({ session, onReview, onNewTest, onChooseLevel }) {
         <GradientButton onClick={onNewTest}>
           New Test <RotateCcw size={16} />
         </GradientButton>
-        <button onClick={onChooseLevel} className="text-[13px] font-medium mt-1" style={{ color: BLUE }}>
+        <button
+          onClick={onHome}
+          className="flex items-center justify-center gap-1.5 text-[13px] font-semibold mt-1 text-[#6B7190] dark:text-[#9AA3C4]"
+        >
+          <Home size={14} /> Back to Home
+        </button>
+        <button onClick={onChooseLevel} className="text-[13px] font-medium" style={{ color: BLUE }}>
           Try a different level
         </button>
       </div>
@@ -952,7 +1044,7 @@ function ResultsScreen({ session, onReview, onNewTest, onChooseLevel }) {
 /* ------------------------------------------------------------------ */
 
 function ReviewScreen({ session, onBack, onTryAgain, onChooseLevel }) {
-  const { questions, answers } = session;
+  const { questions, answers, hintsUsed = [] } = session;
   const [tab, setTab] = useState("all");
   const [openIdx, setOpenIdx] = useState(null);
 
@@ -969,10 +1061,10 @@ function ReviewScreen({ session, onBack, onTryAgain, onChooseLevel }) {
   return (
     <div className="flex flex-col h-full">
       <div className="flex items-center gap-3 px-5 md:px-8 pt-5 pb-3">
-        <button onClick={onBack} className="text-[#1B1E2B]">
+        <button onClick={onBack} className="text-[#1B1E2B] dark:text-[#F0F2FA]">
           <ArrowLeft size={22} />
         </button>
-        <h2 className="text-[18px] font-bold text-[#1B1E2B]">Review Answers</h2>
+        <h2 className="text-[18px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">Review Answers</h2>
       </div>
 
       <div className="px-5 md:px-8 flex gap-2">
@@ -1023,7 +1115,17 @@ function ReviewScreen({ session, onBack, onTryAgain, onChooseLevel }) {
                   )}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-[13.5px] font-medium text-[#1B1E2B] leading-snug">{q.q}</p>
+                  <p className="text-[13.5px] font-medium text-[#1B1E2B] dark:text-[#F0F2FA] leading-snug">
+                    {q.q}
+                    {hintsUsed[i] && (
+                      <span
+                        className="inline-flex items-center gap-1 ml-2 text-[10px] font-bold px-1.5 py-0.5 rounded align-middle"
+                        style={{ background: "#FFF3E6", color: "#B4600A" }}
+                      >
+                        <Lightbulb size={10} /> hint used
+                      </span>
+                    )}
+                  </p>
                   <p className="text-[12px] mt-1" style={{ color: isCorrect ? "#1E8F55" : "#C43A31" }}>
                     Your answer:{" "}
                     <span className="font-semibold">
@@ -1031,6 +1133,7 @@ function ReviewScreen({ session, onBack, onTryAgain, onChooseLevel }) {
                         ? `${String.fromCharCode(65 + answers[i])}) ${q.options[answers[i]]}`
                         : "No answer"}
                     </span>
+                    {isCorrect && hintsUsed[i] && " (half credit)"}
                   </p>
                   {!isCorrect && (
                     <p className="text-[12px] mt-0.5 font-semibold" style={{ color: "#1E8F55" }}>
@@ -1046,7 +1149,7 @@ function ReviewScreen({ session, onBack, onTryAgain, onChooseLevel }) {
               </button>
               {open && (
                 <div className="px-3.5 pb-3.5 -mt-1">
-                  <div className="rounded-xl p-3 text-[12.5px] text-[#5B6180] leading-relaxed bg-white/70">
+                  <div className="rounded-xl p-3 text-[12.5px] text-[#5B6180] leading-relaxed bg-white dark:bg-[#161B2E]/70">
                     {q.explanation}
                   </div>
                 </div>
@@ -1120,9 +1223,36 @@ function AdminScreen({ onBack }) {
   const [status, setStatus] = useState("idle"); // idle | uploading | done | error
   const [result, setResult] = useState(null);
   const fileInputRef = useRef(null);
-  const [sections, setSections] = useState([{ id: "bank", name: "Question Bank", builtin: true, enabled: true }]);
+  const ADMIN_SECTIONS_KEY = "englishTest.adminSections.v1";
+  const DEFAULT_SECTIONS = [
+    { id: "bank", name: "Question Bank", builtin: true, enabled: true },
+    { id: "updates", name: "Updates", builtin: true, enabled: true },
+  ];
+  const [sections, setSections] = useState(() => {
+    if (typeof window === "undefined") return DEFAULT_SECTIONS;
+    try {
+      const saved = JSON.parse(localStorage.getItem(ADMIN_SECTIONS_KEY));
+      if (Array.isArray(saved) && saved.some((s) => s.id === "bank")) {
+        // Make sure the built-in Updates section exists even for admins
+        // who saved their sidebar before this feature was added.
+        if (!saved.some((s) => s.id === "updates")) {
+          const bankIdx = saved.findIndex((s) => s.id === "bank");
+          saved.splice(bankIdx + 1, 0, { id: "updates", name: "Updates", builtin: true, enabled: true });
+        }
+        return saved;
+      }
+    } catch {
+      /* fall through to default */
+    }
+    return DEFAULT_SECTIONS;
+  });
   const [activeSection, setActiveSection] = useState("bank");
   const [newSectionName, setNewSectionName] = useState("");
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    localStorage.setItem(ADMIN_SECTIONS_KEY, JSON.stringify(sections));
+  }, [sections]);
 
   // ---- Login gate ----
   const [authed, setAuthed] = useState(false);
@@ -1247,6 +1377,45 @@ function AdminScreen({ onBack }) {
     }
   }
 
+  // ---- Updates panel (push a new file straight to GitHub, no terminal) ----
+  const [updatePath, setUpdatePath] = useState("src/App.jsx");
+  const [updateContent, setUpdateContent] = useState("");
+  const [updateState, setUpdateState] = useState("idle"); // idle | publishing | done | error
+  const [updateResult, setUpdateResult] = useState(null);
+  const updateFileInputRef = useRef(null);
+
+  function handleUpdateFile(e) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => setUpdateContent(String(reader.result));
+    reader.readAsText(file);
+  }
+
+  async function publishUpdate() {
+    if (!updatePath.trim() || !updateContent.trim()) return;
+    setUpdateState("publishing");
+    setUpdateResult(null);
+    try {
+      const res = await fetch("/api/deploy-file", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password, path: updatePath.trim(), content: updateContent }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setUpdateState("error");
+        setUpdateResult({ error: data.error || "Publish failed" });
+        return;
+      }
+      setUpdateState("done");
+      setUpdateResult(data);
+    } catch (e) {
+      setUpdateState("error");
+      setUpdateResult({ error: String(e) });
+    }
+  }
+
   function handleFile(e) {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -1308,15 +1477,15 @@ function AdminScreen({ onBack }) {
       <div className="flex flex-col h-full items-center justify-center px-6">
         <div className="w-full max-w-[340px]">
           <div className="flex flex-col items-center text-center mb-6">
-            <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-3" style={{ background: "#EEF1FE" }}>
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-3 bg-[#EEF1FE] dark:bg-[#20264A]">
               <Lock size={22} style={{ color: BLUE }} />
             </div>
-            <h2 className="text-[18px] font-bold text-[#1B1E2B]">Admin Login</h2>
-            <p className="text-[12.5px] text-[#8890AE] mt-1">Enter the admin password to continue</p>
+            <h2 className="text-[18px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">Admin Login</h2>
+            <p className="text-[12.5px] text-[#8890AE] dark:text-[#8A93B8] mt-1">Enter the admin password to continue</p>
           </div>
           <form onSubmit={handleLogin}>
-            <div className="flex items-center gap-2 rounded-2xl border border-[#EAEDF9] px-3.5 py-3 mb-3">
-              <Lock size={16} className="text-[#8890AE]" />
+            <div className="flex items-center gap-2 rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] px-3.5 py-3 mb-3">
+              <Lock size={16} className="text-[#8890AE] dark:text-[#8A93B8]" />
               <input
                 type="password"
                 autoFocus
@@ -1346,14 +1515,14 @@ function AdminScreen({ onBack }) {
   return (
     <div className="flex flex-col h-full">
       <div className="flex items-center gap-3 px-5 md:px-8 pt-5 pb-3">
-        <button onClick={onBack} className="text-[#1B1E2B]">
+        <button onClick={onBack} className="text-[#1B1E2B] dark:text-[#F0F2FA]">
           <ArrowLeft size={22} />
         </button>
-        <h2 className="text-[18px] font-bold text-[#1B1E2B]">Admin</h2>
+        <h2 className="text-[18px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">Admin</h2>
       </div>
 
       <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
-        <div className="flex md:flex-col gap-2 overflow-x-auto md:overflow-visible px-5 md:px-3 md:w-[220px] md:border-r border-b md:border-b-0 border-[#EAEDF9] py-3 shrink-0">
+        <div className="flex md:flex-col gap-2 overflow-x-auto md:overflow-visible px-5 md:px-3 md:w-[220px] md:border-r border-b md:border-b-0 border-[#EAEDF9] dark:border-[#2A3050] py-3 shrink-0">
           {sections.map((s) => (
             <div key={s.id} className="flex items-center gap-1.5 shrink-0">
               <button
@@ -1365,7 +1534,7 @@ function AdminScreen({ onBack }) {
                   color: activeSection === s.id && s.enabled !== false ? "#fff" : "#6B7190",
                 }}
               >
-                {s.builtin ? "📦" : "📄"} {s.name}
+                {s.id === "bank" ? "📦" : s.id === "updates" ? "🚀" : "📄"} {s.name}
               </button>
               {!s.builtin && (
                 <button
@@ -1375,19 +1544,19 @@ function AdminScreen({ onBack }) {
                   style={{ background: s.enabled === false ? "#E2E6F0" : BLUE }}
                 >
                   <div
-                    className="w-3.5 h-3.5 bg-white rounded-full absolute top-[3px] transition-all"
+                    className="w-3.5 h-3.5 bg-white dark:bg-[#161B2E] rounded-full absolute top-[3px] transition-all"
                     style={{ left: s.enabled === false ? "3px" : "16px" }}
                   />
                 </button>
               )}
             </div>
           ))}
-          <div className="flex gap-1.5 md:mt-2 md:pt-2 md:border-t border-[#EAEDF9] shrink-0">
+          <div className="flex gap-1.5 md:mt-2 md:pt-2 md:border-t border-[#EAEDF9] dark:border-[#2A3050] shrink-0">
             <input
               value={newSectionName}
               onChange={(e) => setNewSectionName(e.target.value)}
               placeholder="e.g. Lessons"
-              className="w-28 md:w-auto md:flex-1 border border-[#EAEDF9] rounded-lg px-2 py-1.5 text-[12px] outline-none"
+              className="w-28 md:w-auto md:flex-1 border border-[#EAEDF9] dark:border-[#2A3050] rounded-lg px-2 py-1.5 text-[12px] outline-none"
             />
             <button
               onClick={addSection}
@@ -1400,16 +1569,86 @@ function AdminScreen({ onBack }) {
         </div>
 
         <div className="flex-1 overflow-y-auto px-5 md:px-8 py-4">
-          {activeSection !== "bank" ? (
-            <div className="text-center py-16 text-[13.5px] text-[#8890AE]">
+          {activeSection === "updates" ? (
+            <>
+              <div className="rounded-2xl p-3.5 mb-4 flex gap-2.5 bg-[#F5F6FB] dark:bg-[#1B2140]">
+                <ShieldCheck size={18} style={{ color: BLUE }} className="shrink-0 mt-0.5" />
+                <p className="text-[12px] text-[#5B6180] dark:text-[#C5CBE8] leading-relaxed">
+                  Paste or upload a full file's content (like an updated App.jsx from Claude) and the
+                  exact path it belongs at. Publishing commits it straight to your GitHub repo — no
+                  terminal needed. Allowed paths start with <code>src/</code>, <code>api/</code>, or{" "}
+                  <code>netlify/functions/</code>.
+                </p>
+              </div>
+
+              <p className="text-[13px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA] mb-2">File path</p>
+              <input
+                value={updatePath}
+                onChange={(e) => setUpdatePath(e.target.value)}
+                placeholder="src/App.jsx"
+                className="w-full rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] px-3.5 py-3 text-[13px] font-mono outline-none focus:border-[#3F66F5] mb-4"
+              />
+
+              <p className="text-[13px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA] mb-2">File content</p>
+              <div className="flex gap-2 mb-2">
+                <SecondaryButton onClick={() => updateFileInputRef.current?.click()} className="!py-2.5">
+                  <Upload size={15} /> Upload file
+                </SecondaryButton>
+                <input
+                  ref={updateFileInputRef}
+                  type="file"
+                  onChange={handleUpdateFile}
+                  className="hidden"
+                />
+              </div>
+              <textarea
+                value={updateContent}
+                onChange={(e) => setUpdateContent(e.target.value)}
+                placeholder="Paste the full new file content here…"
+                rows={12}
+                className="w-full rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] p-3.5 text-[12px] font-mono outline-none focus:border-[#3F66F5]"
+              />
+
+              {updateResult && (
+                <div
+                  className="mt-4 rounded-2xl p-3.5 text-[12.5px] leading-relaxed"
+                  style={{
+                    background: updateState === "error" ? "#FDF3F2" : "#F3FBF6",
+                    color: updateState === "error" ? "#C43A31" : "#1E8F55",
+                  }}
+                >
+                  {updateState === "error" ? (
+                    <p className="font-semibold">{updateResult.error}</p>
+                  ) : (
+                    <>
+                      <p className="font-semibold">
+                        {updateResult.created ? "Created" : "Updated"} {updateResult.path}
+                      </p>
+                      <p className="mt-1 opacity-80">{updateResult.note}</p>
+                    </>
+                  )}
+                </div>
+              )}
+
+              <div className="mt-5">
+                <GradientButton
+                  onClick={publishUpdate}
+                  disabled={!updatePath.trim() || !updateContent.trim() || updateState === "publishing"}
+                >
+                  {updateState === "publishing" ? "Publishing..." : "Publish Update"}
+                </GradientButton>
+              </div>
+            </>
+          ) : activeSection !== "bank" ? (
+            <div className="text-center py-16 text-[13.5px] text-[#8890AE] dark:text-[#8A93B8]">
               📄 Content management for "{sections.find((s) => s.id === activeSection)?.name}" isn't built
               yet — this just reserves its spot in the sidebar for later.
             </div>
           ) : (
             <>
-              <p className="text-[13px] font-semibold text-[#1B1E2B] mb-2">Current file</p>
+              <p className="text-[13px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA] mb-2">Current file</p>
               {bankLoading && !bankInfo && (
-                <div className="flex items-center gap-2 text-[12.5px] text-[#8890AE] rounded-2xl border border-[#EAEDF9] p-4 mb-4">
+                <div className="flex items-center gap-2 text-[12.5px] text-[#8890AE] dark:text-[#8A93B8] rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] p-4 mb-4">
                   <Loader2 size={14} className="animate-spin" /> Loading questions.json…
                 </div>
               )}
@@ -1420,14 +1659,14 @@ function AdminScreen({ onBack }) {
                 </div>
               )}
               {bankInfo && (
-                <div className="rounded-2xl border border-[#EAEDF9] p-4 mb-3">
+                <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] p-4 mb-3">
                   <div className="flex items-center gap-3 flex-wrap">
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: "#EEF1FE" }}>
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-[#EEF1FE] dark:bg-[#20264A]">
                       🗂️
                     </div>
                     <div className="flex-1 min-w-[140px]">
-                      <p className="text-[13.5px] font-bold text-[#1B1E2B]">questions.json</p>
-                      <p className="text-[11.5px] text-[#8890AE]">
+                      <p className="text-[13.5px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">questions.json</p>
+                      <p className="text-[11.5px] text-[#8890AE] dark:text-[#8A93B8]">
                         {bankInfo.total} questions · {Math.round((bankInfo.sizeBytes || 0) / 1024)} KB
                       </p>
                     </div>
@@ -1447,7 +1686,7 @@ function AdminScreen({ onBack }) {
                       </button>
                     </div>
                   </div>
-                  <p className="text-[11px] text-[#8890AE] mt-3">
+                  <p className="text-[11px] text-[#8890AE] dark:text-[#8A93B8] mt-3">
                     {Object.entries(bankInfo.counts || {}).map(([lvl, n]) => `${lvl}: ${n}`).join(" · ")}
                   </p>
                 </div>
@@ -1479,15 +1718,15 @@ function AdminScreen({ onBack }) {
               )}
 
               {bankEditing && (
-                <div className="rounded-2xl border border-[#EAEDF9] p-4 mb-5">
-                  <p className="text-[12.5px] font-semibold text-[#1B1E2B] mb-2">
+                <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] p-4 mb-5">
+                  <p className="text-[12.5px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA] mb-2">
                     Editing questions.json directly — must stay valid JSON in the same shape.
                   </p>
                   <textarea
                     value={bankEditText}
                     onChange={(e) => setBankEditText(e.target.value)}
                     rows={14}
-                    className="w-full rounded-xl border border-[#EAEDF9] p-3 text-[11.5px] font-mono outline-none focus:border-[#3F66F5]"
+                    className="w-full rounded-xl border border-[#EAEDF9] dark:border-[#2A3050] p-3 text-[11.5px] font-mono outline-none focus:border-[#3F66F5]"
                   />
                   {bankSaveState === "error" && (
                     <p className="text-[12px] text-[#C43A31] mt-2 flex items-center gap-1.5">
@@ -1509,10 +1748,10 @@ function AdminScreen({ onBack }) {
                 </div>
               )}
 
-              <div className="border-t border-[#EAEDF9] my-5" />
+              <div className="border-t border-[#EAEDF9] dark:border-[#2A3050] my-5" />
 
-              <p className="text-[13px] font-semibold text-[#1B1E2B] mb-2">Add new questions</p>
-              <div className="rounded-2xl p-3.5 mb-4 flex gap-2.5" style={{ background: "#F5F6FB" }}>
+              <p className="text-[13px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA] mb-2">Add new questions</p>
+              <div className="rounded-2xl p-3.5 mb-4 flex gap-2.5 bg-[#F5F6FB] dark:bg-[#1B2140]">
                 <ShieldCheck size={18} style={{ color: BLUE }} className="shrink-0 mt-0.5" />
                 <p className="text-[12px] text-[#5B6180] leading-relaxed">
                   Upload a JSON file of new questions to merge into the bank above. They go live for
@@ -1520,7 +1759,7 @@ function AdminScreen({ onBack }) {
                 </p>
               </div>
 
-              <p className="text-[13px] font-semibold text-[#1B1E2B] mb-2">Questions JSON</p>
+              <p className="text-[13px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA] mb-2">Questions JSON</p>
               <div className="flex gap-2 mb-2">
                 <SecondaryButton onClick={() => fileInputRef.current?.click()} className="!py-2.5">
                   <Upload size={15} /> Upload .json file
@@ -1538,7 +1777,7 @@ function AdminScreen({ onBack }) {
                 onChange={(e) => setText(e.target.value)}
                 placeholder={ADMIN_TEMPLATE}
                 rows={10}
-                className="w-full rounded-2xl border border-[#EAEDF9] p-3.5 text-[12px] font-mono outline-none focus:border-[#3F66F5]"
+                className="w-full rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] p-3.5 text-[12px] font-mono outline-none focus:border-[#3F66F5]"
               />
               <button
                 onClick={() => setText(ADMIN_TEMPLATE)}
@@ -1555,8 +1794,8 @@ function AdminScreen({ onBack }) {
               </div>
 
               {parsed && (
-                <div className="mt-4 rounded-2xl border border-[#EAEDF9] p-3.5">
-                  <p className="text-[13px] font-semibold text-[#1B1E2B]">
+                <div className="mt-4 rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] p-3.5">
+                  <p className="text-[13px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA]">
                     {parsed.valid.length} valid · {parsed.errors.length} invalid
                   </p>
                   {parsed.errors.length > 0 && (
@@ -1630,36 +1869,36 @@ function HistoryScreen({ history, onBack }) {
   return (
     <div className="flex flex-col h-full">
       <div className="flex items-center gap-3 px-5 md:px-8 pt-5 pb-3">
-        <button onClick={onBack} className="text-[#1B1E2B]">
+        <button onClick={onBack} className="text-[#1B1E2B] dark:text-[#F0F2FA]">
           <ArrowLeft size={22} />
         </button>
         <div>
-          <h2 className="text-[18px] font-bold text-[#1B1E2B]">Test History</h2>
-          <p className="text-[12px] text-[#8890AE]">Every test you've taken, most recent first</p>
+          <h2 className="text-[18px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">Test History</h2>
+          <p className="text-[12px] text-[#8890AE] dark:text-[#8A93B8]">Every test you've taken, most recent first</p>
         </div>
       </div>
       <div className="flex-1 overflow-y-auto px-5 md:px-8 pb-6">
         <div className="grid grid-cols-3 gap-2.5 mb-5">
-          <div className="rounded-2xl border border-[#EAEDF9] p-3 text-center">
-            <p className="text-[20px] font-bold text-[#1B1E2B]">{history.length}</p>
-            <p className="text-[11px] text-[#8890AE]">Tests taken</p>
+          <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] p-3 text-center">
+            <p className="text-[20px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">{history.length}</p>
+            <p className="text-[11px] text-[#8890AE] dark:text-[#8A93B8]">Tests taken</p>
           </div>
-          <div className="rounded-2xl border border-[#EAEDF9] p-3 text-center">
-            <p className="text-[20px] font-bold text-[#1B1E2B]">{avg}%</p>
-            <p className="text-[11px] text-[#8890AE]">Average score</p>
+          <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] p-3 text-center">
+            <p className="text-[20px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">{avg}%</p>
+            <p className="text-[11px] text-[#8890AE] dark:text-[#8A93B8]">Average score</p>
           </div>
-          <div className="rounded-2xl border border-[#EAEDF9] p-3 text-center">
-            <p className="text-[20px] font-bold text-[#1B1E2B]">{best}%</p>
-            <p className="text-[11px] text-[#8890AE]">Best score</p>
+          <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] p-3 text-center">
+            <p className="text-[20px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">{best}%</p>
+            <p className="text-[11px] text-[#8890AE] dark:text-[#8A93B8]">Best score</p>
           </div>
         </div>
         <div className="flex flex-col gap-2">
           {reversed.map((h, i) => (
-            <div key={i} className="flex items-center gap-3 rounded-2xl border border-[#EAEDF9] p-3">
-              <span className="text-[12.5px] text-[#6B7190] w-28 shrink-0">
+            <div key={i} className="flex items-center gap-3 rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] p-3">
+              <span className="text-[12.5px] text-[#6B7190] dark:text-[#9AA3C4] w-28 shrink-0">
                 {formatDate(h.date)} · {h.level}
               </span>
-              <div className="flex-1 h-2 bg-[#EEF1FA] rounded-full overflow-hidden">
+              <div className="flex-1 h-2 bg-[#EEF1FA] dark:bg-[#232A47] rounded-full overflow-hidden">
                 <div className="h-full rounded-full" style={{ width: `${h.pct}%`, background: BLUE }} />
               </div>
               <span className="text-[13px] font-semibold w-10 text-right">{h.pct}%</span>
@@ -1703,12 +1942,12 @@ function ProgressScreen({ history, onBack }) {
   return (
     <div className="flex flex-col h-full">
       <div className="flex items-center gap-3 px-5 md:px-8 pt-5 pb-3">
-        <button onClick={onBack} className="text-[#1B1E2B]">
+        <button onClick={onBack} className="text-[#1B1E2B] dark:text-[#F0F2FA]">
           <ArrowLeft size={22} />
         </button>
         <div>
-          <h2 className="text-[18px] font-bold text-[#1B1E2B]">Your Progress</h2>
-          <p className="text-[12px] text-[#8890AE]">Where you stand across the CEFR scale</p>
+          <h2 className="text-[18px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">Your Progress</h2>
+          <p className="text-[12px] text-[#8890AE] dark:text-[#8A93B8]">Where you stand across the CEFR scale</p>
         </div>
       </div>
       <div className="flex-1 overflow-y-auto px-5 md:px-8 pb-6 md:max-w-[720px] md:mx-auto md:w-full">
@@ -1728,7 +1967,7 @@ function ProgressScreen({ history, onBack }) {
         </div>
 
         <div className="rounded-2xl p-4 mb-5 flex items-center gap-3" style={{ background: trendBg }}>
-          <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 bg-white">
+          <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 bg-white dark:bg-[#161B2E]">
             <TrendIcon size={18} style={{ color: trendColor }} />
           </div>
           <p className="text-[12.5px] leading-relaxed" style={{ color: trendColor }}>
@@ -1738,11 +1977,11 @@ function ProgressScreen({ history, onBack }) {
 
         {recent.length > 0 && (
           <>
-            <p className="text-[13px] font-semibold text-[#1B1E2B] mb-3">Score trend</p>
+            <p className="text-[13px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA] mb-3">Score trend</p>
             <div className="flex items-end gap-2 h-32 mb-2 px-1">
               {recent.map((h, i) => (
                 <div key={i} className="flex-1 flex flex-col items-center justify-end h-full gap-1">
-                  <span className="text-[10px] text-[#8890AE]">{h.pct}%</span>
+                  <span className="text-[10px] text-[#8890AE] dark:text-[#8A93B8]">{h.pct}%</span>
                   <div
                     className="w-full rounded-t-md"
                     style={{ height: `${Math.max(4, (h.pct / maxPct) * 100)}%`, background: BLUE }}
@@ -1752,7 +1991,7 @@ function ProgressScreen({ history, onBack }) {
             </div>
             <div className="flex gap-2 px-1 mb-6">
               {recent.map((h, i) => (
-                <span key={i} className="flex-1 text-center text-[10px] text-[#8890AE]">
+                <span key={i} className="flex-1 text-center text-[10px] text-[#8890AE] dark:text-[#8A93B8]">
                   {formatDate(h.date)}
                 </span>
               ))}
@@ -1760,14 +1999,14 @@ function ProgressScreen({ history, onBack }) {
           </>
         )}
 
-        <p className="text-[13px] font-semibold text-[#1B1E2B] mb-2">Score history</p>
+        <p className="text-[13px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA] mb-2">Score history</p>
         <div className="flex flex-col gap-2">
           {[...history].reverse().map((h, i) => (
-            <div key={i} className="flex items-center gap-3 rounded-2xl border border-[#EAEDF9] p-3">
-              <span className="text-[12.5px] text-[#6B7190] w-24 shrink-0">
+            <div key={i} className="flex items-center gap-3 rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] p-3">
+              <span className="text-[12.5px] text-[#6B7190] dark:text-[#9AA3C4] w-24 shrink-0">
                 {formatDate(h.date)}
               </span>
-              <div className="flex-1 h-2 bg-[#EEF1FA] rounded-full overflow-hidden">
+              <div className="flex-1 h-2 bg-[#EEF1FA] dark:bg-[#232A47] rounded-full overflow-hidden">
                 <div className="h-full rounded-full" style={{ width: `${h.pct}%`, background: BLUE }} />
               </div>
               <span className="text-[13px] font-semibold w-10 text-right">{h.pct}%</span>
@@ -1789,28 +2028,39 @@ export default function App() {
   const [session, setSession] = useState(null); // { questions, answers, config }
   const [history, setHistory] = useState([]);
 
+  const [darkMode, setDarkMode] = useState(false);
+
   useEffect(() => {
     setHistory(getHistory());
-    if (typeof window !== "undefined" && new URLSearchParams(window.location.search).get("admin") === "1") {
-      setScreen("admin");
+    if (typeof window !== "undefined") {
+      if (new URLSearchParams(window.location.search).get("admin") === "1") {
+        setScreen("admin");
+      }
+      const savedDark = localStorage.getItem("englishTest.darkMode") === "1";
+      setDarkMode(savedDark);
     }
   }, []);
+
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    document.documentElement.classList.toggle("dark", darkMode);
+    localStorage.setItem("englishTest.darkMode", darkMode ? "1" : "0");
+  }, [darkMode]);
 
   function handleStartTest(config) {
     setQuizConfig(config);
     setScreen("quiz");
   }
 
-  function handleFinishQuiz(questions, answers) {
-    const s = { questions, answers, config: quizConfig };
+  function handleFinishQuiz(questions, answers, hintsUsed = []) {
+    const s = { questions, answers, hintsUsed, config: quizConfig };
     setSession(s);
-    const score = questions.filter((q, i) => answers[i] === q.correct).length;
-    const pct = Math.round((score / questions.length) * 100);
+    const { weighted, pct } = computeScore(questions, answers, hintsUsed);
     const estLevel = estimateLevel(quizConfig.level, pct);
     addHistoryEntry({
       level: quizConfig.level,
       categories: quizConfig.categories,
-      score,
+      score: weighted,
       total: questions.length,
       pct,
       estLevel,
@@ -1821,11 +2071,18 @@ export default function App() {
 
   return (
     <div
-      className="w-full flex justify-center md:items-start"
-      style={{ background: "linear-gradient(180deg, #F7F9FF 0%, #FFFFFF 30%)", minHeight: "100vh" }}
+      className="w-full flex justify-center md:items-start relative overflow-hidden"
+      style={{
+        background: darkMode
+          ? "linear-gradient(180deg, #0B0E1C 0%, #10142A 30%)"
+          : "linear-gradient(180deg, #F7F9FF 0%, #FFFFFF 30%)",
+        minHeight: "100vh",
+      }}
     >
+      <div className="hidden md:block pointer-events-none fixed -left-32 top-20 w-96 h-96 rounded-full opacity-30 blur-3xl animate-blob" style={{ background: darkMode ? "#3F66F5" : "#7C97FF" }} />
+      <div className="hidden md:block pointer-events-none fixed -right-24 bottom-10 w-80 h-80 rounded-full opacity-20 blur-3xl animate-blob-slow" style={{ background: darkMode ? "#2E4FD1" : "#B7C2F5" }} />
       <div
-        className="w-full bg-white flex flex-col min-h-screen max-w-[430px] md:max-w-[760px] lg:max-w-[960px] md:my-8 md:rounded-3xl md:min-h-[88vh]"
+        className="w-full bg-white dark:bg-[#161B2E] flex flex-col min-h-screen max-w-[430px] md:max-w-[760px] lg:max-w-[960px] md:my-8 md:rounded-3xl md:min-h-[88vh] relative z-10"
         style={{ boxShadow: "0 0 60px rgba(63,102,245,0.06)" }}
       >
         {screen === "home" && (
@@ -1835,6 +2092,8 @@ export default function App() {
             history={history}
             onOpenHistory={() => setScreen("history")}
             onOpenProgress={() => setScreen("progress")}
+            darkMode={darkMode}
+            onToggleDark={() => setDarkMode((v) => !v)}
           />
         )}
         {screen === "setup" && (
@@ -1854,6 +2113,7 @@ export default function App() {
             onReview={() => setScreen("review")}
             onNewTest={() => setScreen("setup")}
             onChooseLevel={() => setScreen("setup")}
+            onHome={() => setScreen("home")}
           />
         )}
         {screen === "review" && session && (
