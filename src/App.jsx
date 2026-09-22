@@ -1299,8 +1299,9 @@ function AdminScreen({ onBack }) {
     }
     return DEFAULT_SECTIONS;
   });
-  const [activeSection, setActiveSection] = useState("bank");
+  const [activeSection, setActiveSection] = useState("dashboard");
   const [newSectionName, setNewSectionName] = useState("");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
