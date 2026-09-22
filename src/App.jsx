@@ -1111,15 +1111,22 @@ function ReviewScreen({ session, onBack, onTryAgain, onChooseLevel }) {
   const correctTotal = items.filter((x) => x.isCorrect).length;
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex items-center gap-3 px-5 md:px-8 pt-5 pb-3">
-        <button onClick={onBack} className="text-[#1B1E2B] dark:text-[#F0F2FA]">
+    <div className="flex flex-col h-full bg-[#F7F9FF] dark:bg-[#0B0E1C]">
+      {/* Header */}
+      <div className="flex items-center gap-3 px-4 md:px-6 py-4 bg-white dark:bg-[#161B2E] border-b border-[#EAEDF9] dark:border-[#2A3050]">
+        <button onClick={onBack} className="text-[#1B1E2B] dark:text-[#F0F2FA] hover:opacity-70 transition-opacity">
           <ArrowLeft size={22} />
         </button>
-        <h2 className="text-[18px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">Review Answers</h2>
+        <div className="flex-1">
+          <h2 className="text-[17px] md:text-[19px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">Review Answers</h2>
+          <p className="text-[12px] text-[#8890AE] dark:text-[#8A93B8] mt-0.5">
+            {correctTotal} of {items.length} correct • {Math.round((correctTotal / items.length) * 100)}%
+          </p>
+        </div>
       </div>
 
-      <div className="px-5 md:px-8 flex gap-2">
+      {/* Tabs */}
+      <div className="px-4 md:px-6 py-3 bg-white dark:bg-[#161B2E] border-b border-[#EAEDF9] dark:border-[#2A3050] flex gap-2">
         {[
           { id: "all", label: `All (${items.length})` },
           { id: "correct", label: `Correct (${correctTotal})` },
@@ -1128,71 +1135,73 @@ function ReviewScreen({ session, onBack, onTryAgain, onChooseLevel }) {
           <button
             key={t.id}
             onClick={() => setTab(t.id)}
-            className="text-[12px] font-semibold px-3 py-1.5 rounded-full border"
-            style={{
-              borderColor: tab === t.id ? BLUE : "#EAEDF9",
-              background: tab === t.id ? BLUE : "#fff",
-              color: tab === t.id ? "#fff" : "#6B7190",
-            }}
+            className={`text-[13px] font-semibold px-4 py-2 rounded-xl border transition-all ${
+              tab === t.id
+                ? "border-[#3F66F5] bg-[#3F66F5] text-white shadow-sm"
+                : "border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#1B2140] text-[#6B7190] dark:text-[#9AA3C4] hover:border-[#3F66F5]/30"
+            }`}
           >
             {t.label}
           </button>
         ))}
       </div>
 
-      <div className="flex-1 overflow-y-auto px-5 md:px-8 mt-4 flex flex-col gap-2.5">
+      {/* Questions List - Full Width */}
+      <div className="flex-1 overflow-y-auto px-4 md:px-6 py-4">
         {filtered.map(({ q, i, isCorrect }) => {
           const open = openIdx === i;
           return (
             <div
               key={q.uid}
-              className="rounded-2xl border overflow-hidden"
-              style={{
-                borderColor: isCorrect ? "#BFEBD2" : "#F7C6C1",
-                background: isCorrect ? "#F3FBF6" : "#FDF3F2",
-              }}
+              className={`rounded-2xl border overflow-hidden mb-3 transition-all ${
+                isCorrect
+                  ? "border-[#86EFAC] dark:border-[#166534] bg-[#F0FDF4] dark:bg-[#052E16]"
+                  : "border-[#FCA5A5] dark:border-[#7F1D1D] bg-[#FEF2F2] dark:bg-[#1C0A0A]"
+              }`}
             >
               <button
                 onClick={() => setOpenIdx(open ? null : i)}
-                className="w-full flex items-start gap-3 p-3.5 text-left"
+                className="w-full flex items-start gap-3 md:gap-4 p-4 md:p-5 text-left hover:opacity-90 transition-opacity"
               >
                 <div
-                  className="w-7 h-7 rounded-full flex items-center justify-center shrink-0"
-                  style={{ background: isCorrect ? "#2FAE6B" : "#E0483E" }}
+                  className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 ${
+                    isCorrect ? 'bg-[#10B981]' : 'bg-[#EF4444]'
+                  }`}
                 >
                   {isCorrect ? (
-                    <CheckCircle2 size={16} className="text-white" />
+                    <CheckCircle2 size={18} className="text-white" />
                   ) : (
-                    <XCircle size={16} className="text-white" />
+                    <XCircle size={18} className="text-white" />
                   )}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-[13.5px] font-medium text-[#1B1E2B] dark:text-[#F0F2FA] leading-snug">
+                  <p className="text-[14px] md:text-[15px] font-medium text-[#1B1E2B] dark:text-[#F0F2FA] leading-relaxed mb-2.5">
                     {q.q}
                   </p>
-                  <p className="text-[12px] mt-1" style={{ color: isCorrect ? "#1E8F55" : "#C43A31" }}>
+                  <p className={`text-[13px] font-medium mb-1.5 ${isCorrect ? 'text-[#059669] dark:text-[#6EE7B7]' : 'text-[#DC2626] dark:text-[#FCA5A5]'}`}>
                     Your answer:{" "}
-                    <span className="font-semibold">
+                    <span className="font-bold">
                       {answers[i] !== null
                         ? `${String.fromCharCode(65 + answers[i])}) ${q.options[answers[i]]}`
                         : "No answer"}
                     </span>
                   </p>
                   {!isCorrect && (
-                    <p className="text-[12px] mt-0.5 font-semibold" style={{ color: "#1E8F55" }}>
-                      Correct answer: {String.fromCharCode(65 + q.correct)}) {q.options[q.correct]}
+                    <p className="text-[13px] font-semibold text-[#059669] dark:text-[#6EE7B7]">
+                      ✓ Correct: {String.fromCharCode(65 + q.correct)}) {q.options[q.correct]}
                     </p>
                   )}
                 </div>
                 <ChevronRight
-                  size={16}
-                  className="text-[#C3C8DE] mt-1 shrink-0 transition-transform"
+                  size={18}
+                  className="text-[#8890AE] dark:text-[#6B7190] mt-1 shrink-0 transition-transform"
                   style={{ transform: open ? "rotate(90deg)" : "none" }}
                 />
               </button>
-              {open && (
-                <div className="px-3.5 pb-3.5 -mt-1">
-                  <div className="rounded-xl p-3 text-[12.5px] text-[#5B6180] leading-relaxed bg-white dark:bg-[#161B2E]/70">
+              {open && q.explanation && (
+                <div className="px-4 md:px-5 pb-4 md:pb-5 -mt-2">
+                  <div className="rounded-xl p-4 text-[13px] md:text-[14px] text-[#475569] dark:text-[#CBD5E1] leading-relaxed bg-white dark:bg-[#0F1419] border border-[#E2E8F0] dark:border-[#1E293B]">
+                    <p className="font-semibold text-[#1E293B] dark:text-[#F1F5F9] mb-2 text-[12px] uppercase tracking-wide">💡 Explanation</p>
                     {q.explanation}
                   </div>
                 </div>
@@ -1203,11 +1212,12 @@ function ReviewScreen({ session, onBack, onTryAgain, onChooseLevel }) {
         <div className="h-2" />
       </div>
 
-      <div className="px-5 md:px-8 pb-6 pt-3 flex flex-col gap-2.5">
-        <GradientButton onClick={onTryAgain}>
-          Try Again <RotateCcw size={16} />
+      {/* Footer Actions */}
+      <div className="px-4 md:px-6 pb-5 pt-4 bg-white dark:bg-[#161B2E] border-t border-[#EAEDF9] dark:border-[#2A3050] flex flex-col gap-2.5">
+        <GradientButton onClick={onTryAgain} className="!py-3">
+          <RotateCcw size={16} /> Try Again
         </GradientButton>
-        <button onClick={onChooseLevel} className="text-[13px] font-medium" style={{ color: BLUE }}>
+        <button onClick={onChooseLevel} className="text-[13px] font-medium text-[#3F66F5] dark:text-[#7C97FF] hover:underline">
           Choose a different level
         </button>
       </div>
@@ -1597,10 +1607,20 @@ function AdminScreen({ onBack }) {
     { id: "lessons", name: "Lessons", icon: BookOpen, enabled: false, comingSoon: true },
   ];
 
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <div className="flex h-full bg-[#F7F9FF] dark:bg-[#0B0E1C]">
+      {/* Mobile Overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <div className="w-64 bg-white dark:bg-[#161B2E] border-r border-[#EAEDF9] dark:border-[#2A3050] flex flex-col">
+      <div className={`fixed lg:relative inset-y-0 left-0 z-50 w-72 bg-white dark:bg-[#161B2E] border-r border-[#EAEDF9] dark:border-[#2A3050] flex flex-col transform transition-transform lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         {/* Logo */}
         <div className="p-5 border-b border-[#EAEDF9] dark:border-[#2A3050]">
           <div className="flex items-center gap-2.5">
@@ -1661,20 +1681,31 @@ function AdminScreen({ onBack }) {
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Header */}
-        <div className="px-8 py-6 border-b border-[#EAEDF9] dark:border-[#2A3050]">
-          <h2 className="text-[22px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">
+        {/* Mobile Header */}
+        <div className="lg:hidden px-4 py-3 bg-white dark:bg-[#161B2E] border-b border-[#EAEDF9] dark:border-[#2A3050] flex items-center gap-3">
+          <button onClick={() => setSidebarOpen(true)} className="text-[#1B1E2B] dark:text-[#F0F2FA]">
+            <Menu size={22} />
+          </button>
+          <h2 className="text-[17px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">
+            {menuItems.find(m => m.id === activeSection)?.name || "Dashboard"}
+          </h2>
+        </div>
+
+        {/* Desktop Header */}
+        <div className="hidden lg:block px-6 lg:px-8 py-5 lg:py-6 bg-white dark:bg-[#161B2E] border-b border-[#EAEDF9] dark:border-[#2A3050]">
+          <h2 className="text-[20px] lg:text-[22px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">
             {menuItems.find(m => m.id === activeSection)?.name || "Dashboard"}
           </h2>
           <p className="text-[13px] text-[#8890AE] dark:text-[#8A93B8] mt-1">
             {activeSection === "dashboard" && "Overview of your platform statistics"}
             {activeSection === "bank" && "Manage your question database"}
             {activeSection === "updates" && "Deploy code updates directly to GitHub"}
+            {activeSection === "users" && "View and manage registered users"}
           </p>
         </div>
 
         {/* Content Area */}
-        <div className="flex-1 overflow-y-auto px-8 py-6">
+        <div className="flex-1 overflow-y-auto px-4 md:px-6 lg:px-8 py-4 lg:py-6">
           {/* Dashboard */}
           {activeSection === "dashboard" && (
             <div className="max-w-6xl">
