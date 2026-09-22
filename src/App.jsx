@@ -25,7 +25,6 @@ import {
   Trash2,
   Moon,
   Home,
-  Lightbulb,
   AlertTriangle,
   ShieldCheck,
   TrendingUp,
@@ -186,8 +185,8 @@ function HomeScreen({ onStart, historyCount, history, onOpenHistory, onOpenProgr
           className="rounded-3xl p-5 relative overflow-hidden"
           style={{ background: `linear-gradient(135deg, ${BLUE} 0%, ${BLUE_DARK} 100%)` }}
         >
-          <div className="absolute -right-6 -top-10 w-32 h-32 rounded-full bg-white dark:bg-[#161B2E]/10" />
-          <div className="absolute -right-2 bottom-0 w-20 h-20 rounded-full bg-white dark:bg-[#161B2E]/10" />
+          <div className="absolute -right-6 -top-10 w-32 h-32 rounded-full bg-white/10" />
+          <div className="absolute -right-2 bottom-0 w-20 h-20 rounded-full bg-white/10" />
           <Sparkles className="text-white/80" size={22} />
           <p className="text-white font-semibold mt-3 text-[15px]">
             {historyCount > 0
@@ -332,15 +331,16 @@ function SetupScreen({ onBack, onStartTest }) {
               <button
                 key={l.id}
                 onClick={() => setLevel(l.id)}
-                className="flex items-center gap-3 rounded-2xl border p-3.5 text-left transition-colors"
-                style={{
-                  borderColor: active ? BLUE : "#EAEDF9",
-                  background: active ? "#F2F5FF" : "#fff",
-                }}
+                className={`flex items-center gap-3 rounded-2xl border p-3.5 text-left transition-colors ${
+                  active
+                    ? "border-[#3F66F5] bg-[#F2F5FF] dark:bg-[#1E2440]"
+                    : "border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E]"
+                }`}
               >
                 <div
-                  className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
-                  style={{ background: active ? BLUE : "#F1F3FA" }}
+                  className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${
+                    active ? "bg-[#3F66F5]" : "bg-[#F1F3FA] dark:bg-[#20264A]"
+                  }`}
                 >
                   <span className={"text-[12px] font-bold " + (active ? "text-white" : "text-[#8890AE] dark:text-[#8A93B8]")}>
                     {l.id}
@@ -352,10 +352,11 @@ function SetupScreen({ onBack, onStartTest }) {
                 </div>
                 <DifficultyBars count={l.bars} />
                 <div
-                  className="w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0"
-                  style={{ borderColor: active ? BLUE : "#D8DCEE" }}
+                  className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 ${
+                    active ? "border-[#3F66F5]" : "border-[#D8DCEE] dark:border-[#3A4060]"
+                  }`}
                 >
-                  {active && <div className="w-2.5 h-2.5 rounded-full" style={{ background: BLUE }} />}
+                  {active && <div className="w-2.5 h-2.5 rounded-full bg-[#3F66F5]" />}
                 </div>
               </button>
             );
@@ -374,22 +375,26 @@ function SetupScreen({ onBack, onStartTest }) {
               <button
                 key={cat.id}
                 onClick={() => toggleCategory(cat.id)}
-                className="flex items-center gap-3 rounded-2xl border p-3.5 text-left transition-colors"
-                style={{
-                  borderColor: active ? BLUE : "#EAEDF9",
-                  background: active ? "#F2F5FF" : "#fff",
-                }}
+                className={`flex items-center gap-3 rounded-2xl border p-3.5 text-left transition-colors ${
+                  active
+                    ? "border-[#3F66F5] bg-[#F2F5FF] dark:bg-[#1E2440]"
+                    : "border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E]"
+                }`}
               >
                 <div
-                  className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
-                  style={{ background: active ? BLUE : "#F1F3FA" }}
+                  className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${
+                    active ? "bg-[#3F66F5]" : "bg-[#F1F3FA] dark:bg-[#20264A]"
+                  }`}
                 >
-                  <Icon size={16} style={{ color: active ? "#fff" : "#8890AE" }} />
+                  <Icon size={16} className={active ? "text-white" : "text-[#8890AE] dark:text-[#8A93B8]"} />
                 </div>
                 <span className="flex-1 text-[14px] font-medium text-[#1B1E2B] dark:text-[#F0F2FA]">{cat.label}</span>
                 <div
-                  className="w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0"
-                  style={{ borderColor: active ? BLUE : "#D8DCEE", background: active ? BLUE : "#fff" }}
+                  className={`w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0 ${
+                    active
+                      ? "border-[#3F66F5] bg-[#3F66F5]"
+                      : "border-[#D8DCEE] dark:border-[#3A4060] bg-white dark:bg-[#161B2E]"
+                  }`}
                 >
                   {active && <Check size={12} className="text-white" strokeWidth={3} />}
                 </div>
@@ -407,12 +412,11 @@ function SetupScreen({ onBack, onStartTest }) {
               <button
                 key={n}
                 onClick={() => setCount(n)}
-                className="rounded-xl py-2.5 text-[13px] font-semibold border"
-                style={{
-                  borderColor: count === n ? BLUE : "#EAEDF9",
-                  background: count === n ? BLUE : "#fff",
-                  color: count === n ? "#fff" : "#6B7190",
-                }}
+                className={`rounded-xl py-2.5 text-[13px] font-semibold border ${
+                  count === n
+                    ? "border-[#3F66F5] bg-[#3F66F5] text-white"
+                    : "border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] text-[#6B7190] dark:text-[#9AA3C4]"
+                }`}
               >
                 {n}
               </button>
@@ -431,11 +435,12 @@ function SetupScreen({ onBack, onStartTest }) {
             </div>
             <button
               onClick={() => setTimerOn((v) => !v)}
-              className="w-11 h-6 rounded-full relative transition-colors"
-              style={{ background: timerOn ? BLUE : "#E2E6F0" }}
+              className={`w-11 h-6 rounded-full relative transition-colors ${
+                timerOn ? "bg-[#3F66F5]" : "bg-[#E2E6F0] dark:bg-[#2A3050]"
+              }`}
             >
               <div
-                className="w-5 h-5 bg-white dark:bg-[#161B2E] rounded-full absolute top-0.5 transition-all"
+                className="w-5 h-5 bg-white dark:bg-[#0B0E1C] rounded-full absolute top-0.5 transition-all"
                 style={{ left: timerOn ? "22px" : "2px" }}
               />
             </button>
@@ -446,12 +451,11 @@ function SetupScreen({ onBack, onStartTest }) {
                 <button
                   key={m}
                   onClick={() => setMinutes(m)}
-                  className="rounded-xl py-2 text-[13px] font-semibold border"
-                  style={{
-                    borderColor: minutes === m ? BLUE : "#EAEDF9",
-                    background: minutes === m ? "#F2F5FF" : "#fff",
-                    color: minutes === m ? BLUE : "#6B7190",
-                  }}
+                  className={`rounded-xl py-2 text-[13px] font-semibold border ${
+                    minutes === m
+                      ? "border-[#3F66F5] bg-[#F2F5FF] dark:bg-[#1E2440] text-[#3F66F5]"
+                      : "border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] text-[#6B7190] dark:text-[#9AA3C4]"
+                  }`}
                 >
                   {m} min
                 </button>
@@ -493,7 +497,6 @@ function QuizScreen({ config, onExit, onFinish }) {
   const [source, setSource] = useState(null); // "ai" | "bank"
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState([]);
-  const [hintsUsed, setHintsUsed] = useState([]);
   const [secondsLeft, setSecondsLeft] = useState(config.timerOn ? config.minutes * 60 : null);
   const finishedRef = useRef(false);
 
@@ -515,7 +518,6 @@ function QuizScreen({ config, onExit, onFinish }) {
         addSeenUids(config.level, picked.map((q) => q.uid));
       }
       setAnswers((prev) => (prev.length ? prev : Array(config.count).fill(null)));
-      setHintsUsed((prev) => (prev.length ? prev : Array(config.count).fill(false)));
     })();
     return () => {
       cancelled = true;
@@ -528,7 +530,7 @@ function QuizScreen({ config, onExit, onFinish }) {
     if (secondsLeft <= 0) {
       if (!finishedRef.current) {
         finishedRef.current = true;
-        onFinish(questions, answers, hintsUsed);
+        onFinish(questions, answers);
       }
       return;
     }
@@ -559,21 +561,12 @@ function QuizScreen({ config, onExit, onFinish }) {
     });
   }
 
-  function useHint() {
-    if (hintsUsed[index]) return;
-    setHintsUsed((prev) => {
-      const next = [...prev];
-      next[index] = true;
-      return next;
-    });
-  }
-
   function goNext() {
     if (index < questions.length - 1) {
       setIndex((i) => i + 1);
     } else {
       finishedRef.current = true;
-      onFinish(questions, answers, hintsUsed);
+      onFinish(questions, answers);
     }
   }
 
@@ -636,26 +629,9 @@ function QuizScreen({ config, onExit, onFinish }) {
             {current.passage}
           </div>
         )}
-        <p className="text-[17px] md:text-[20px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA] leading-snug mb-3">
+        <p className="text-[17px] md:text-[20px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA] leading-snug mb-5">
           {current.q}
         </p>
-
-        <div className="mb-5">
-          {hintsUsed[index] ? (
-            <div className="flex items-start gap-2 rounded-xl p-3 text-[12.5px] leading-relaxed" style={{ background: "#FFF3E6", color: "#B4600A" }}>
-              <Lightbulb size={15} className="shrink-0 mt-0.5" />
-              <span>{current.explanation}</span>
-            </div>
-          ) : (
-            <button
-              onClick={useHint}
-              className="flex items-center gap-1.5 text-[12.5px] font-semibold px-3 py-1.5 rounded-full"
-              style={{ background: "#FFF3E6", color: "#D97706" }}
-            >
-              <Lightbulb size={13} /> Use a hint (half credit if correct)
-            </button>
-          )}
-        </div>
 
         <div className="flex flex-col gap-3">
           {current.options.map((opt, i) => {
@@ -680,7 +656,7 @@ function QuizScreen({ config, onExit, onFinish }) {
                 >
                   {letter}
                 </div>
-                <span className="text-[14px] md:text-[15px] text-[#292D42]">{opt}</span>
+                <span className="text-[14px] md:text-[15px] text-[#292D42] dark:text-[#E5E8F5]">{opt}</span>
               </button>
             );
           })}
@@ -839,22 +815,21 @@ function Confetti() {
 }
 
 function ResultsScreen({ session, onReview, onNewTest, onChooseLevel, onHome }) {
-  const { questions, answers, config, hintsUsed = [] } = session;
+  const { questions, answers, config } = session;
   const total = questions.length;
-  const { correctCount, weighted, pct } = computeScore(questions, answers, hintsUsed);
-  const hintCount = hintsUsed.filter(Boolean).length;
+  const { correctCount, pct } = computeScore(questions, answers);
   const estLevel = estimateLevel(config.level, pct);
 
   const byCategory = CATEGORIES.map((cat) => {
     const qs = questions
       .map((q, i) => ({ q, i }))
       .filter(({ q }) => q.category === cat.id);
-    const catWeighted = qs.reduce((sum, { q, i }) => {
+    const catCorrect = qs.reduce((sum, { q, i }) => {
       if (answers[i] !== q.correct) return sum;
-      return sum + (hintsUsed[i] ? 0.5 : 1);
+      return sum + 1;
     }, 0);
-    const p = qs.length ? Math.round((catWeighted / qs.length) * 100) : 0;
-    return { ...cat, correct: catWeighted, of: qs.length, pct: p };
+    const p = qs.length ? Math.round((catCorrect / qs.length) * 100) : 0;
+    return { ...cat, correct: catCorrect, of: qs.length, pct: p };
   });
 
   const canvasRef = useRef(null);
@@ -952,14 +927,9 @@ function ResultsScreen({ session, onReview, onNewTest, onChooseLevel, onHome }) 
             <div>
               <p className="text-[12px] text-[#8890AE] dark:text-[#8A93B8]">Your score</p>
               <p className="text-[28px] md:text-[34px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA] mt-0.5">
-                {weighted % 1 === 0 ? weighted : weighted.toFixed(1)}
+                {correctCount}
                 <span className="text-[16px] text-[#8890AE] dark:text-[#8A93B8] font-medium"> / {total}</span>
               </p>
-              {hintCount > 0 && (
-                <p className="text-[11px] mt-1" style={{ color: "#D97706" }}>
-                  💡 {hintCount} hint{hintCount > 1 ? "s" : ""} used ({correctCount} correct, half credit on hinted ones)
-                </p>
-              )}
             </div>
             <div className="text-right">
               <p className="text-[12px] text-[#8890AE] dark:text-[#8A93B8]">
@@ -1005,7 +975,7 @@ function ResultsScreen({ session, onReview, onNewTest, onChooseLevel, onHome }) 
             {byCategory.map((c) => (
               <div key={c.id} className="flex items-center gap-3 rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] p-3">
                 <c.icon size={16} style={{ color: BLUE }} className="shrink-0" />
-                <span className="text-[13px] text-[#3F4460] w-20 shrink-0">{c.label}</span>
+                <span className="text-[13px] text-[#3F4460] dark:text-[#C5CBE8] w-20 shrink-0">{c.label}</span>
                 <div className="flex-1 h-2 bg-[#EEF1FA] dark:bg-[#232A47] rounded-full overflow-hidden">
                   <div className="h-full rounded-full" style={{ width: `${c.pct}%`, background: BLUE }} />
                 </div>
@@ -1044,7 +1014,7 @@ function ResultsScreen({ session, onReview, onNewTest, onChooseLevel, onHome }) 
 /* ------------------------------------------------------------------ */
 
 function ReviewScreen({ session, onBack, onTryAgain, onChooseLevel }) {
-  const { questions, answers, hintsUsed = [] } = session;
+  const { questions, answers } = session;
   const [tab, setTab] = useState("all");
   const [openIdx, setOpenIdx] = useState(null);
 
@@ -1117,14 +1087,6 @@ function ReviewScreen({ session, onBack, onTryAgain, onChooseLevel }) {
                 <div className="flex-1 min-w-0">
                   <p className="text-[13.5px] font-medium text-[#1B1E2B] dark:text-[#F0F2FA] leading-snug">
                     {q.q}
-                    {hintsUsed[i] && (
-                      <span
-                        className="inline-flex items-center gap-1 ml-2 text-[10px] font-bold px-1.5 py-0.5 rounded align-middle"
-                        style={{ background: "#FFF3E6", color: "#B4600A" }}
-                      >
-                        <Lightbulb size={10} /> hint used
-                      </span>
-                    )}
                   </p>
                   <p className="text-[12px] mt-1" style={{ color: isCorrect ? "#1E8F55" : "#C43A31" }}>
                     Your answer:{" "}
@@ -1133,7 +1095,6 @@ function ReviewScreen({ session, onBack, onTryAgain, onChooseLevel }) {
                         ? `${String.fromCharCode(65 + answers[i])}) ${q.options[answers[i]]}`
                         : "No answer"}
                     </span>
-                    {isCorrect && hintsUsed[i] && " (half credit)"}
                   </p>
                   {!isCorrect && (
                     <p className="text-[12px] mt-0.5 font-semibold" style={{ color: "#1E8F55" }}>
@@ -2052,15 +2013,15 @@ export default function App() {
     setScreen("quiz");
   }
 
-  function handleFinishQuiz(questions, answers, hintsUsed = []) {
-    const s = { questions, answers, hintsUsed, config: quizConfig };
+  function handleFinishQuiz(questions, answers) {
+    const s = { questions, answers, config: quizConfig };
     setSession(s);
-    const { weighted, pct } = computeScore(questions, answers, hintsUsed);
+    const { correctCount, pct } = computeScore(questions, answers);
     const estLevel = estimateLevel(quizConfig.level, pct);
     addHistoryEntry({
       level: quizConfig.level,
       categories: quizConfig.categories,
-      score: weighted,
+      score: correctCount,
       total: questions.length,
       pct,
       estLevel,
