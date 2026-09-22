@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo, createContext, useContext } from "react";
 import {
   Menu,
   ArrowLeft,
@@ -32,10 +32,18 @@ import {
   Minus,
   BarChart3,
   GraduationCap,
+  User,
+  Mail,
+  Eye,
+  EyeOff,
+  LogOut,
+  UserPlus,
 } from "lucide-react";
 import { LEVELS, CATEGORY_META, pickQuestions, estimateLevel, estimateExplanation, levelName, categoryQuestionCounts, computeScore } from "./data/bank";
 import { fetchAIQuestions } from "./lib/aiQuestions";
 import { getHistory, addHistoryEntry, getSeenUids, addSeenUids } from "./lib/storage";
+import { signUp, signIn, signOut, getSession, resetPassword, onAuthStateChange, isAuthAvailable } from "./lib/auth";
+import { saveTestResult, fetchTestResults } from "./lib/results";
 
 /* ------------------------------------------------------------------ */
 /*  DESIGN TOKENS                                                      */
@@ -48,6 +56,17 @@ const BLUE_LIGHT = "#7C97FF";
 
 const CATEGORY_ICONS = { grammar: ClipboardList, vocabulary: Layers, reading: BookOpen };
 const CATEGORIES = CATEGORY_META.map((c) => ({ ...c, icon: CATEGORY_ICONS[c.id] }));
+
+/* ------------------------------------------------------------------ */
+/*  AUTH CONTEXT                                                       */
+/*  Provides user session across the app.                             */
+/* ------------------------------------------------------------------ */
+
+const AuthContext = createContext(null);
+
+export function useAuth() {
+  return useContext(AuthContext);
+}
 
 /* ------------------------------------------------------------------ */
 /*  SMALL UI PIECES                                                    */
@@ -150,6 +169,7 @@ function HomeScreen({ onStart, historyCount, history, onOpenHistory, onOpenProgr
   const counts = categoryQuestionCounts();
   const last = history[history.length - 1];
   const currentLevel = last?.estLevel || null;
+  const { user, signOut: handleSignOut } = useAuth();
 
   return (
     <div className="flex flex-col h-full relative">
@@ -282,6 +302,64 @@ function HomeScreen({ onStart, historyCount, history, onOpenHistory, onOpenProgr
                 />
               </button>
             </div>
+
+            {/* Auth Section */}
+            {isAuthAvailable() && (
+              <div className="mt-1">
+                {user ? (
+                  <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] p-3.5">
+                    <div className="flex items-center gap-2.5 mb-2">
+                      <div className="w-8 h-8 rounded-full flex items-center justify-center bg-[#EEF1FE] dark:bg-[#20264A]">
+                        <User size={14} style={{ color: BLUE }} />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-semibold text-[13px] text-[#1B1E2B] dark:text-[#F0F2FA] truncate">
+                          {user.user_metadata?.displayName || user.email?.split('@')[0] || 'User'}
+                        </p>
+                        <p className="text-[11px] text-[#8890AE] dark:text-[#8A93B8] truncate">{user.email}</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => {
+                          setDashOpen(false);
+                          setScreen("dashboard");
+                        }}
+                        className="flex-1 flex items-center justify-center gap-2 rounded-xl border border-[#3F66F5] bg-[#EEF1FE] dark:bg-[#1E2440] py-2 text-[13px] font-semibold text-[#3F66F5] hover:bg-[#3F66F5] hover:text-white transition-colors"
+                      >
+                        <User size={14} />
+                        Dashboard
+                      </button>
+                      <button
+                        onClick={() => {
+                          handleSignOut();
+                          setDashOpen(false);
+                        }}
+                        className="flex items-center justify-center gap-2 rounded-xl border border-[#EAEDF9] dark:border-[#2A3050] py-2 px-3 text-[13px] font-semibold text-[#6B7190] dark:text-[#9AA3C4] hover:border-[#C43A31] hover:text-[#C43A31] transition-colors"
+                      >
+                        <LogOut size={14} />
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => {
+                      setDashOpen(false);
+                      // Navigate to auth screen - we'll add this prop
+                      if (window.location.search.includes('auth=1')) return;
+                      const url = new URL(window.location.href);
+                      url.searchParams.set('auth', '1');
+                      window.history.pushState({}, '', url);
+                      window.dispatchEvent(new PopStateEvent('popstate'));
+                    }}
+                    className="w-full rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] flex items-center gap-2.5 p-3.5 hover:border-[#3F66F5] transition-colors"
+                  >
+                    <UserPlus size={16} style={{ color: BLUE }} />
+                    <span className="font-semibold text-[14px] text-[#1B1E2B] dark:text-[#F0F2FA]">Sign In / Register</span>
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -1275,6 +1353,38 @@ function AdminScreen({ onBack }) {
   const [bankSaveMsg, setBankSaveMsg] = useState("");
   const [confirmClear, setConfirmClear] = useState(false);
 
+  // ---- Users section (admin analytics) ----
+  const [users, setUsers] = useState([]);
+  const [usersLoading, setUsersLoading] = useState(false);
+  const [usersError, setUsersError] = useState("");
+
+  async function fetchUsers() {
+    setUsersLoading(true);
+    setUsersError("");
+    try {
+      const res = await fetch("/netlify/functions/admin-users", {
+        headers: { Authorization: `Bearer ${password}` },
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setUsersError(data.error || "Failed to load users");
+        return;
+      }
+      setUsers(data.users || []);
+    } catch (e) {
+      setUsersError("Couldn't reach the server.");
+    } finally {
+      setUsersLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    if (authed && activeSection === "users" && users.length === 0 && !usersLoading) {
+      fetchUsers();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [authed, activeSection]);
+
   async function fetchBankInfo() {
     setBankLoading(true);
     setBankError("");
@@ -1482,7 +1592,7 @@ function AdminScreen({ onBack }) {
     { id: "dashboard", name: "Dashboard", icon: BarChart3, enabled: true },
     { id: "bank", name: "Question Bank", icon: ClipboardList, enabled: true },
     { id: "updates", name: "Updates", icon: Upload, enabled: true },
-    { id: "users", name: "Users", icon: GraduationCap, enabled: false, comingSoon: true },
+    { id: "users", name: "Users", icon: GraduationCap, enabled: true },
     { id: "analytics", name: "Analytics", icon: TrendingUp, enabled: false, comingSoon: true },
     { id: "lessons", name: "Lessons", icon: BookOpen, enabled: false, comingSoon: true },
   ];
@@ -1757,6 +1867,117 @@ function AdminScreen({ onBack }) {
             </>
           )}
 
+          {/* Users Section - User Management */}
+          {activeSection === "users" && (
+            <>
+              {usersLoading ? (
+                <div className="flex items-center justify-center py-12">
+                  <Loader2 size={32} className="animate-spin text-[#3F66F5]" />
+                </div>
+              ) : usersError ? (
+                <div className="rounded-2xl border border-[#F7C6C1] bg-[#FDF3F2] p-4 mb-4">
+                  <p className="text-[13px] font-semibold text-[#C43A31] flex items-center gap-2">
+                    <AlertTriangle size={16} /> {usersError}
+                  </p>
+                  <button onClick={fetchUsers} className="text-[13px] font-semibold mt-2 underline" style={{ color: BLUE }}>
+                    Retry
+                  </button>
+                </div>
+              ) : (
+                <>
+                  {/* Stats Overview */}
+                  <div className="grid grid-cols-3 gap-4 mb-6">
+                    <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] p-4">
+                      <p className="text-[12px] text-[#8890AE] dark:text-[#8A93B8] mb-1">Total Users</p>
+                      <p className="text-[28px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">{users.length}</p>
+                    </div>
+                    <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] p-4">
+                      <p className="text-[12px] text-[#8890AE] dark:text-[#8A93B8] mb-1">Active Users</p>
+                      <p className="text-[28px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">
+                        {users.filter(u => u.totalTests > 0).length}
+                      </p>
+                    </div>
+                    <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] p-4">
+                      <p className="text-[12px] text-[#8890AE] dark:text-[#8A93B8] mb-1">Total Tests</p>
+                      <p className="text-[28px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">
+                        {users.reduce((sum, u) => sum + u.totalTests, 0)}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Users Table */}
+                  <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] overflow-hidden">
+                    <div className="overflow-x-auto">
+                      <table className="w-full">
+                        <thead className="bg-[#F5F6FB] dark:bg-[#1B2140]">
+                          <tr>
+                            <th className="text-left px-4 py-3 text-[12px] font-semibold text-[#6B7190] dark:text-[#9AA3C4]">User</th>
+                            <th className="text-left px-4 py-3 text-[12px] font-semibold text-[#6B7190] dark:text-[#9AA3C4]">Tests</th>
+                            <th className="text-left px-4 py-3 text-[12px] font-semibold text-[#6B7190] dark:text-[#9AA3C4]">Avg</th>
+                            <th className="text-left px-4 py-3 text-[12px] font-semibold text-[#6B7190] dark:text-[#9AA3C4]">Best</th>
+                            <th className="text-left px-4 py-3 text-[12px] font-semibold text-[#6B7190] dark:text-[#9AA3C4]">Last Active</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {users.length === 0 ? (
+                            <tr>
+                              <td colSpan="5" className="px-4 py-8 text-center text-[13px] text-[#8890AE] dark:text-[#8A93B8]">
+                                No users yet
+                              </td>
+                            </tr>
+                          ) : (
+                            users.map((user, i) => (
+                              <tr key={user.id} className={`border-t border-[#EAEDF9] dark:border-[#2A3050] ${i % 2 === 0 ? 'bg-white dark:bg-[#161B2E]' : 'bg-[#F7F9FF] dark:bg-[#0B0E1C]'}`}>
+                                <td className="px-4 py-3">
+                                  <div>
+                                    <p className="text-[13px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA]">
+                                      {user.displayName || user.email?.split('@')[0] || 'User'}
+                                    </p>
+                                    <p className="text-[11px] text-[#8890AE] dark:text-[#8A93B8]">{user.email}</p>
+                                  </div>
+                                </td>
+                                <td className="px-4 py-3 text-[13px] text-[#1B1E2B] dark:text-[#F0F2FA]">{user.totalTests}</td>
+                                <td className="px-4 py-3 text-[13px] font-semibold" style={{ color: user.avgScore >= 70 ? '#1E8F55' : user.avgScore >= 50 ? BLUE : '#D97706' }}>
+                                  {user.avgScore}%
+                                </td>
+                                <td className="px-4 py-3 text-[13px] text-[#1B1E2B] dark:text-[#F0F2FA]">{user.bestScore}%</td>
+                                <td className="px-4 py-3 text-[12px] text-[#8890AE] dark:text-[#8A93B8]">
+                                  {user.lastTestAt ? formatDate(user.lastTestAt) : formatDate(user.lastSignIn || user.createdAt)}
+                                </td>
+                              </tr>
+                            ))
+                          )}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </>
+              )}
+            </>
+          )}
+
+          {/* Coming Soon Sections - Analytics, Lessons */}
+          {(activeSection === "analytics" || activeSection === "lessons") && (
+            <div className="flex items-center justify-center min-h-[500px]">
+              <div className="max-w-md text-center">
+                <div className="w-20 h-20 mx-auto mb-5 rounded-2xl bg-[#FFF3E6] dark:bg-[#2A2410] flex items-center justify-center">
+                  <Sparkles size={36} className="text-[#D97706]" />
+                </div>
+                <h3 className="text-[20px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA] mb-2">
+                  {menuItems.find(m => m.id === activeSection)?.name} - Coming Soon
+                </h3>
+                <p className="text-[14px] text-[#8890AE] dark:text-[#8A93B8] leading-relaxed mb-6">
+                  {activeSection === "analytics" && "Detailed analytics, charts, and insights about user performance and platform usage."}
+                  {activeSection === "lessons" && "Create and manage interactive lessons, video content, and learning paths for students."}
+                </p>
+                <div className="flex items-center justify-center gap-2 text-[13px] text-[#6B7190] dark:text-[#9AA3C4]">
+                  <Clock size={16} />
+                  <span>Stay tuned for future updates!</span>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Bank Section - Question Bank Manager */}
           {activeSection === "bank" && (
             <>
@@ -1972,6 +2193,430 @@ function AdminScreen({ onBack }) {
 }
 
 /* ------------------------------------------------------------------ */
+/*  SCREEN: USER DASHBOARD                                             */
+/*  Personal stats & synced results (when authenticated)              */
+/* ------------------------------------------------------------------ */
+
+function UserDashboardScreen({ onBack }) {
+  const { user } = useAuth();
+  const [loading, setLoading] = useState(true);
+  const [stats, setStats] = useState(null);
+  const [cloudResults, setCloudResults] = useState([]);
+  const [syncStatus, setSyncStatus] = useState("idle"); // idle | syncing | synced | error
+  const localHistory = getHistory();
+
+  useEffect(() => {
+    if (!user) return;
+
+    async function loadUserData() {
+      setLoading(true);
+      try {
+        // Fetch cloud results
+        const { results } = await fetchTestResults(user.id, 50);
+        setCloudResults(results || []);
+
+        // Calculate stats from cloud data
+        const totalTests = results?.length || 0;
+        const avgScore = totalTests > 0
+          ? Math.round(results.reduce((sum, r) => sum + r.percentage, 0) / totalTests)
+          : 0;
+        const bestScore = totalTests > 0
+          ? Math.max(...results.map(r => r.percentage))
+          : 0;
+
+        setStats({ totalTests, avgScore, bestScore });
+      } catch (err) {
+        console.error("Failed to load user data:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadUserData();
+  }, [user]);
+
+  async function syncLocalToCloud() {
+    if (!user || !localHistory.length) return;
+
+    setSyncStatus("syncing");
+    try {
+      // Upload local history to cloud (simple approach: upload all)
+      for (const entry of localHistory) {
+        await saveTestResult(user.id, entry);
+      }
+      setSyncStatus("synced");
+      setTimeout(() => setSyncStatus("idle"), 2000);
+    } catch (err) {
+      console.error("Sync failed:", err);
+      setSyncStatus("error");
+    }
+  }
+
+  if (!user) {
+    return (
+      <div className="flex flex-col h-full items-center justify-center p-8">
+        <Lock size={48} className="text-[#8890AE] dark:text-[#8A93B8] mb-4" />
+        <p className="text-[15px] text-[#6B7190] dark:text-[#9AA3C4] text-center">
+          Sign in to sync your progress across devices
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col h-full">
+      {/* Header */}
+      <div className="flex items-center gap-3 px-5 md:px-8 pt-5 pb-3">
+        <button onClick={onBack} className="text-[#1B1E2B] dark:text-[#F0F2FA]">
+          <ArrowLeft size={22} />
+        </button>
+        <div className="flex-1">
+          <h2 className="text-[18px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">Your Dashboard</h2>
+          <p className="text-[12px] text-[#8890AE] dark:text-[#8A93B8]">
+            {user.user_metadata?.displayName || user.email?.split('@')[0] || 'Your'} progress & stats
+          </p>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="flex-1 overflow-y-auto px-5 md:px-8 pb-6">
+        {loading ? (
+          <div className="flex items-center justify-center py-12">
+            <Loader2 size={32} className="animate-spin text-[#3F66F5]" />
+          </div>
+        ) : (
+          <>
+            {/* Stats Cards */}
+            <div className="grid grid-cols-3 gap-2.5 mb-5">
+              <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] p-3.5 text-center">
+                <p className="text-[24px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">
+                  {stats?.totalTests || 0}
+                </p>
+                <p className="text-[11px] text-[#8890AE] dark:text-[#8A93B8]">Tests</p>
+              </div>
+              <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] p-3.5 text-center">
+                <p className="text-[24px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">
+                  {stats?.avgScore || 0}%
+                </p>
+                <p className="text-[11px] text-[#8890AE] dark:text-[#8A93B8]">Average</p>
+              </div>
+              <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] p-3.5 text-center">
+                <p className="text-[24px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">
+                  {stats?.bestScore || 0}%
+                </p>
+                <p className="text-[11px] text-[#8890AE] dark:text-[#8A93B8]">Best</p>
+              </div>
+            </div>
+
+            {/* Sync Section */}
+            {localHistory.length > 0 && (
+              <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] p-4 mb-5">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-xl bg-[#EEF1FE] dark:bg-[#20264A] flex items-center justify-center">
+                    <Upload size={18} style={{ color: BLUE }} />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-[14px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA]">
+                      Sync Local History
+                    </p>
+                    <p className="text-[12px] text-[#8890AE] dark:text-[#8A93B8]">
+                      {localHistory.length} test{localHistory.length !== 1 ? 's' : ''} on this device
+                    </p>
+                  </div>
+                </div>
+                <SecondaryButton
+                  onClick={syncLocalToCloud}
+                  disabled={syncStatus === "syncing"}
+                  className="w-full !py-2.5"
+                >
+                  {syncStatus === "syncing" && <Loader2 size={14} className="animate-spin" />}
+                  {syncStatus === "synced" && <Check size={14} />}
+                  {syncStatus === "syncing" ? "Syncing..." : syncStatus === "synced" ? "Synced!" : "Upload to Cloud"}
+                </SecondaryButton>
+                {syncStatus === "error" && (
+                  <p className="text-[12px] text-[#C43A31] mt-2 flex items-center gap-1.5">
+                    <AlertTriangle size={12} /> Sync failed. Try again.
+                  </p>
+                )}
+              </div>
+            )}
+
+            {/* Recent Tests */}
+            <h3 className="text-[15px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA] mb-3">
+              Recent Tests (Cloud)
+            </h3>
+            {cloudResults.length === 0 ? (
+              <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] p-6 text-center">
+                <p className="text-[13px] text-[#8890AE] dark:text-[#8A93B8]">
+                  No cloud results yet. Complete a test while signed in to start tracking.
+                </p>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-2">
+                {cloudResults.slice(0, 10).map((r, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-3 rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] p-3"
+                  >
+                    <span className="text-[12px] text-[#6B7190] dark:text-[#9AA3C4] w-24 shrink-0">
+                      {formatDate(r.completed_at)}
+                    </span>
+                    <div className="flex-1 h-2 bg-[#EEF1FA] dark:bg-[#232A47] rounded-full overflow-hidden">
+                      <div
+                        className="h-full rounded-full"
+                        style={{ width: `${r.percentage}%`, background: BLUE }}
+                      />
+                    </div>
+                    <span className="text-[13px] font-semibold w-10 text-right text-[#1B1E2B] dark:text-[#F0F2FA]">
+                      {r.percentage}%
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  SCREEN: AUTH (Login/Register/Forgot Password)                     */
+/* ------------------------------------------------------------------ */
+
+function AuthScreen({ onBack, onSuccess }) {
+  const [mode, setMode] = useState("login"); // "login" | "register" | "forgot"
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [displayName, setDisplayName] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setError("");
+    setSuccess("");
+
+    if (mode === "register") {
+      if (password !== confirmPassword) {
+        setError("Passwords don't match");
+        return;
+      }
+      if (password.length < 6) {
+        setError("Password must be at least 6 characters");
+        return;
+      }
+    }
+
+    setLoading(true);
+
+    try {
+      if (mode === "login") {
+        const { user, error: err } = await signIn(email, password);
+        if (err) {
+          setError(err.message || "Failed to sign in");
+        } else {
+          setSuccess("Signed in successfully!");
+          setTimeout(() => onSuccess(user), 500);
+        }
+      } else if (mode === "register") {
+        const { user, error: err } = await signUp(email, password, { displayName });
+        if (err) {
+          setError(err.message || "Failed to create account");
+        } else {
+          setSuccess("Account created! Check your email to verify.");
+          setTimeout(() => setMode("login"), 2000);
+        }
+      } else if (mode === "forgot") {
+        const { error: err } = await resetPassword(email);
+        if (err) {
+          setError(err.message || "Failed to send reset email");
+        } else {
+          setSuccess("Password reset email sent! Check your inbox.");
+        }
+      }
+    } catch (err) {
+      setError(err.message || "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <div className="flex flex-col h-full bg-[#F7F9FF] dark:bg-[#0B0E1C]">
+      {/* Header */}
+      <div className="flex items-center gap-3 px-5 md:px-8 pt-5 pb-3">
+        <button onClick={onBack} className="text-[#1B1E2B] dark:text-[#F0F2FA]">
+          <ArrowLeft size={22} />
+        </button>
+        <div>
+          <h2 className="text-[18px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">
+            {mode === "login" ? "Sign In" : mode === "register" ? "Create Account" : "Reset Password"}
+          </h2>
+          <p className="text-[12px] text-[#8890AE] dark:text-[#8A93B8]">
+            {mode === "login" ? "Welcome back! Sign in to sync your progress" : mode === "register" ? "Join to save your test results" : "Enter your email to reset your password"}
+          </p>
+        </div>
+      </div>
+
+      {/* Form */}
+      <div className="flex-1 overflow-y-auto px-5 md:px-8 pb-6">
+        <div className="max-w-md mx-auto">
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {mode === "register" && (
+              <div>
+                <label className="block text-[13px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA] mb-2">
+                  Display Name
+                </label>
+                <div className="relative">
+                  <User size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#8890AE] dark:text-[#8A93B8]" />
+                  <input
+                    type="text"
+                    value={displayName}
+                    onChange={(e) => setDisplayName(e.target.value)}
+                    placeholder="Your name"
+                    className="w-full rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] pl-11 pr-4 py-3.5 text-[14px] outline-none focus:border-[#3F66F5] text-[#1B1E2B] dark:text-[#F0F2FA]"
+                  />
+                </div>
+              </div>
+            )}
+
+            <div>
+              <label className="block text-[13px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA] mb-2">
+                Email
+              </label>
+              <div className="relative">
+                <Mail size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#8890AE] dark:text-[#8A93B8]" />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@example.com"
+                  required
+                  className="w-full rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] pl-11 pr-4 py-3.5 text-[14px] outline-none focus:border-[#3F66F5] text-[#1B1E2B] dark:text-[#F0F2FA]"
+                />
+              </div>
+            </div>
+
+            {mode !== "forgot" && (
+              <div>
+                <label className="block text-[13px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA] mb-2">
+                  Password
+                </label>
+                <div className="relative">
+                  <Lock size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#8890AE] dark:text-[#8A93B8]" />
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="••••••••"
+                    required
+                    className="w-full rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] pl-11 pr-12 py-3.5 text-[14px] outline-none focus:border-[#3F66F5] text-[#1B1E2B] dark:text-[#F0F2FA]"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#8890AE] dark:text-[#8A93B8]"
+                  >
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {mode === "register" && (
+              <div>
+                <label className="block text-[13px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA] mb-2">
+                  Confirm Password
+                </label>
+                <div className="relative">
+                  <Lock size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#8890AE] dark:text-[#8A93B8]" />
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder="••••••••"
+                    required
+                    className="w-full rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] pl-11 pr-4 py-3.5 text-[14px] outline-none focus:border-[#3F66F5] text-[#1B1E2B] dark:text-[#F0F2FA]"
+                  />
+                </div>
+              </div>
+            )}
+
+            {error && (
+              <div className="rounded-2xl border border-[#F7C6C1] bg-[#FDF3F2] p-3.5 text-[13px] text-[#C43A31] flex items-center gap-2">
+                <AlertTriangle size={16} />
+                <span>{error}</span>
+              </div>
+            )}
+
+            {success && (
+              <div className="rounded-2xl border border-[#C6F6D5] bg-[#F0FDF4] p-3.5 text-[13px] text-[#1E8F55] flex items-center gap-2">
+                <CheckCircle2 size={16} />
+                <span>{success}</span>
+              </div>
+            )}
+
+            <GradientButton type="submit" disabled={loading} className="w-full">
+              {loading ? "Please wait..." : mode === "login" ? "Sign In" : mode === "register" ? "Create Account" : "Send Reset Email"}
+            </GradientButton>
+          </form>
+
+          {/* Mode Switcher */}
+          <div className="mt-6 text-center space-y-2">
+            {mode === "login" && (
+              <>
+                <button
+                  onClick={() => setMode("register")}
+                  className="text-[13px] text-[#3F66F5] font-semibold"
+                >
+                  Don't have an account? Sign up
+                </button>
+                <br />
+                <button
+                  onClick={() => setMode("forgot")}
+                  className="text-[13px] text-[#8890AE] dark:text-[#8A93B8]"
+                >
+                  Forgot password?
+                </button>
+              </>
+            )}
+            {mode === "register" && (
+              <button
+                onClick={() => setMode("login")}
+                className="text-[13px] text-[#3F66F5] font-semibold"
+              >
+                Already have an account? Sign in
+              </button>
+            )}
+            {mode === "forgot" && (
+              <button
+                onClick={() => setMode("login")}
+                className="text-[13px] text-[#3F66F5] font-semibold"
+              >
+                Back to Sign In
+              </button>
+            )}
+          </div>
+
+          {/* Optional: Show offline notice */}
+          {!isAuthAvailable() && (
+            <div className="mt-6 rounded-2xl border border-[#FFE4B5] bg-[#FFFAEB] p-3.5 text-[12px] text-[#D97706]">
+              <p className="font-semibold mb-1">Authentication not configured</p>
+              <p>Add Supabase credentials to enable user accounts.</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /*  SCREEN: HISTORY (full)                                             */
 /* ------------------------------------------------------------------ */
 
@@ -2137,18 +2782,41 @@ function ProgressScreen({ history, onBack }) {
 /* ------------------------------------------------------------------ */
 
 export default function App() {
-  const [screen, setScreen] = useState("home"); // home | setup | quiz | results | review | history | progress | admin
+  const [screen, setScreen] = useState("home"); // home | setup | quiz | results | review | history | progress | admin | auth
   const [quizConfig, setQuizConfig] = useState(null);
   const [session, setSession] = useState(null); // { questions, answers, config }
   const [history, setHistory] = useState([]);
-
   const [darkMode, setDarkMode] = useState(false);
+
+  // Auth state
+  const [user, setUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
+
+  // Check for existing session on mount
+  useEffect(() => {
+    async function checkSession() {
+      const { user: currentUser } = await getSession();
+      setUser(currentUser);
+      setAuthLoading(false);
+    }
+    checkSession();
+
+    // Listen to auth changes
+    const unsubscribe = onAuthStateChange((event, session) => {
+      setUser(session?.user || null);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     setHistory(getHistory());
     if (typeof window !== "undefined") {
-      if (new URLSearchParams(window.location.search).get("admin") === "1") {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("admin") === "1") {
         setScreen("admin");
+      } else if (params.get("auth") === "1") {
+        setScreen("auth");
       }
       const savedDark = localStorage.getItem("englishTest.darkMode") === "1";
       setDarkMode(savedDark);
@@ -2166,35 +2834,57 @@ export default function App() {
     setScreen("quiz");
   }
 
-  function handleFinishQuiz(questions, answers) {
+  async function handleFinishQuiz(questions, answers) {
     const s = { questions, answers, config: quizConfig };
     setSession(s);
     const { correctCount, pct } = computeScore(questions, answers);
     const estLevel = estimateLevel(quizConfig.level, pct);
-    addHistoryEntry({
+
+    const result = {
       level: quizConfig.level,
       categories: quizConfig.categories,
       score: correctCount,
       total: questions.length,
       pct,
       estLevel,
-    });
+    };
+
+    // Save to localStorage
+    addHistoryEntry(result);
     setHistory(getHistory());
+
+    // Save to Supabase if user is logged in
+    if (user) {
+      await saveTestResult(user.id, result);
+    }
+
     setScreen("results");
   }
 
+  async function handleSignOut() {
+    await signOut();
+    setUser(null);
+  }
+
+  const authContextValue = {
+    user,
+    authLoading,
+    signOut: handleSignOut,
+  };
+
   return (
-    <div
-      className="w-full flex justify-center md:items-start relative overflow-hidden"
-      style={{
-        background: darkMode
-          ? "linear-gradient(180deg, #0B0E1C 0%, #10142A 30%)"
-          : "linear-gradient(180deg, #F7F9FF 0%, #FFFFFF 30%)",
-        minHeight: "100vh",
-      }}
-    >
-      <div className="hidden md:block pointer-events-none fixed -left-32 top-20 w-96 h-96 rounded-full opacity-30 blur-3xl animate-blob" style={{ background: darkMode ? "#3F66F5" : "#7C97FF" }} />
-      <div className="hidden md:block pointer-events-none fixed -right-24 bottom-10 w-80 h-80 rounded-full opacity-20 blur-3xl animate-blob-slow" style={{ background: darkMode ? "#2E4FD1" : "#B7C2F5" }} />
+    <AuthContext.Provider value={authContextValue}>
+      <div
+        className="w-full flex justify-center md:items-start relative overflow-hidden"
+        style={{
+          background: darkMode
+            ? "linear-gradient(180deg, #0B0E1C 0%, #10142A 30%)"
+            : "linear-gradient(180deg, #F7F9FF 0%, #FFFFFF 30%)",
+          minHeight: "100vh",
+        }}
+      >
+        <div className="hidden md:block pointer-events-none fixed -left-32 top-20 w-96 h-96 rounded-full opacity-30 blur-3xl animate-blob" style={{ background: darkMode ? "#3F66F5" : "#7C97FF" }} />
+        <div className="hidden md:block pointer-events-none fixed -right-24 bottom-10 w-80 h-80 rounded-full opacity-20 blur-3xl animate-blob-slow" style={{ background: darkMode ? "#2E4FD1" : "#B7C2F5" }} />
       <div
         className="w-full bg-white dark:bg-[#161B2E] flex flex-col min-h-screen max-w-[430px] md:max-w-[760px] lg:max-w-[960px] md:my-8 md:rounded-3xl md:min-h-[88vh] relative z-10"
         style={{ boxShadow: "0 0 60px rgba(63,102,245,0.06)" }}
@@ -2241,7 +2931,15 @@ export default function App() {
         {screen === "admin" && <AdminScreen onBack={() => setScreen("home")} />}
         {screen === "history" && <HistoryScreen history={history} onBack={() => setScreen("home")} />}
         {screen === "progress" && <ProgressScreen history={history} onBack={() => setScreen("home")} />}
+        {screen === "dashboard" && <UserDashboardScreen onBack={() => setScreen("home")} />}
+        {screen === "auth" && (
+          <AuthScreen
+            onBack={() => setScreen("home")}
+            onSuccess={() => setScreen("home")}
+          />
+        )}
       </div>
     </div>
+    </AuthContext.Provider>
   );
 }
