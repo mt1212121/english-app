@@ -1608,8 +1608,6 @@ function AdminScreen({ onBack }) {
     { id: "lessons", name: "Lessons", icon: BookOpen, enabled: false, comingSoon: true },
   ];
 
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
   return (
     <div className="flex h-full bg-[#F7F9FF] dark:bg-[#0B0E1C]">
       {/* Mobile Overlay */}
