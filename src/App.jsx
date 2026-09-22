@@ -641,22 +641,26 @@ function QuizScreen({ config, onExit, onFinish }) {
               <button
                 key={i}
                 onClick={() => selectOption(i)}
-                className="flex items-center gap-3 rounded-2xl border p-3.5 md:p-4 text-left transition-colors hover:border-[#C3CFFB]"
-                style={{
-                  borderColor: isSelected ? BLUE : "#EAEDF9",
-                  background: isSelected ? "#F2F5FF" : "#fff",
-                }}
+                className={`flex items-center gap-3 rounded-2xl border-2 p-3.5 md:p-4 text-left transition-all ${
+                  isSelected
+                    ? "border-[#3F66F5] bg-[#EEF1FE] dark:bg-[#1E2440] shadow-sm"
+                    : "border-[#E2E6F5] dark:border-[#2A3050] bg-[#F7F9FF] dark:bg-[#1B2140] hover:border-[#C3CFFB] dark:hover:border-[#3F66F5]/50"
+                }`}
               >
                 <div
-                  className="w-7 h-7 rounded-full flex items-center justify-center shrink-0 text-[12px] font-bold"
-                  style={{
-                    background: isSelected ? BLUE : "#F1F3FA",
-                    color: isSelected ? "#fff" : "#8890AE",
-                  }}
+                  className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 text-[13px] font-bold ${
+                    isSelected
+                      ? "bg-[#3F66F5] text-white"
+                      : "bg-[#E2E6F5] dark:bg-[#20264A] text-[#6B7190] dark:text-[#8A93B8]"
+                  }`}
                 >
                   {letter}
                 </div>
-                <span className="text-[14px] md:text-[15px] text-[#292D42] dark:text-[#E5E8F5]">{opt}</span>
+                <span className={`text-[14px] md:text-[15px] font-medium ${
+                  isSelected
+                    ? "text-[#1B1E2B] dark:text-[#F0F2FA]"
+                    : "text-[#3F4460] dark:text-[#C5CBE8]"
+                }`}>{opt}</span>
               </button>
             );
           })}
@@ -1473,64 +1477,215 @@ function AdminScreen({ onBack }) {
     );
   }
 
-  return (
-    <div className="flex flex-col h-full">
-      <div className="flex items-center gap-3 px-5 md:px-8 pt-5 pb-3">
-        <button onClick={onBack} className="text-[#1B1E2B] dark:text-[#F0F2FA]">
-          <ArrowLeft size={22} />
-        </button>
-        <h2 className="text-[18px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">Admin</h2>
-      </div>
+  // Sidebar menu items
+  const menuItems = [
+    { id: "dashboard", name: "Dashboard", icon: BarChart3, enabled: true },
+    { id: "bank", name: "Question Bank", icon: ClipboardList, enabled: true },
+    { id: "updates", name: "Updates", icon: Upload, enabled: true },
+    { id: "users", name: "Users", icon: GraduationCap, enabled: false, comingSoon: true },
+    { id: "analytics", name: "Analytics", icon: TrendingUp, enabled: false, comingSoon: true },
+    { id: "lessons", name: "Lessons", icon: BookOpen, enabled: false, comingSoon: true },
+  ];
 
-      <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
-        <div className="flex md:flex-col gap-2 overflow-x-auto md:overflow-visible px-5 md:px-3 md:w-[220px] md:border-r border-b md:border-b-0 border-[#EAEDF9] dark:border-[#2A3050] py-3 shrink-0">
-          {sections.map((s) => (
-            <div key={s.id} className="flex items-center gap-1.5 shrink-0">
-              <button
-                onClick={() => s.enabled !== false && setActiveSection(s.id)}
-                disabled={s.enabled === false}
-                className="flex items-center gap-2 px-3 py-2.5 rounded-xl text-[13px] font-semibold whitespace-nowrap disabled:opacity-40"
-                style={{
-                  background: activeSection === s.id && s.enabled !== false ? BLUE : "transparent",
-                  color: activeSection === s.id && s.enabled !== false ? "#fff" : "#6B7190",
-                }}
-              >
-                {s.id === "bank" ? "📦" : s.id === "updates" ? "🚀" : "📄"} {s.name}
-              </button>
-              {!s.builtin && (
-                <button
-                  onClick={() => toggleSectionEnabled(s.id)}
-                  title={s.enabled === false ? "Turn on" : "Turn off"}
-                  className="w-8 h-5 rounded-full relative shrink-0"
-                  style={{ background: s.enabled === false ? "#E2E6F0" : BLUE }}
-                >
-                  <div
-                    className="w-3.5 h-3.5 bg-white dark:bg-[#161B2E] rounded-full absolute top-[3px] transition-all"
-                    style={{ left: s.enabled === false ? "3px" : "16px" }}
-                  />
-                </button>
-              )}
-            </div>
-          ))}
-          <div className="flex gap-1.5 md:mt-2 md:pt-2 md:border-t border-[#EAEDF9] dark:border-[#2A3050] shrink-0">
-            <input
-              value={newSectionName}
-              onChange={(e) => setNewSectionName(e.target.value)}
-              placeholder="e.g. Lessons"
-              className="w-28 md:w-auto md:flex-1 border border-[#EAEDF9] dark:border-[#2A3050] rounded-lg px-2 py-1.5 text-[12px] outline-none"
-            />
-            <button
-              onClick={addSection}
-              className="w-7 h-7 rounded-lg text-white flex items-center justify-center shrink-0"
-              style={{ background: BLUE }}
+  return (
+    <div className="flex h-full bg-[#F7F9FF] dark:bg-[#0B0E1C]">
+      {/* Sidebar */}
+      <div className="w-64 bg-white dark:bg-[#161B2E] border-r border-[#EAEDF9] dark:border-[#2A3050] flex flex-col">
+        {/* Logo */}
+        <div className="p-5 border-b border-[#EAEDF9] dark:border-[#2A3050]">
+          <div className="flex items-center gap-2.5">
+            <div
+              className="w-9 h-9 rounded-xl flex items-center justify-center"
+              style={{ background: `linear-gradient(135deg, ${BLUE}, ${BLUE_LIGHT})` }}
             >
-              +
-            </button>
+              <BookOpen size={18} className="text-white" />
+            </div>
+            <div>
+              <h1 className="font-bold text-[15px] text-[#1B1E2B] dark:text-[#F0F2FA]">English Test</h1>
+              <p className="text-[11px] text-[#8890AE] dark:text-[#8A93B8]">Admin Panel</p>
+            </div>
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto px-5 md:px-8 py-4">
-          {activeSection === "updates" ? (
+        {/* Menu */}
+        <div className="flex-1 overflow-y-auto py-4 px-3">
+          {menuItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = activeSection === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => item.enabled && setActiveSection(item.id)}
+                disabled={!item.enabled}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl mb-1 transition-all ${
+                  isActive && item.enabled
+                    ? "bg-[#3F66F5] text-white"
+                    : item.enabled
+                    ? "text-[#6B7190] dark:text-[#9AA3C4] hover:bg-[#F5F6FB] dark:hover:bg-[#1B2140]"
+                    : "text-[#C3C8DE] dark:text-[#3A4060] cursor-not-allowed opacity-50"
+                }`}
+              >
+                <Icon size={18} />
+                <span className="text-[13.5px] font-medium flex-1 text-left">{item.name}</span>
+                {item.comingSoon && (
+                  <span className="text-[9px] font-bold bg-[#FFF3E6] dark:bg-[#2A2410] text-[#D97706] px-1.5 py-0.5 rounded">
+                    Soon
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Footer */}
+        <div className="p-3 border-t border-[#EAEDF9] dark:border-[#2A3050]">
+          <button
+            onClick={onBack}
+            className="w-full flex items-center gap-2 px-3 py-2.5 rounded-xl text-[13.5px] font-medium text-[#6B7190] dark:text-[#9AA3C4] hover:bg-[#F5F6FB] dark:hover:bg-[#1B2140] transition-all"
+          >
+            <Home size={18} />
+            Back to Home
+          </button>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* Header */}
+        <div className="px-8 py-6 border-b border-[#EAEDF9] dark:border-[#2A3050]">
+          <h2 className="text-[22px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">
+            {menuItems.find(m => m.id === activeSection)?.name || "Dashboard"}
+          </h2>
+          <p className="text-[13px] text-[#8890AE] dark:text-[#8A93B8] mt-1">
+            {activeSection === "dashboard" && "Overview of your platform statistics"}
+            {activeSection === "bank" && "Manage your question database"}
+            {activeSection === "updates" && "Deploy code updates directly to GitHub"}
+          </p>
+        </div>
+
+        {/* Content Area */}
+        <div className="flex-1 overflow-y-auto px-8 py-6">
+          {/* Dashboard */}
+          {activeSection === "dashboard" && (
+            <div className="max-w-6xl">
+              {/* Stats Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] p-5">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 rounded-xl bg-[#EEF1FE] dark:bg-[#20264A] flex items-center justify-center">
+                      <ClipboardList size={18} style={{ color: BLUE }} />
+                    </div>
+                    <p className="text-[12px] text-[#8890AE] dark:text-[#8A93B8]">Total Questions</p>
+                  </div>
+                  <p className="text-[28px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">{bankInfo?.total || 0}</p>
+                  <p className="text-[11px] text-[#8890AE] dark:text-[#8A93B8] mt-1">Across all levels</p>
+                </div>
+
+                <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] p-5">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 rounded-xl bg-[#EEF1FE] dark:bg-[#20264A] flex items-center justify-center">
+                      <Layers size={18} style={{ color: BLUE }} />
+                    </div>
+                    <p className="text-[12px] text-[#8890AE] dark:text-[#8A93B8]">Total Levels</p>
+                  </div>
+                  <p className="text-[28px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">{LEVELS.length}</p>
+                  <p className="text-[11px] text-[#8890AE] dark:text-[#8A93B8] mt-1">A1 to C1</p>
+                </div>
+
+                <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] p-5">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 rounded-xl bg-[#EEF1FE] dark:bg-[#20264A] flex items-center justify-center">
+                      <BookOpen size={18} style={{ color: BLUE }} />
+                    </div>
+                    <p className="text-[12px] text-[#8890AE] dark:text-[#8A93B8]">Categories</p>
+                  </div>
+                  <p className="text-[28px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">{CATEGORIES.length}</p>
+                  <p className="text-[11px] text-[#8890AE] dark:text-[#8A93B8] mt-1">Grammar, Vocab, Reading</p>
+                </div>
+
+                <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] p-5">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 rounded-xl bg-[#FFF3E6] dark:bg-[#2A2410] flex items-center justify-center">
+                      <GraduationCap size={18} className="text-[#D97706]" />
+                    </div>
+                    <p className="text-[12px] text-[#8890AE] dark:text-[#8A93B8]">Users</p>
+                  </div>
+                  <p className="text-[28px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">—</p>
+                  <p className="text-[11px] text-[#D97706] font-semibold mt-1">Coming Soon</p>
+                </div>
+              </div>
+
+              {/* Quick Actions */}
+              <div className="mb-6">
+                <h3 className="text-[15px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA] mb-3">Quick Actions</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <button
+                    onClick={() => setActiveSection("bank")}
+                    className="flex items-center gap-3 p-4 rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] hover:border-[#3F66F5] transition-all text-left"
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-[#EEF1FE] dark:bg-[#20264A] flex items-center justify-center shrink-0">
+                      <ClipboardList size={18} style={{ color: BLUE }} />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-[13.5px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA]">Manage Questions</p>
+                      <p className="text-[11.5px] text-[#8890AE] dark:text-[#8A93B8] mt-0.5">Add, edit, or remove questions</p>
+                    </div>
+                    <ChevronRight size={18} className="text-[#8890AE] dark:text-[#8A93B8]" />
+                  </button>
+
+                  <button
+                    onClick={() => setActiveSection("updates")}
+                    className="flex items-center gap-3 p-4 rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] hover:border-[#3F66F5] transition-all text-left"
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-[#EEF1FE] dark:bg-[#20264A] flex items-center justify-center shrink-0">
+                      <Upload size={18} style={{ color: BLUE }} />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-[13.5px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA]">Deploy Updates</p>
+                      <p className="text-[11.5px] text-[#8890AE] dark:text-[#8A93B8] mt-0.5">Push code changes to GitHub</p>
+                    </div>
+                    <ChevronRight size={18} className="text-[#8890AE] dark:text-[#8A93B8]" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Coming Soon Features */}
+              <div>
+                <h3 className="text-[15px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA] mb-3">Coming Soon</h3>
+                <div className="rounded-2xl border border-[#FFF3E6] dark:border-[#2A2410] bg-[#FFFBF5] dark:bg-[#1A1810] p-5">
+                  <div className="flex items-start gap-3 mb-4">
+                    <Sparkles size={20} className="text-[#D97706] shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-[14px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA] mb-1">
+                        Advanced Features in Development
+                      </p>
+                      <p className="text-[12.5px] text-[#8890AE] dark:text-[#8A93B8] leading-relaxed">
+                        We're working on user management, analytics dashboard, and lesson creation tools.
+                        These features will be available in future updates.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {menuItems.filter(m => m.comingSoon).map((item) => {
+                      const Icon = item.icon;
+                      return (
+                        <div
+                          key={item.id}
+                          className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white dark:bg-[#161B2E] border border-[#EAEDF9] dark:border-[#2A3050]"
+                        >
+                          <Icon size={14} className="text-[#8890AE] dark:text-[#8A93B8]" />
+                          <span className="text-[12px] text-[#6B7190] dark:text-[#9AA3C4]">{item.name}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Updates Section */}
+          {activeSection === "updates" && (
             <>
               <div className="rounded-2xl p-3.5 mb-4 flex gap-2.5 bg-[#F5F6FB] dark:bg-[#1B2140]">
                 <ShieldCheck size={18} style={{ color: BLUE }} className="shrink-0 mt-0.5" />
@@ -1600,12 +1755,10 @@ function AdminScreen({ onBack }) {
                 </GradientButton>
               </div>
             </>
-          ) : activeSection !== "bank" ? (
-            <div className="text-center py-16 text-[13.5px] text-[#8890AE] dark:text-[#8A93B8]">
-              📄 Content management for "{sections.find((s) => s.id === activeSection)?.name}" isn't built
-              yet — this just reserves its spot in the sidebar for later.
-            </div>
-          ) : (
+          )}
+
+          {/* Bank Section - Question Bank Manager */}
+          {activeSection === "bank" && (
             <>
               <p className="text-[13px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA] mb-2">Current file</p>
               {bankLoading && !bankInfo && (
