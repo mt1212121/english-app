@@ -1609,35 +1609,32 @@ function AdminScreen({ onBack }) {
   ];
 
   return (
-    <div className="flex h-full bg-[#F7F9FF] dark:bg-[#0B0E1C]">
+    <div className="flex h-full bg-gradient-to-br from-[#0F172A] to-[#1E293B]">
       {/* Mobile Overlay */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
-      {/* Sidebar */}
-      <div className={`fixed lg:relative inset-y-0 left-0 z-50 w-72 bg-[#1a1f2e] dark:bg-[#0F1419] border-r border-[#2d3548] dark:border-[#1E293B] flex flex-col transform transition-transform lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      {/* Sidebar - Modern Dark */}
+      <div className={`fixed lg:relative inset-y-0 left-0 z-50 w-72 bg-gradient-to-b from-[#1E293B] to-[#0F172A] border-r border-white/10 flex flex-col shadow-2xl transform transition-transform lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         {/* Logo */}
-        <div className="p-6 border-b border-[#2d3548] dark:border-[#1E293B]">
+        <div className="p-6 border-b border-white/10">
           <div className="flex items-center gap-3">
-            <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg"
-              style={{ background: `linear-gradient(135deg, ${BLUE}, ${BLUE_LIGHT})` }}
-            >
-              <BookOpen size={20} className="text-white" />
+            <div className="w-11 h-11 rounded-2xl flex items-center justify-center bg-gradient-to-br from-[#3F66F5] to-[#8B5CF6] shadow-lg shadow-blue-500/20">
+              <BookOpen size={22} className="text-white" />
             </div>
             <div>
-              <h1 className="font-bold text-[16px] text-white">English Test</h1>
-              <p className="text-[11px] text-gray-400">Admin Panel</p>
+              <h1 className="font-bold text-[17px] text-white">English Test</h1>
+              <p className="text-[12px] text-gray-400">Admin Dashboard</p>
             </div>
           </div>
         </div>
 
         {/* Menu */}
-        <div className="flex-1 overflow-y-auto py-4 px-3">
+        <div className="flex-1 overflow-y-auto py-6 px-4">
           {menuItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeSection === item.id;
@@ -1651,19 +1648,19 @@ function AdminScreen({ onBack }) {
                   }
                 }}
                 disabled={!item.enabled}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl mb-2 transition-all ${
+                className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-2xl mb-2 transition-all duration-200 ${
                   isActive && item.enabled
-                    ? "bg-[#3F66F5] text-white shadow-lg shadow-[#3F66F5]/20"
+                    ? "bg-gradient-to-r from-[#3F66F5] to-[#8B5CF6] text-white shadow-xl shadow-blue-500/30 scale-[1.02]"
                     : item.enabled
-                    ? "text-gray-300 hover:bg-[#252b3d] hover:text-white"
+                    ? "text-gray-300 hover:bg-white/5 hover:text-white hover:scale-[1.01]"
                     : "text-gray-600 cursor-not-allowed opacity-40"
                 }`}
               >
-                <Icon size={19} />
-                <span className="text-[14px] font-medium flex-1 text-left">{item.name}</span>
+                <Icon size={20} className={isActive ? "drop-shadow-lg" : ""} />
+                <span className="text-[15px] font-semibold flex-1 text-left">{item.name}</span>
                 {item.comingSoon && (
-                  <span className="text-[9px] font-bold bg-amber-500/10 text-amber-500 px-2 py-1 rounded-md">
-                    Soon
+                  <span className="text-[10px] font-bold bg-amber-500/20 text-amber-400 px-2.5 py-1 rounded-lg border border-amber-500/30">
+                    SOON
                   </span>
                 )}
               </button>
@@ -1672,13 +1669,13 @@ function AdminScreen({ onBack }) {
         </div>
 
         {/* Footer */}
-        <div className="p-4 border-t border-[#2d3548] dark:border-[#1E293B]">
+        <div className="p-4 border-t border-white/10">
           <button
             onClick={onBack}
-            className="w-full flex items-center gap-2 px-4 py-3 rounded-xl text-[14px] font-medium text-gray-300 hover:bg-[#252b3d] hover:text-white transition-all"
+            className="w-full flex items-center justify-center gap-2 px-4 py-3.5 rounded-2xl text-[15px] font-semibold text-gray-300 bg-white/5 hover:bg-white/10 hover:text-white transition-all duration-200"
           >
-            <Home size={19} />
-            Back to Home
+            <Home size={20} />
+            Exit Admin
           </button>
         </div>
       </div>
@@ -1686,110 +1683,116 @@ function AdminScreen({ onBack }) {
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Mobile Header */}
-        <div className="lg:hidden px-4 py-3 bg-white dark:bg-[#161B2E] border-b border-[#EAEDF9] dark:border-[#2A3050] flex items-center gap-3">
-          <button onClick={() => setSidebarOpen(true)} className="text-[#1B1E2B] dark:text-[#F0F2FA]">
-            <Menu size={22} />
+        <div className="lg:hidden px-5 py-4 bg-gradient-to-r from-[#3F66F5] to-[#8B5CF6] flex items-center gap-3 shadow-xl">
+          <button onClick={() => setSidebarOpen(true)} className="text-white">
+            <Menu size={24} />
           </button>
-          <h2 className="text-[17px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">
+          <h2 className="text-[18px] font-bold text-white">
             {menuItems.find(m => m.id === activeSection)?.name || "Dashboard"}
           </h2>
         </div>
 
-        {/* Desktop Header */}
-        <div className="hidden lg:block px-6 lg:px-8 py-5 lg:py-6 bg-gradient-to-r from-[#3F66F5] to-[#5B7CFF] dark:from-[#2E4FD1] dark:to-[#3F66F5]">
-          <h2 className="text-[20px] lg:text-[24px] font-bold text-white">
+        {/* Desktop Header - Gradient */}
+        <div className="hidden lg:block px-8 py-6 bg-gradient-to-r from-[#3F66F5] via-[#6366F1] to-[#8B5CF6] shadow-2xl">
+          <h2 className="text-[28px] font-bold text-white drop-shadow-lg">
             {menuItems.find(m => m.id === activeSection)?.name || "Dashboard"}
           </h2>
-          <p className="text-[13px] text-white/80 mt-1">
-            {activeSection === "dashboard" && "Overview of your platform statistics"}
-            {activeSection === "bank" && "Manage your question database"}
-            {activeSection === "updates" && "Deploy code updates directly to GitHub"}
-            {activeSection === "users" && "View and manage registered users"}
+          <p className="text-[14px] text-white/90 mt-2 font-medium">
+            {activeSection === "dashboard" && "📊 Overview of your platform statistics"}
+            {activeSection === "bank" && "📚 Manage your question database"}
+            {activeSection === "updates" && "🚀 Deploy code updates directly to GitHub"}
+            {activeSection === "users" && "👥 View and manage registered users"}
           </p>
         </div>
 
-        {/* Content Area */}
-        <div className="flex-1 overflow-y-auto px-4 md:px-6 lg:px-8 py-4 lg:py-6">
+        {/* Content Area - Modern Cards */}
+        <div className="flex-1 overflow-y-auto px-4 md:px-6 lg:px-8 py-6 lg:py-8">
           {/* Dashboard */}
           {activeSection === "dashboard" && (
-            <div className="max-w-6xl">
-              {/* Stats Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] p-5">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-xl bg-[#EEF1FE] dark:bg-[#20264A] flex items-center justify-center">
-                      <ClipboardList size={18} style={{ color: BLUE }} />
+            <div className="max-w-7xl mx-auto">
+              {/* Stats Cards - Modern Glass Effect */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+                <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 backdrop-blur-xl border border-white/20 p-6 hover:scale-[1.02] transition-transform duration-300 shadow-xl">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/20 to-transparent rounded-full blur-3xl"></div>
+                  <div className="relative">
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#3F66F5] to-[#8B5CF6] flex items-center justify-center mb-4 shadow-lg shadow-blue-500/30">
+                      <ClipboardList size={24} className="text-white" />
                     </div>
-                    <p className="text-[12px] text-[#8890AE] dark:text-[#8A93B8]">Total Questions</p>
+                    <p className="text-[13px] text-gray-300 font-medium mb-2">Total Questions</p>
+                    <p className="text-[36px] font-black text-white mb-1">{bankInfo?.total || 0}</p>
+                    <p className="text-[12px] text-gray-400">Across all levels</p>
                   </div>
-                  <p className="text-[28px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">{bankInfo?.total || 0}</p>
-                  <p className="text-[11px] text-[#8890AE] dark:text-[#8A93B8] mt-1">Across all levels</p>
                 </div>
 
-                <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] p-5">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-xl bg-[#EEF1FE] dark:bg-[#20264A] flex items-center justify-center">
-                      <Layers size={18} style={{ color: BLUE }} />
+                <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-500/10 to-teal-500/10 backdrop-blur-xl border border-white/20 p-6 hover:scale-[1.02] transition-transform duration-300 shadow-xl">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-emerald-500/20 to-transparent rounded-full blur-3xl"></div>
+                  <div className="relative">
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center mb-4 shadow-lg shadow-emerald-500/30">
+                      <Layers size={24} className="text-white" />
                     </div>
-                    <p className="text-[12px] text-[#8890AE] dark:text-[#8A93B8]">Total Levels</p>
+                    <p className="text-[13px] text-gray-300 font-medium mb-2">Total Levels</p>
+                    <p className="text-[36px] font-black text-white mb-1">{LEVELS.length}</p>
+                    <p className="text-[12px] text-gray-400">A1 to C1</p>
                   </div>
-                  <p className="text-[28px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">{LEVELS.length}</p>
-                  <p className="text-[11px] text-[#8890AE] dark:text-[#8A93B8] mt-1">A1 to C1</p>
                 </div>
 
-                <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] p-5">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-xl bg-[#EEF1FE] dark:bg-[#20264A] flex items-center justify-center">
-                      <BookOpen size={18} style={{ color: BLUE }} />
+                <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-amber-500/10 to-orange-500/10 backdrop-blur-xl border border-white/20 p-6 hover:scale-[1.02] transition-transform duration-300 shadow-xl">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-amber-500/20 to-transparent rounded-full blur-3xl"></div>
+                  <div className="relative">
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center mb-4 shadow-lg shadow-amber-500/30">
+                      <BookOpen size={24} className="text-white" />
                     </div>
-                    <p className="text-[12px] text-[#8890AE] dark:text-[#8A93B8]">Categories</p>
+                    <p className="text-[13px] text-gray-300 font-medium mb-2">Categories</p>
+                    <p className="text-[36px] font-black text-white mb-1">{CATEGORIES.length}</p>
+                    <p className="text-[12px] text-gray-400">Grammar, Vocab, Reading</p>
                   </div>
-                  <p className="text-[28px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">{CATEGORIES.length}</p>
-                  <p className="text-[11px] text-[#8890AE] dark:text-[#8A93B8] mt-1">Grammar, Vocab, Reading</p>
                 </div>
 
-                <div className="rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] p-5">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-xl bg-[#FFF3E6] dark:bg-[#2A2410] flex items-center justify-center">
-                      <GraduationCap size={18} className="text-[#D97706]" />
+                <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-pink-500/10 to-rose-500/10 backdrop-blur-xl border border-white/20 p-6 hover:scale-[1.02] transition-transform duration-300 shadow-xl">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-pink-500/20 to-transparent rounded-full blur-3xl"></div>
+                  <div className="relative">
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center mb-4 shadow-lg shadow-pink-500/30">
+                      <GraduationCap size={24} className="text-white" />
                     </div>
-                    <p className="text-[12px] text-[#8890AE] dark:text-[#8A93B8]">Users</p>
+                    <p className="text-[13px] text-gray-300 font-medium mb-2">Users</p>
+                    <p className="text-[36px] font-black text-white mb-1">—</p>
+                    <p className="text-[12px] text-amber-400 font-bold">Coming Soon</p>
                   </div>
-                  <p className="text-[28px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">—</p>
-                  <p className="text-[11px] text-[#D97706] font-semibold mt-1">Coming Soon</p>
                 </div>
               </div>
 
-              {/* Quick Actions */}
-              <div className="mb-6">
-                <h3 className="text-[15px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA] mb-3">Quick Actions</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {/* Quick Actions - Modern Cards */}
+              <div className="mb-8">
+                <h3 className="text-[18px] font-bold text-white mb-5 flex items-center gap-2">
+                  ⚡ Quick Actions
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <button
                     onClick={() => setActiveSection("bank")}
-                    className="flex items-center gap-3 p-4 rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] hover:border-[#3F66F5] transition-all text-left"
+                    className="group flex items-center gap-4 p-5 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 hover:border-blue-500/50 transition-all text-left shadow-lg"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-[#EEF1FE] dark:bg-[#20264A] flex items-center justify-center shrink-0">
-                      <ClipboardList size={18} style={{ color: BLUE }} />
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#3F66F5] to-[#8B5CF6] flex items-center justify-center shrink-0 shadow-lg shadow-blue-500/30">
+                      <ClipboardList size={22} className="text-white" />
                     </div>
                     <div className="flex-1">
-                      <p className="text-[13.5px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA]">Manage Questions</p>
-                      <p className="text-[11.5px] text-[#8890AE] dark:text-[#8A93B8] mt-0.5">Add, edit, or remove questions</p>
+                      <p className="text-[15px] font-bold text-white mb-1">Manage Questions</p>
+                      <p className="text-[13px] text-gray-400">Add, edit, or remove questions</p>
                     </div>
-                    <ChevronRight size={18} className="text-[#8890AE] dark:text-[#8A93B8]" />
+                    <ChevronRight size={20} className="text-gray-500 group-hover:text-blue-400 transition-colors" />
                   </button>
 
                   <button
                     onClick={() => setActiveSection("updates")}
-                    className="flex items-center gap-3 p-4 rounded-2xl border border-[#EAEDF9] dark:border-[#2A3050] bg-white dark:bg-[#161B2E] hover:border-[#3F66F5] transition-all text-left"
+                    className="group flex items-center gap-4 p-5 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 hover:border-purple-500/50 transition-all text-left shadow-lg"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-[#EEF1FE] dark:bg-[#20264A] flex items-center justify-center shrink-0">
-                      <Upload size={18} style={{ color: BLUE }} />
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shrink-0 shadow-lg shadow-purple-500/30">
+                      <Upload size={22} className="text-white" />
                     </div>
                     <div className="flex-1">
-                      <p className="text-[13.5px] font-semibold text-[#1B1E2B] dark:text-[#F0F2FA]">Deploy Updates</p>
-                      <p className="text-[11.5px] text-[#8890AE] dark:text-[#8A93B8] mt-0.5">Push code changes to GitHub</p>
+                      <p className="text-[15px] font-bold text-white mb-1">Deploy Updates</p>
+                      <p className="text-[13px] text-gray-400">Push code changes to GitHub</p>
                     </div>
-                    <ChevronRight size={18} className="text-[#8890AE] dark:text-[#8A93B8]" />
+                    <ChevronRight size={20} className="text-gray-500 group-hover:text-purple-400 transition-colors" />
                   </button>
                 </div>
               </div>
