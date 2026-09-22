@@ -1619,19 +1619,19 @@ function AdminScreen({ onBack }) {
       )}
 
       {/* Sidebar */}
-      <div className={`fixed lg:relative inset-y-0 left-0 z-50 w-72 bg-white dark:bg-[#161B2E] border-r border-[#EAEDF9] dark:border-[#2A3050] flex flex-col transform transition-transform lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <div className={`fixed lg:relative inset-y-0 left-0 z-50 w-72 bg-[#1a1f2e] dark:bg-[#0F1419] border-r border-[#2d3548] dark:border-[#1E293B] flex flex-col transform transition-transform lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         {/* Logo */}
-        <div className="p-5 border-b border-[#EAEDF9] dark:border-[#2A3050]">
-          <div className="flex items-center gap-2.5">
+        <div className="p-6 border-b border-[#2d3548] dark:border-[#1E293B]">
+          <div className="flex items-center gap-3">
             <div
-              className="w-9 h-9 rounded-xl flex items-center justify-center"
+              className="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg"
               style={{ background: `linear-gradient(135deg, ${BLUE}, ${BLUE_LIGHT})` }}
             >
-              <BookOpen size={18} className="text-white" />
+              <BookOpen size={20} className="text-white" />
             </div>
             <div>
-              <h1 className="font-bold text-[15px] text-[#1B1E2B] dark:text-[#F0F2FA]">English Test</h1>
-              <p className="text-[11px] text-[#8890AE] dark:text-[#8A93B8]">Admin Panel</p>
+              <h1 className="font-bold text-[16px] text-white">English Test</h1>
+              <p className="text-[11px] text-gray-400">Admin Panel</p>
             </div>
           </div>
         </div>
@@ -1644,20 +1644,25 @@ function AdminScreen({ onBack }) {
             return (
               <button
                 key={item.id}
-                onClick={() => item.enabled && setActiveSection(item.id)}
+                onClick={() => {
+                  if (item.enabled) {
+                    setActiveSection(item.id);
+                    setSidebarOpen(false);
+                  }
+                }}
                 disabled={!item.enabled}
-                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl mb-1 transition-all ${
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl mb-2 transition-all ${
                   isActive && item.enabled
-                    ? "bg-[#3F66F5] text-white"
+                    ? "bg-[#3F66F5] text-white shadow-lg shadow-[#3F66F5]/20"
                     : item.enabled
-                    ? "text-[#6B7190] dark:text-[#9AA3C4] hover:bg-[#F5F6FB] dark:hover:bg-[#1B2140]"
-                    : "text-[#C3C8DE] dark:text-[#3A4060] cursor-not-allowed opacity-50"
+                    ? "text-gray-300 hover:bg-[#252b3d] hover:text-white"
+                    : "text-gray-600 cursor-not-allowed opacity-40"
                 }`}
               >
-                <Icon size={18} />
-                <span className="text-[13.5px] font-medium flex-1 text-left">{item.name}</span>
+                <Icon size={19} />
+                <span className="text-[14px] font-medium flex-1 text-left">{item.name}</span>
                 {item.comingSoon && (
-                  <span className="text-[9px] font-bold bg-[#FFF3E6] dark:bg-[#2A2410] text-[#D97706] px-1.5 py-0.5 rounded">
+                  <span className="text-[9px] font-bold bg-amber-500/10 text-amber-500 px-2 py-1 rounded-md">
                     Soon
                   </span>
                 )}
@@ -1667,12 +1672,12 @@ function AdminScreen({ onBack }) {
         </div>
 
         {/* Footer */}
-        <div className="p-3 border-t border-[#EAEDF9] dark:border-[#2A3050]">
+        <div className="p-4 border-t border-[#2d3548] dark:border-[#1E293B]">
           <button
             onClick={onBack}
-            className="w-full flex items-center gap-2 px-3 py-2.5 rounded-xl text-[13.5px] font-medium text-[#6B7190] dark:text-[#9AA3C4] hover:bg-[#F5F6FB] dark:hover:bg-[#1B2140] transition-all"
+            className="w-full flex items-center gap-2 px-4 py-3 rounded-xl text-[14px] font-medium text-gray-300 hover:bg-[#252b3d] hover:text-white transition-all"
           >
-            <Home size={18} />
+            <Home size={19} />
             Back to Home
           </button>
         </div>
@@ -1691,11 +1696,11 @@ function AdminScreen({ onBack }) {
         </div>
 
         {/* Desktop Header */}
-        <div className="hidden lg:block px-6 lg:px-8 py-5 lg:py-6 bg-white dark:bg-[#161B2E] border-b border-[#EAEDF9] dark:border-[#2A3050]">
-          <h2 className="text-[20px] lg:text-[22px] font-bold text-[#1B1E2B] dark:text-[#F0F2FA]">
+        <div className="hidden lg:block px-6 lg:px-8 py-5 lg:py-6 bg-gradient-to-r from-[#3F66F5] to-[#5B7CFF] dark:from-[#2E4FD1] dark:to-[#3F66F5]">
+          <h2 className="text-[20px] lg:text-[24px] font-bold text-white">
             {menuItems.find(m => m.id === activeSection)?.name || "Dashboard"}
           </h2>
-          <p className="text-[13px] text-[#8890AE] dark:text-[#8A93B8] mt-1">
+          <p className="text-[13px] text-white/80 mt-1">
             {activeSection === "dashboard" && "Overview of your platform statistics"}
             {activeSection === "bank" && "Manage your question database"}
             {activeSection === "updates" && "Deploy code updates directly to GitHub"}
