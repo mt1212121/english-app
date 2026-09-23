@@ -40,7 +40,6 @@ import {
   UserPlus,
 } from "lucide-react";
 import { LEVELS, CATEGORY_META, pickQuestions, estimateLevel, estimateExplanation, levelName, categoryQuestionCounts, computeScore } from "./data/bank";
-import { fetchAIQuestions } from "./lib/aiQuestions";
 import { getHistory, addHistoryEntry, getSeenUids, addSeenUids } from "./lib/storage";
 import { signUp, signIn, signOut, getSession, resetPassword, onAuthStateChange, isAuthAvailable } from "./lib/auth";
 import { saveTestResult, fetchTestResults } from "./lib/results";
@@ -164,7 +163,7 @@ function AccordionRow({ icon, title, soon, summary, onSeeMore }) {
   );
 }
 
-function HomeScreen({ onStart, historyCount, history, onOpenHistory, onOpenProgress, darkMode, onToggleDark }) {
+function HomeScreen({ onStart, historyCount, history, onOpenHistory, onOpenProgress, onOpenDashboard, darkMode, onToggleDark }) {
   const [dashOpen, setDashOpen] = useState(false);
   const counts = categoryQuestionCounts();
   const last = history[history.length - 1];
@@ -323,7 +322,7 @@ function HomeScreen({ onStart, historyCount, history, onOpenHistory, onOpenProgr
                       <button
                         onClick={() => {
                           setDashOpen(false);
-                          setScreen("dashboard");
+                          onOpenDashboard();
                         }}
                         className="flex-1 flex items-center justify-center gap-2 rounded-xl border border-[#3F66F5] bg-[#EEF1FE] dark:bg-[#1E2440] py-2 text-[13px] font-semibold text-[#3F66F5] hover:bg-[#3F66F5] hover:text-white transition-colors"
                       >
@@ -572,31 +571,21 @@ function formatTime(sec) {
 
 function QuizScreen({ config, onExit, onFinish }) {
   const [questions, setQuestions] = useState(null);
-  const [source, setSource] = useState(null); // "ai" | "bank"
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [secondsLeft, setSecondsLeft] = useState(config.timerOn ? config.minutes * 60 : null);
   const finishedRef = useRef(false);
 
-  // Load the question set once: try AI generation first, fall back to the
-  // local bank (excluding recently-seen questions for this level).
+  // Load the question set from the local practice bank (excluding
+  // recently-seen questions for this level so repeats feel fresh).
   useEffect(() => {
     let cancelled = false;
-    (async () => {
-      const ai = await fetchAIQuestions(config.level, config.count, config.categories);
-      if (cancelled) return;
-      if (ai) {
-        setQuestions(ai);
-        setSource("ai");
-      } else {
-        const seen = getSeenUids(config.level);
-        const picked = pickQuestions(config.level, config.count, config.categories, seen);
-        setQuestions(picked);
-        setSource("bank");
-        addSeenUids(config.level, picked.map((q) => q.uid));
-      }
-      setAnswers((prev) => (prev.length ? prev : Array(config.count).fill(null)));
-    })();
+    const seen = getSeenUids(config.level);
+    const picked = pickQuestions(config.level, config.count, config.categories, seen);
+    if (cancelled) return;
+    setQuestions(picked);
+    addSeenUids(config.level, picked.map((q) => q.uid));
+    setAnswers((prev) => (prev.length ? prev : Array(config.count).fill(null)));
     return () => {
       cancelled = true;
     };
@@ -617,12 +606,12 @@ function QuizScreen({ config, onExit, onFinish }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [secondsLeft, config.timerOn, questions]);
 
-  if (!questions) {
+  if (!questions || questions.length === 0) {
     return (
       <div className="flex flex-col h-full items-center justify-center px-8 text-center">
         <Loader2 size={28} className="animate-spin" style={{ color: BLUE }} />
         <p className="text-[14px] font-medium text-[#1B1E2B] dark:text-[#F0F2FA] mt-4">Preparing your test…</p>
-        <p className="text-[12.5px] text-[#8890AE] dark:text-[#8A93B8] mt-1">Generating a fresh set of questions</p>
+        <p className="text-[12.5px] text-[#8890AE] dark:text-[#8A93B8] mt-1">Getting your questions ready</p>
       </div>
     );
   }
@@ -677,15 +666,9 @@ function QuizScreen({ config, onExit, onFinish }) {
           />
         </div>
         <div className="flex items-center justify-between mt-2">
-          {source === "bank" ? (
-            <div className="flex items-center gap-1 text-[11px] text-[#A6ACC6]">
-              <WifiOff size={12} /> Practice bank
-            </div>
-          ) : (
-            <div className="flex items-center gap-1 text-[11px]" style={{ color: BLUE }}>
-              <Sparkles size={12} /> AI-generated
-            </div>
-          )}
+          <div className="flex items-center gap-1 text-[11px] text-[#A6ACC6]">
+            <WifiOff size={12} /> Practice bank
+          </div>
           {config.timerOn && (
             <div
               className="flex items-center gap-1.5 text-[13px] font-semibold px-2.5 py-1 rounded-lg"
@@ -1373,7 +1356,7 @@ function AdminScreen({ onBack }) {
     setUsersLoading(true);
     setUsersError("");
     try {
-      const res = await fetch("/netlify/functions/admin-users", {
+      const res = await fetch("/api/admin-users", {
         headers: { Authorization: `Bearer ${password}` },
       });
       const data = await res.json();
@@ -2934,6 +2917,7 @@ export default function App() {
             history={history}
             onOpenHistory={() => setScreen("history")}
             onOpenProgress={() => setScreen("progress")}
+            onOpenDashboard={() => setScreen("dashboard")}
             darkMode={darkMode}
             onToggleDark={() => setDarkMode((v) => !v)}
           />

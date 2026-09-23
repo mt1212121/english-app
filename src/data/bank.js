@@ -63,13 +63,21 @@ export function buildLevelPool(level, categoryIds) {
  */
 export function pickQuestions(level, count, categoryIds, excludeUids = []) {
   const fullPool = shuffle(buildLevelPool(level, categoryIds));
+
+  // Nothing exists for this level/category combination at all (e.g. an
+  // admin cleared the bank, or picked a category with zero questions for
+  // this level) — return an empty array instead of looping forever below.
+  if (fullPool.length === 0) return [];
+
   const fresh = fullPool.filter((q) => !excludeUids.includes(q.uid));
   const source = fresh.length >= count ? fresh : fullPool;
 
   if (count <= source.length) return source.slice(0, count);
 
   // Still not enough unique questions to fill the test: cycle through
-  // shuffled copies to reach the requested count.
+  // shuffled copies to reach the requested count. Safe from an infinite
+  // loop because fullPool.length > 0 is guaranteed above, so every pass
+  // through the for-loop makes progress toward `count`.
   const result = [...source];
   while (result.length < count) {
     const extra = shuffle(fullPool);
